@@ -1,0 +1,17 @@
+/* Import statements are not supported in plain CSS, so they are removed. */
+/* You should handle the imports in your build process when compiling SCSS to CSS. */
+
+/* customize primary dark */
+$primary: #001199;
+
+[data-bs-theme="dark"] {
+    --bs-primary: #{$primary};
+    --bs-primary-bg-subtle: #{$primary};
+    --bs-primary-bg-subtle-dark: #{$primary};
+}
+
+/* In plain CSS, you need to manually apply the styles for .btn-primary */
+[data-bs-theme="dark"] .btn-primary {
+    --bs-btn-bg: #001199;
+}
+
