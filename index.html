@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
@@ -28,6 +28,85 @@
    </style>  
 </head>
   <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Your Logo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <!-- Add your navigation links here -->
+            </ul>
+            <!-- Dark Mode Toggle Button -->
+            <div class="custom-control custom-switch ml-3">
+                <input type="checkbox" class="custom-control-input" id="darkModeToggle">
+                <label class="custom-control-label" for="darkModeToggle">Dark Mode</label>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Your content goes here -->
+
+    <!-- Add Bootstrap JS and jQuery links -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Your JavaScript for dark mode toggling goes here -->
+</body>
+</html>
+
+
+<script>
+    // Get the dark mode toggle input element
+    const darkModeToggle = document.getElementById('darkModeToggle');
+
+    // Function to enable dark mode
+    function enableDarkMode() {
+        document.body.classList.add('dark-mode');
+    }
+
+    // Function to disable dark mode
+    function disableDarkMode() {
+        document.body.classList.remove('dark-mode');
+    }
+
+    // Function to toggle dark mode based on the checkbox state
+    function toggleDarkMode() {
+        if (darkModeToggle.checked) {
+            enableDarkMode();
+        } else {
+            disableDarkMode();
+        }
+    }
+
+    // Event listener to handle dark mode toggle
+    darkModeToggle.addEventListener('change', toggleDarkMode);
+
+    // Check if dark mode is enabled or not on page load (optional)
+    // You can save the user's preference in localStorage and load it here
+    // For simplicity, we are assuming dark mode is initially disabled
+    disableDarkMode();
+</script>
+
+    Customize the dark mode styles:
+
+Add CSS styles to your HTML file or in an external CSS file to define how the page should look when dark mode is enabled. For example:
+
+html
+
+<style>
+    /* Dark mode styles */
+    .dark-mode {
+        background-color: #1a1a1a;
+        color: #f1f1f1;
+    }
+
+    .dark-mode .navbar {
+        background-color: #333;
+    }
+
+    /* Customize other elements as needed for dark mode */
+</style>
+
 
   <div class="container-sm">
   <h1>Dr. Manu V.T.</h1> <img class="img-fluid" src="Manu_DP-modified.png" alt="Manu's Photo" class="float-end"> 
