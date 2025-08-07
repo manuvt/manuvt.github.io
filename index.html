@@ -1,6 +1,40 @@
 <html lang="en" data-bs-theme="dark">
 <head>
 <style>
+  /* Style the buttons inside the tab */
+.tab button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 22px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  float: left;
+  padding: 0px 12px;
+  border: 1px solid #ccc;
+  width: 70%;
+  border-left: none;
+  height: 300px;
+}
 div {
   resize: both;
   overflow: auto;
@@ -148,46 +182,37 @@ div {
 <button class="accordion">Educational Qualifications</button>
 <div class="panel">
     <div class="accordion-body">
-      <div class="container mt-4">
-        <ul class="nav nav-tabs" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" data-bs-toggle="tab" href="#btech">B.Tech</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#mtech">M.Tech</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" href="#phd">Ph.D</a>
-          </li>
-        </ul>
+      <div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">B.Tech<br> (2003-2007)</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">M.Tech (2009-2011)</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')"> PhD <br> (2013-2018) </button>
+</div>
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-          <div id="btech" class="container tab-pane active">
-            <p>Computer Science & Engineering</p>
-            <p>NIT Calicut</p>
-            <p>Kerala, India</p>
-          </div>
+<div id="London" class="tabcontent">
+  <p>Computer Science & Engineering <br>
+	National Institute of Technology Calicut (NITC)</p>
+</div>
 
-          <div id="mtech" class="container tab-pane fade">
-            <p>Computer Science with Specialization in Digital Image Computing</p>
-            <p>Department of Computer Science, Kariyavattom Campus</p>
-            <p>University of Kerala</p>
-            <p>Trivandrum, Kerala, India.</p>
-          </div>
+<div id="Paris" class="tabcontent">
+  <p>Computer Science with Specialization in Digital Image Computing<br>
+  Department of Computer Science<br> 
+  University of Kerala <br> 
+  Kariyavattom Campus
+  </p> 
+</div>
 
-          <div id="phd" class="container tab-pane fade">
-            <p>Computer Science</p>
-            <p>School of Computer and Information Sciences</p>
-            <p>University of Hyderabad</p>
-            <p>Hyderabad, Telangana, India</p>
-            <p>&amp;</p>
-            <p>Center of Excellence in Cyber Security</p>
-            <p>Institute for Development and Research in Banking Technology (IDRBT)</p>
-            <p><i data-gwd-tl-hidden="">Estd. by Reserve Bank of India</i></p>
-            <p>Hyderabad, Telangana, India.</p>
-          </div>
-        </div>
+<div id="Tokyo" class="tabcontent">
+  <p>Computer Science<br>
+  School of Computer and Information Sciences (SCIS)<br> 
+  University of Hyderabad (Central University )<br>
+	&<br>
+Center of Excellence in Cyber Security (formerly)<br>
+Institute for Development and Research in Banking Technology (IDRBT)<br> Hyderabad<br>
+(Estd. by Reserve Bank of India)
+  </p>
+</div>
+
+    </div>
 </div>
 </div>
 </div>
@@ -232,7 +257,24 @@ for (var i = 0; i < acc.length; i++) {
   });
 }
 </script>
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
 
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
 
 
 <script>
