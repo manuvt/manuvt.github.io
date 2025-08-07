@@ -1,7 +1,7 @@
 <html lang="en" data-bs-theme="dark">
 <head>
 <style>
-.accordion {
+ .accordion {
   background-color: #eee;
   color: #444;
   cursor: pointer;
@@ -33,6 +33,8 @@
 .panel {
   padding: 0 18px;
   background-color: white;
+  text-align: left;
+  color: black;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
@@ -81,7 +83,7 @@
 <button class="accordion">  Publication List </button>
 <div class="panel">
    <ol>
-  <ul>International Peer-Reviewed Journals
+  <ul><b>International Peer-Reviewed Journals</b>
     <ol>
       <li>
         Manu, V. T., & Mehtre, B. M. (2019). Tamper detection of social media images using quality artifacts and texture features. <i>Forensic Science International</i>, Elsevier, 295, 100–112. <a href="https://doi.org/10.1016/j.forsciint.2018.11.025" target="_blank">DOI</a><br>
@@ -96,7 +98,7 @@
     </ol>
   </ul>
 
-  <ul>International Conferences (Outside India, Scopus Indexed)
+  <ul><b>International Conferences (Outside India, Scopus Indexed)</b>
     <ol start="3">
       <li>
         Manu, V. T., & Mehtre, B. M. (2017). Blind technique using blocking artifacts and entropy of histograms for image tampering detection. In <i>Second International Workshop on Pattern Recognition</i> (SPIE Proceedings, Vol. 10443, p. 104430T). International Society for Optics and Photonics, Singapore. <a href="https://doi.org/10.1117/12.2280306" target="_blank">DOI</a><br>
@@ -106,7 +108,7 @@
     </ol>
   </ul>
 
-  <ul>International Conferences (In India, Scopus Indexed)
+  <ul><b>International Conferences (In India, Scopus Indexed)</b>
     <ol start="4">
       <li>
         Manu, V. T., & Mehtre, B. M. (2016). Detection of copy-move forgery in images using segmentation and SURF. In <i>Advances in Signal Processing and Intelligent Recognition Systems</i> (pp. 645–654). Springer, Cham.
@@ -120,7 +122,7 @@
     </ol>
   </ul>
 
-  <ul>Book Chapters (Scopus Indexed)
+  <ul><b>Book Chapters (Scopus Indexed)</b>
     <ol start="7">
       <li>
         K. Sitara and Manu V.T. (2022). Security concerns and forensic aspects of IoHT. In: <i>Smart and Secure Internet of Healthcare Things</i>. Editors: Dr. Nitin Gupta et al., CRC Press, Taylor and Francis Group.
@@ -131,7 +133,7 @@
     </ol>
   </ul>
 
-  <ul>Misc. Journals
+  <ul><b>Misc. Journals</b>
     <ol start="9">
       <li>
         Manu, V. T., & Simon, P. (2012). A novel statistical fusion rule for image fusion and its comparison in non subsampled contourlet transform domain and wavelet domain. <i>arXiv preprint</i> arXiv:1205.1648.
@@ -201,6 +203,10 @@ for (i = 0; i < acc.length; i++) {
   });
 }
 </script>
-
+<p id="time"></p>
+<script>
+const d = new Date();
+document.getElementById("time").innerHTML = d;
+</script>
 </body>
 </html>
