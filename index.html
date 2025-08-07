@@ -1,12 +1,20 @@
 <html lang="en" data-bs-theme="dark">
 <head>
 <style>
-  /* Style the buttons inside the tab */
+ .tab {
+  float: left;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  width: 30%;
+  height: 100px;
+}
+
+/* Style the buttons inside the tab */
 .tab button {
   display: block;
   background-color: inherit;
   color: black;
-  padding: 22px 16px;
+  padding: 10px 10px;
   width: 100%;
   border: none;
   outline: none;
@@ -29,7 +37,7 @@
 /* Style the tab content */
 .tabcontent {
   float: left;
-  padding: 0px 12px;
+  padding: 0px 8px;
   border: 1px solid #ccc;
   width: 70%;
   border-left: none;
@@ -183,9 +191,9 @@ div {
 <div class="panel">
     <div class="accordion-body">
       <div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">B.Tech<br> (2003-2007)</button>
+  <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">B.Tech (2003-2007)</button>
   <button class="tablinks" onclick="openCity(event, 'Paris')">M.Tech (2009-2011)</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')"> PhD <br> (2013-2018) </button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')"> PhD (2013-2018) </button>
 </div>
 
 <div id="London" class="tabcontent">
