@@ -209,21 +209,31 @@ div {
 </footer>     
 <script>
 var acc = document.getElementsByClassName("accordion");
-var i;
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
+for (var i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function () {
     var panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-      panel.style.maxHeight = null;
-    } else {
+
+    var isAlreadyOpen = panel.style.maxHeight;
+
+    // Close all panels
+    var allPanels = document.getElementsByClassName("panel");
+    var allButtons = document.getElementsByClassName("accordion");
+    for (var j = 0; j < allPanels.length; j++) {
+      allPanels[j].style.maxHeight = null;
+      allButtons[j].classList.remove("active");
+    }
+
+    // Toggle current one if it wasn't already open
+    if (!isAlreadyOpen) {
+      this.classList.add("active");
       panel.style.maxHeight = panel.scrollHeight + "px";
-    } 
+    }
   });
 }
-
 </script>
+
+
 
 <script>
 const d = new Date();
