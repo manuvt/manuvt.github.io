@@ -1,11 +1,18 @@
 <html lang="en" data-bs-theme="dark">
 <head>
 <style>
- div {
-  resize: both;
-  overflow: auto;
-}
- .accordion {
+	
+.tab-content {
+  > .tab-pane {
+    display: none;
+  }
+  > .active {
+    display: block;
+    background-color: #fff;
+  }
+}	
+	
+.accordion {
   background-color: #eee;
   color: #444;
   cursor: pointer;
@@ -30,8 +37,6 @@
   margin-left: 2px;
 }
 
-
-
 .panel {
   padding: 0 5px;
   background-color: white;
@@ -42,6 +47,7 @@
   transition: max-height 0.1s ease-out;
 }
 </style>
+	
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>🎓 Homepage of Dr. Manu V.T. | Ph.D | CISA</title>
@@ -185,14 +191,14 @@ NB: All of the above are done in Regular-Full Time mode
   		<li>Dec 2012 - Lifetime</li>
 	</ul>	
 </ul> 
- 
 </div>
 </div>
-
 <br>
+	
 <footer>
 <p id="time"></p>
-</footer>     
+</footer> 
+	
 <script>
 var acc = document.getElementsByClassName("accordion");
 
@@ -218,6 +224,7 @@ for (var i = 0; i < acc.length; i++) {
   });
 }
 </script>
+	
 <script>
 function openCity(evt, cityName) {
   var i, tabcontent, tablinks;
@@ -237,11 +244,11 @@ function openCity(evt, cityName) {
 document.getElementById("defaultOpen").click();
 </script>
 
-
 <script>
 const d = new Date();
 document.getElementById("time").innerHTML = d;
 </script>
+	
 </body>
 
 </html>
