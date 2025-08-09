@@ -194,7 +194,104 @@ NB: All of the above are done in Regular-Full Time mode
 </div>
 </div>
 <br>
-	
+	<div class="card" role="region" aria-label="Clock widget">
+    <div id="time" aria-live="polite">--:--:--</div>
+    <div class="meta">
+      <div id="tzLabel">Local time</div>
+    </div>
+
+    <div class="controls" aria-hidden="false">
+      <label>
+        <span class="sr-only">Choose timezone</span>
+        <select id="tzSelect" title="Choose timezone">
+          <option value="local">Local</option>
+          <option value="UTC">UTC</option>
+          <option value="+05:30">UTC+05:30</option>
+          <option value="-04:00">UTC-04:00</option>
+          <!-- add more options as needed -->
+        </select>
+      </label>
+
+      <label>
+        <input type="checkbox" id="toggle12" />
+        <span style="user-select:none">12-hour</span>
+      </label>
+    </div>
+  </div>
+	<script>
+    const timeEl = document.getElementById('time');
+    const tzSelect = document.getElementById('tzSelect');
+    const tzLabel = document.getElementById('tzLabel');
+    const toggle12 = document.getElementById('toggle12');
+
+    // Convert Date to timezone-aware Date string using Intl.DateTimeFormat
+    function formatTime(date, tz, use12) {
+      const options = {
+        hour: '2-digit', minute: '2-digit', second: '2-digit',
+        hour12: use12
+      };
+      if (tz && tz !== 'local') {
+        // If tz is like "+05:30" convert to "UTC+05:30" for Intl
+        if (/^[\+\-]\d{2}:\d{2}$/.test(tz)) {
+          tz = 'UTC' + tz;
+        }
+        options.timeZone = tz;
+      }
+      // Use parts so we can control padding and separators consistently
+      const formatter = new Intl.DateTimeFormat(undefined, options);
+      return formatter.format(date);
+    }
+
+    function getTZLabel(value) {
+      return value === 'local' ? 'Local time' : (value === 'UTC' ? 'UTC' : value);
+    }
+
+    function scheduleTick(fn) {
+      // Compute ms until next full second and use setTimeout to avoid drift
+      const now = performance.now();
+      const msToNextSecond = 1000 - (now % 1000);
+      return setTimeout(() => {
+        fn();
+        // After aligned tick, use setInterval every 1000ms but re-align periodically to be safe
+        const id = setInterval(fn, 1000);
+        // store interval id so if we need to reschedule we can clear it
+        scheduleTick.intervalId = id;
+      }, msToNextSecond);
+    }
+
+    function update() {
+      const tz = tzSelect.value;
+      const use12 = toggle12.checked;
+      const now = new Date();
+      // For Intl, if using local, omit timeZone option (so local)
+      const text = formatTime(now, tz === 'local' ? undefined : tz, use12);
+      timeEl.textContent = text;
+      tzLabel.textContent = getTZLabel(tz);
+    }
+
+    // Start: align first tick precisely and set up recurring updates.
+    // We'll clear any previous interval if reconfiguring.
+    function startClock() {
+      if (scheduleTick.timeoutId) clearTimeout(scheduleTick.timeoutId);
+      if (scheduleTick.intervalId) clearInterval(scheduleTick.intervalId);
+      // update immediately so UI doesn't wait for first aligned tick
+      update();
+      scheduleTick.timeoutId = scheduleTick(update);
+    }
+
+    // Event listeners to change options live
+    tzSelect.addEventListener('change', startClock);
+    toggle12.addEventListener('change', startClock);
+
+    // Start it
+    startClock();
+
+    // If page becomes hidden and visible again, resync to avoid drift
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) startClock();
+    });
+  </script>
+
 <footer>
 <p id="time"></p>
 </footer> 
