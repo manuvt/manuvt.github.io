@@ -394,6 +394,52 @@ Outside of work, I enjoy exploring new technologies, mentoring enthusiastic lear
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  // === Publication filters ===
+  const filterButtons = document.querySelectorAll('[data-pub-filter]');
+  const pubSections = document.querySelectorAll('#pubSections .pub-section');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-pub-filter');
+
+      // set active button
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // show/hide sections by category
+      pubSections.forEach(section => {
+        const cat = section.getAttribute('data-category');
+        if (filter === 'all' || filter === cat) {
+          section.classList.remove('d-none');
+        } else {
+          section.classList.add('d-none');
+        }
+      });
+    });
+  });
+
+  // === ORCiD "Sync" button (placeholder) ===
+  const orcidSyncBtn = document.getElementById('orcidSyncBtn');
+  if (orcidSyncBtn) {
+    orcidSyncBtn.addEventListener('click', () => {
+      alert(
+        "In a future version, this button can be wired to the ORCiD API\n" +
+        "to fetch your latest publications automatically.\n\n" +
+        "For now, please update this section manually when you add new works."
+      );
+    });
+  }
+
+  // Optional: If you ever add data-citations attributes,
+  // you can auto-render them into the badges like this:
+  document.querySelectorAll('.pub-citations').forEach(badge => {
+    const val = badge.getAttribute('data-citations');
+    if (val && val.trim() !== '') {
+      badge.textContent = 'Citations: ' + val;
+    }
+  });
+</script>
 
   <!-- Clock script -->
   <scrip
