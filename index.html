@@ -131,7 +131,210 @@ Outside of work, I enjoy exploring new technologies, mentoring enthusiastic lear
         </h2>
         <div id="collapsePubs" class="accordion-collapse collapse" aria-labelledby="headingPubs" data-bs-parent="#mainAccordion">
           <div class="accordion-body">
-            *Your publication list content goes here (unchanged)*
+              <!-- Toolbar: filters + ORCiD sync button -->
+<div class="d-flex flex-wrap align-items-center justify-content-between mb-3 gap-2">
+  <div class="btn-group btn-group-sm" role="group" aria-label="Filter publications">
+    <button type="button" class="btn btn-outline-primary active" data-pub-filter="all">All</button>
+    <button type="button" class="btn btn-outline-primary" data-pub-filter="journal">Journals</button>
+    <button type="button" class="btn btn-outline-primary" data-pub-filter="conference">Conferences</button>
+    <button type="button" class="btn btn-outline-primary" data-pub-filter="book">Book Chapters</button>
+    <button type="button" class="btn btn-outline-primary" data-pub-filter="misc">Misc.</button>
+  </div>
+
+  <button
+    type="button"
+    class="btn btn-sm btn-outline-secondary"
+    id="orcidSyncBtn"
+    title="Future: Auto-update from ORCiD"
+  >
+    🔄 Sync from ORCiD
+  </button>
+</div>
+
+<!-- Publication sections (filterable by data-category) -->
+<div id="pubSections">
+
+  <!-- Journals -->
+  <div class="pub-section mb-4" data-category="journal">
+    <h5>International Peer-Reviewed Journals</h5>
+    <ol>
+      <li>
+        <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+          <span class="badge rounded-pill text-bg-success">Q1 Journal</span>
+          <span class="badge rounded-pill text-bg-info text-dark">SCI</span>
+          <span class="badge rounded-pill text-bg-secondary">Scopus</span>
+          <span class="badge rounded-pill text-bg-light text-dark border pub-citations" data-citations="">
+            Citations: update
+          </span>
+        </span>
+        <br>
+        Manu, V. T., &amp; Mehtre, B. M. (2019).
+        Tamper detection of social media images using quality artifacts and texture features.
+        <em>Forensic Science International</em>, Elsevier, 295, 100–112.
+        <br>
+        <strong>DOI:</strong>
+        <a href="https://doi.org/10.1016/j.forsciint.2018.11.025" target="_blank">
+          10.1016/j.forsciint.2018.11.025
+        </a><br>
+        <strong>Indexing:</strong> SCI, Scopus, DBLP<br>
+        <strong>Impact Factor:</strong> 2.395
+      </li>
+
+      <li class="mt-3">
+        <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+          <span class="badge rounded-pill text-bg-warning text-dark">Q2 Journal</span>
+          <span class="badge rounded-pill text-bg-info text-dark">SCIE</span>
+          <span class="badge rounded-pill text-bg-secondary">Scopus</span>
+          <span class="badge rounded-pill text-bg-light text-dark border pub-citations" data-citations="">
+            Citations: update
+          </span>
+        </span>
+        <br>
+        Manu, V. T., &amp; Mehtre, B. M. (2018).
+        Copy-move tampering detection using affine transformation property preservation on clustered keypoints.
+        <em>Signal, Image and Video Processing</em>, Springer, 12(3), 549–556.
+        <br>
+        <strong>DOI:</strong>
+        <a href="https://doi.org/10.1007/s11760-017-1191-7" target="_blank">
+          10.1007/s11760-017-1191-7
+        </a><br>
+        <strong>Indexing:</strong> SCIE, Scopus, DBLP<br>
+        <strong>Impact Factor:</strong> 2.157
+      </li>
+    </ol>
+  </div>
+
+  <!-- International Conferences (Outside India) -->
+  <div class="pub-section mb-4" data-category="conference">
+    <h5>International Conferences (Outside India, Scopus Indexed)</h5>
+    <ol start="3">
+      <li>
+        <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+          <span class="badge rounded-pill text-bg-secondary">Scopus Indexed</span>
+          <span class="badge rounded-pill text-bg-light text-dark border pub-citations" data-citations="">
+            Citations: update
+          </span>
+        </span>
+        <br>
+        Manu, V. T., &amp; Mehtre, B. M. (2017).
+        Blind technique using blocking artifacts and entropy of histograms for image tampering detection.
+        In <em>Second International Workshop on Pattern Recognition</em>
+        (SPIE Proceedings, Vol. 10443, p. 104430T). International Society for Optics and Photonics.
+        <br>
+        <strong>Venue:</strong> Nanyang Technological University<br>
+        <strong>Country:</strong> Singapore<br>
+        <strong>Date:</strong> May 1–3, 2017<br>
+        <strong>Indexing:</strong> Scopus<br>
+        <strong>DOI:</strong>
+        <a href="https://doi.org/10.1117/12.2280306" target="_blank">10.1117/12.2280306</a>
+      </li>
+    </ol>
+  </div>
+
+  <!-- International Conferences (In India) -->
+  <div class="pub-section mb-4" data-category="conference">
+    <h5>International Conferences (In India, Scopus Indexed)</h5>
+    <ol start="4">
+      <li>
+        <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+          <span class="badge rounded-pill text-bg-secondary">Scopus Indexed</span>
+          <span class="badge rounded-pill text-bg-light text-dark border pub-citations" data-citations="">
+            Citations: update
+          </span>
+        </span>
+        <br>
+        Manu, V. T., &amp; Mehtre, B. M. (2016).
+        Detection of copy-move forgery in images using segmentation and SURF.
+        In <em>Advances in Signal Processing and Intelligent Recognition Systems</em> (pp. 645–654).
+        Springer, Cham.
+      </li>
+
+      <li class="mt-3">
+        <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+          <span class="badge rounded-pill text-bg-secondary">Scopus Indexed</span>
+          <span class="badge rounded-pill text-bg-light text-dark border pub-citations" data-citations="">
+            Citations: update
+          </span>
+        </span>
+        <br>
+        Manu, V. T., &amp; Mehtre, B. M. (2015).
+        Visual artifacts based image splicing detection in uncompressed images.
+        In <em>Computer Graphics, Vision and Information Security (CGVIS)</em>,
+        IEEE International Conference (pp. 145–150). IEEE.
+      </li>
+
+      <li class="mt-3">
+        <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+          <span class="badge rounded-pill text-bg-secondary">Scopus Indexed</span>
+          <span class="badge rounded-pill text-bg-light text-dark border pub-citations" data-citations="">
+            Citations: update
+          </span>
+        </span>
+        <br>
+        Manu, V. T., &amp; Simon, P. (2012).
+        A Novel Statistical Fusion Rule for Image Fusion in Non Subsampled Contourlet Transform Domain.
+        In <em>International Conference on Computer Science and Information Technology</em> (pp. 367–376).
+        Springer, Berlin.
+      </li>
+    </ol>
+  </div>
+
+  <!-- Book Chapters -->
+  <div class="pub-section mb-4" data-category="book">
+    <h5>Book Chapters (Scopus Indexed)</h5>
+    <ol start="7">
+      <li>
+        <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+          <span class="badge rounded-pill text-bg-secondary">Book Chapter</span>
+          <span class="badge rounded-pill text-bg-light text-dark border pub-citations" data-citations="">
+            Citations: update
+          </span>
+        </span>
+        <br>
+        Sitara, K., &amp; Manu V. T. (2022).
+        Security concerns and forensic aspects of IoHT.
+        In <em>Smart and Secure Internet of Healthcare Things</em>.
+        CRC Press, Taylor &amp; Francis Group.
+      </li>
+
+      <li class="mt-3">
+        <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+          <span class="badge rounded-pill text-bg-secondary">Book Chapter</span>
+          <span class="badge rounded-pill text-bg-light text-dark border pub-citations" data-citations="">
+            Citations: update
+          </span>
+        </span>
+        <br>
+        Manu, V. T., &amp; Mehtre, B. M. (2018).
+        Review of Image Tampering Detection Techniques.
+        In S. Ramakrishnan (Ed.),
+        <em>Cryptographic and Information Security Approaches for Images and Videos</em>, 1st Ed.
+        Boca Raton: CRC Press, p. 986.
+      </li>
+    </ol>
+  </div>
+
+  <!-- Misc Journals -->
+  <div class="pub-section mb-0" data-category="misc">
+    <h5>Miscellaneous Journals</h5>
+    <ol start="9">
+      <li>
+        <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+          <span class="badge rounded-pill text-bg-light text-dark border pub-citations" data-citations="">
+            Citations: update
+          </span>
+        </span>
+        <br>
+        Manu, V. T., &amp; Simon, P. (2012).
+        A novel statistical fusion rule for image fusion and its comparison in Non-Subsampled
+        Contourlet Transform and Wavelet domains.
+        <em>arXiv preprint</em> arXiv:1205.1648.
+      </li>
+    </ol>
+  </div>
+
+</div> <!-- /#pubSections -->
+
           </div>
         </div>
       </div>
