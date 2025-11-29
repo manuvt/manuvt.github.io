@@ -1,420 +1,356 @@
+<!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
-  <style>
-    .tab-content {
-      > .tab-pane {
-        display: none;
-      }
-      > .active {
-        display: block;
-        background-color: #fff;
-      }
-    }
-
-    .accordion {
-      background-color: #eee;
-      color: #444;
-      cursor: pointer;
-      padding: 18px;
-      width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: 15px;
-      transition: .10s;
-    }
-
-    .active,
-    .accordion:hover {
-      background-color: #ccc;
-    }
-
-    .accordion:after {
-      content: '\002B';
-      color: #777;
-      font-weight: bold;
-      float: right;
-      margin-left: 2px;
-    }
-
-    .panel {
-      padding: 0 5px;
-      background-color: white;
-      text-align: left;
-      color: black;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.1s ease-out;
-    }
-  </style>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>🎓 Homepage of Dr. Manu V.T. | Ph.D | CISA</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      padding: 1.5rem 1rem;
+      background-color: #111827; /* dark header */
+    }
+
+    header h1,
+    header h2 {
+      margin: 0;
+    }
+
+    header h2 {
+      font-size: 2rem;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+
+    .accordion-item + .accordion-item {
+      margin-top: 0.5rem; /* small gap between accordion sections */
+    }
+
+    .card {
+      margin-top: 1.5rem;
+      padding: 1rem;
+    }
+  </style>
 </head>
 
-<body>
+<body class="bg-dark text-light">
   <header>
     <h2>Dr. Manu V.T.</h2>
     <h1>Assistant Professor, National Forensic Sciences University (NFSU), Bhopal Campus, India</h1>
   </header>
 
-  <!-- NEW: About Me accordion -->
-  <button class="accordion">About Me</button>
-  <div class="panel">
-    <p>
-      Teaching has always been close to my heart — a passion shaped by my mother, who served as a state award–winning
-      teacher in the government school system. Inspired by her dedication and impact, I chose to pursue a life in academia
-      where I could blend learning, discovery, and the joy of guiding future engineers.
-    </p>
-    <p>
-      My academic journey began with a B.Tech. in Computer Science and Engineering from NIT Calicut, followed by an
-      M.Tech. from the University of Kerala, Department of Computer Science. I then completed my Ph.D. in Computer
-      Science at the University of Hyderabad (Central University). My doctoral research was carried out at the Center of
-      Excellence in Cyber Security, IDRBT — an institute established by the Reserve Bank of India to strengthen
-      cybersecurity in the financial sector.
-    </p>
-    <p>
-      I had the privilege of being mentored by Prof. B. M. Mehtre, a pioneer behind India’s first Automated Fingerprint
-      Identification System (AFIS), whose work continues to support law enforcement agencies across India and overseas.
-      Working alongside such impactful research helped shape my interest in digital forensics and security.
-    </p>
-    <p>
-      Over the years, my research has led to publications in reputable journals including Elsevier’s Forensic Science
-      International (SCI, Q1) and Springer’s Signal, Image and Video Processing (SCIE, Q2), as well as multiple
-      Scopus-indexed conference papers and book chapters. My technical contributions also extend to cybersecurity readiness
-      initiatives in the Indian banking sector. At IDRBT, I led and coordinated teams for large-scale cyber drills involving
-      more than 25 participants at a time, helping banks improve their incident response capabilities in line with RBI
-      directives. I also participated in CERT-In national cyber mock drills, worked on forensic lab design, and delivered
-      hands-on security training for banking professionals.
-    </p>
-    <p>
-      My digital forensics experience includes working with the FRED forensic workstation and industry-standard tools such
-      as EnCase, Oxygen Forensics, and Paraben SIM analysis suites. I hold professional certifications including CISA
-      (Certified Information Systems Auditor) and ISO 27001:2022 ISMS Lead Auditor.
-    </p>
-    <p>
-      Today, my research spans image forensics and cyber defense analytics. My work continues to be driven by a belief that
-      technology should enable trust — and that education empowers individuals to secure the world they build.
-    </p>
-    <p>
-      Outside of work, I enjoy exploring new technologies, mentoring enthusiastic learners, and finding creative ways to
-      bring real-world security challenges into the classroom.
-    </p>
-  </div>
+  <main class="container py-4">
 
-  <button class="accordion">Contact & Research Profiles</button>
-  <div class="panel">
-    <div class="container mt-3">
-      <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#home">e-mail</a></li>
-        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#orchid">ORCiD</a></li>
-        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#scopus">Scopus</a></li>
-        <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#googlescholar">Scholar</a></li>
-      </ul>
+    <!-- Bootstrap Accordion wrapper -->
+    <div class="accordion" id="mainAccordion">
 
-      <div class="tab-content mt-3">
-        <div id="home" class="tab-pane fade show active">
-          <ol>
-            <p>personal: <a href="mailto:manuvt.nitc@gmail.com">manuvt.nitc@gmail.com</a></p>
-            <p>official: <a href="mailto:manu.vt@nfsu.ac.in">manu.vt@nfsu.ac.in</a></p>
-          </ol>
-        </div>
-        <div id="orchid" class="tab-pane fade">
-          <p><a href="https://orcid.org/0000-0001-5696-4851" target="_blank" rel="noopener">0000-0001-5696-4851</a></p>
-        </div>
-        <div id="scopus" class="tab-pane fade">
-          <p><a href="https://www.scopus.com/authid/detail.uri?authorId=55339839700" target="_blank" rel="noopener">55339839700</a></p>
-        </div>
-        <div id="googlescholar" class="tab-pane fade">
-          <p><a href="https://scholar.google.com/citations?user=4grbJmcAAAAJ&hl=en" target="_blank" rel="noopener">4grbJmcAAAAJ</a></p>
+      <!-- About Me -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingAbout">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseAbout"
+            aria-expanded="true"
+            aria-controls="collapseAbout"
+          >
+            About Me
+          </button>
+        </h2>
+        <div
+          id="collapseAbout"
+          class="accordion-collapse collapse show"
+          aria-labelledby="headingAbout"
+          data-bs-parent="#mainAccordion"
+        >
+          <div class="accordion-body text-dark">
+            <p>
+              Teaching has always been close to my heart — a passion shaped by my mother, who served as a state
+              award–winning teacher in the government school system. Inspired by her dedication and impact, I chose
+              to pursue a life in academia where I could blend learning, discovery, and the joy of guiding future
+              engineers.
+            </p>
+            <p>
+              My academic journey began with a B.Tech. in Computer Science and Engineering from NIT Calicut, followed
+              by an M.Tech. from the University of Kerala, Department of Computer Science. I then completed my Ph.D.
+              in Computer Science at the University of Hyderabad (Central University). My doctoral research was carried
+              out at the Center of Excellence in Cyber Security, IDRBT — an institute established by the Reserve Bank
+              of India to strengthen cybersecurity in the financial sector.
+            </p>
+            <p>
+              I had the privilege of being mentored by Prof. B. M. Mehtre, a pioneer behind India’s first Automated
+              Fingerprint Identification System (AFIS), whose work continues to support law enforcement agencies across
+              India and overseas. Working alongside such impactful research helped shape my interest in digital
+              forensics and security.
+            </p>
+            <p>
+              Over the years, my research has led to publications in reputable journals including Elsevier’s Forensic
+              Science International (SCI, Q1) and Springer’s Signal, Image and Video Processing (SCIE, Q2), as well as
+              multiple Scopus-indexed conference papers and book chapters. My technical contributions also extend to
+              cybersecurity readiness initiatives in the Indian banking sector. At IDRBT, I led and coordinated teams
+              for large-scale cyber drills involving more than 25 participants at a time, helping banks improve their
+              incident response capabilities in line with RBI directives. I also participated in CERT-In national cyber
+              mock drills, worked on forensic lab design, and delivered hands-on security training for banking
+              professionals.
+            </p>
+            <p>
+              My digital forensics experience includes working with the FRED forensic workstation and industry-standard
+              tools such as EnCase, Oxygen Forensics, and Paraben SIM analysis suites. I hold professional
+              certifications including CISA (Certified Information Systems Auditor) and ISO 27001:2022 ISMS Lead
+              Auditor.
+            </p>
+            <p>
+              Today, my research spans image forensics and cyber defense analytics. My work continues to be driven by
+              a belief that technology should enable trust — and that education empowers individuals to secure the
+              world they build.
+            </p>
+            <p>
+              Outside of work, I enjoy exploring new technologies, mentoring enthusiastic learners, and finding
+              creative ways to bring real-world security challenges into the classroom.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <br>
-
-  <button class="accordion">Publication List</button>
-  <div class="panel">
-    <ol>
-      <ul><b>International Peer-Reviewed Journals</b>
-        <ol>
-          <li>
-            Manu, V. T., &amp; Mehtre, B. M. (2019). Tamper detection of social media images using quality artifacts and
-            texture features. <i>Forensic Science International</i>, Elsevier, 295, 100–112.
-            <a href="https://doi.org/10.1016/j.forsciint.2018.11.025" target="_blank">DOI</a><br>
-            Indexing: Science Citation Index (SCI), Scopus, DBLP<br>
-            Impact Factor: 2.395
-          </li>
-          <li>
-            Manu, V. T., &amp; Mehtre, B. M. (2018). Copy-move tampering detection using affine transformation property
-            preservation on clustered keypoints. <i>Signal, Image and Video Processing</i>, Springer, 12(3), 549–556.
-            <a href="https://doi.org/10.1007/s11760-017-1191-7" target="_blank">DOI</a><br>
-            Indexing: Science Citation Index Expanded (SCIE), Scopus, DBLP<br>
-            Impact Factor: 2.157
-          </li>
-        </ol>
-      </ul>
-
-      <ul><b>International Conferences (Outside India, Scopus Indexed)</b>
-        <ol start="3">
-          <li>
-            Manu, V. T., &amp; Mehtre, B. M. (2017). Blind technique using blocking artifacts and entropy of histograms for
-            image tampering detection. In <i>Second International Workshop on Pattern Recognition</i> (SPIE Proceedings,
-            Vol. 10443, p. 104430T). International Society for Optics and Photonics, Singapore.
-            <a href="https://doi.org/10.1117/12.2280306" target="_blank">DOI</a><br>
-            Venue: Nanyang Technological University, Singapore.<br>
-            Date: May 1–3, 2017<br>
-          </li>
-        </ol>
-      </ul>
-
-      <ul><b>International Conferences (In India, Scopus Indexed)</b>
-        <ol start="4">
-          <li>
-            Manu, V. T., &amp; Mehtre, B. M. (2016). Detection of copy-move forgery in images using segmentation and SURF.
-            In <i>Advances in Signal Processing and Intelligent Recognition Systems</i> (pp. 645–654). Springer, Cham.
-          </li>
-          <li>
-            Manu, V. T., &amp; Mehtre, B. M. (2015). Visual artifacts based image splicing detection in uncompressed
-            images. In <i>Computer Graphics, Vision and Information Security (CGVIS)</i>, IEEE International Conference
-            (pp. 145–150). IEEE.
-          </li>
-          <li>
-            Manu, V. T., &amp; Simon, P. (2012). A Novel Statistical Fusion Rule for Image Fusion in Non Subsampled
-            Contourlet Transform Domain. In <i>International Conference on Computer Science and Information Technology</i>
-            (pp. 367–376). Springer, Berlin.
-          </li>
-        </ol>
-      </ul>
-
-      <ul><b>Book Chapters (Scopus Indexed)</b>
-        <ol start="7">
-          <li>
-            K. Sitara and Manu V.T. (2022). Security concerns and forensic aspects of IoHT. In:
-            <i>Smart and Secure Internet of Healthcare Things</i>. Editors: Dr. Nitin Gupta et al., CRC Press, Taylor and
-            Francis Group.
-          </li>
-          <li>
-            Manu, V. T., &amp; Mehtre, B. M. (2018). Review of Image Tampering Detection Techniques. In: S. Ramakrishnan,
-            ed., <i>Cryptographic and Information Security Approaches for Images and Videos</i>, 1st ed. Boca Raton: CRC
-            Press, p.986.
-          </li>
-        </ol>
-      </ul>
-
-      <ul><b>Misc. Journals</b>
-        <ol start="9">
-          <li>
-            Manu, V. T., &amp; Simon, P. (2012). A novel statistical fusion rule for image fusion and its comparison in
-            non subsampled contourlet transform domain and wavelet domain. <i>arXiv preprint</i> arXiv:1205.1648.
-          </li>
-        </ol>
-      </ul>
-    </ol>
-  </div>
-
-  <br>
-
-  <button class="accordion">Educational Qualifications</button>
-  <div class="panel">
-    <div class="accordion-body">
-      <div class="tab">
-        <ul>
-          <li>
-            B.Tech (2003-2007) Computer Science &amp; Engineering <br>
-            NIT Calicut
-          </li>
-          <li>
-            M.Tech (2009-2011) Computer Science with Specialization in Digital Image Computing<br>
-            Department of Computer Science, University of Kerala, Kariyavattom Campus
-          </li>
-          <li>
-            PhD (2013-2018) Computer Science <br>
-            School of Computer and Information Sciences (SCIS), University of Hyderabad (Central University)<br>
-            &amp;<br>
-            Center of Excellence in Cyber Security (formerly)<br>
-            Institute for Development and Research in Banking Technology (IDRBT), Hyderabad<br>
-            (Estd. by Reserve Bank of India)
-          </li>
-        </ul>
-
-        NB: All of the above are done in Regular-Full Time mode
-      </div>
-    </div>
-  </div>
-
-  <br>
-
-  <div>
-    <div>
-      <button class="accordion">Certifications</button>
-      <div class="panel">
-        <div class="accordion-body">
-          <ul>
-            <li>
-              Certified Information Systems Auditor&reg; (CISA)
-              <ul>
-                <li>
-                  <a href="https://www.credly.com/badges/07c191c0-923e-4935-9af2-1d305fd7c28b/public_url" target="_blank"
-                    rel="noopener">View Badge</a>
+      <!-- Contact & Research Profiles -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingContact">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseContact"
+            aria-expanded="false"
+            aria-controls="collapseContact"
+          >
+            Contact &amp; Research Profiles
+          </button>
+        </h2>
+        <div
+          id="collapseContact"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingContact"
+          data-bs-parent="#mainAccordion"
+        >
+          <div class="accordion-body text-dark">
+            <div class="container mt-3">
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" data-bs-toggle="tab" href="#tabEmail" role="tab">e-mail</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="tab" href="#tabOrcid" role="tab">ORCiD</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="tab" href="#tabScopus" role="tab">Scopus</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-bs-toggle="tab" href="#tabScholar" role="tab">Scholar</a>
                 </li>
               </ul>
-            </li>
-            <li>ISO 27001:2022 ISMS Lead Auditor</li>
-            <li>
-              UGC National Eligibilty Test (NET) for Lectureship
-              <ul>
-                <li>Dec 2012 - Lifetime</li>
+
+              <div class="tab-content mt-3">
+                <div id="tabEmail" class="tab-pane fade show active" role="tabpanel">
+                  <ul>
+                    <li>personal: <a href="mailto:manuvt.nitc@gmail.com">manuvt.nitc@gmail.com</a></li>
+                    <li>official: <a href="mailto:manu.vt@nfsu.ac.in">manu.vt@nfsu.ac.in</a></li>
+                  </ul>
+                </div>
+
+                <div id="tabOrcid" class="tab-pane fade" role="tabpanel">
+                  <p>
+                    <a href="https://orcid.org/0000-0001-5696-4851" target="_blank" rel="noopener">
+                      0000-0001-5696-4851
+                    </a>
+                  </p>
+                </div>
+
+                <div id="tabScopus" class="tab-pane fade" role="tabpanel">
+                  <p>
+                    <a href="https://www.scopus.com/authid/detail.uri?authorId=55339839700"
+                       target="_blank" rel="noopener">
+                      55339839700
+                    </a>
+                  </p>
+                </div>
+
+                <div id="tabScholar" class="tab-pane fade" role="tabpanel">
+                  <p>
+                    <a href="https://scholar.google.com/citations?user=4grbJmcAAAAJ&hl=en"
+                       target="_blank" rel="noopener">
+                      4grbJmcAAAAJ
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Publication List -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingPubs">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapsePubs"
+            aria-expanded="false"
+            aria-controls="collapsePubs"
+          >
+            Publication List
+          </button>
+        </h2>
+        <div
+          id="collapsePubs"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingPubs"
+          data-bs-parent="#mainAccordion"
+        >
+          <div class="accordion-body text-dark">
+            <ol>
+              <ul><b>International Peer-Reviewed Journals</b>
+                <ol>
+                  <li>
+                    Manu, V. T., &amp; Mehtre, B. M. (2019). Tamper detection of social media images using quality
+                    artifacts and texture features. <i>Forensic Science International</i>, Elsevier, 295, 100–112.
+                    <a href="https://doi.org/10.1016/j.forsciint.2018.11.025" target="_blank">DOI</a><br>
+                    Indexing: Science Citation Index (SCI), Scopus, DBLP<br>
+                    Impact Factor: 2.395
+                  </li>
+                  <li>
+                    Manu, V. T., &amp; Mehtre, B. M. (2018). Copy-move tampering detection using affine transformation
+                    property preservation on clustered keypoints. <i>Signal, Image and Video Processing</i>, Springer,
+                    12(3), 549–556.
+                    <a href="https://doi.org/10.1007/s11760-017-1191-7" target="_blank">DOI</a><br>
+                    Indexing: Science Citation Index Expanded (SCIE), Scopus, DBLP<br>
+                    Impact Factor: 2.157
+                  </li>
+                </ol>
               </ul>
-            </li>
-          </ul>
+
+              <ul><b>International Conferences (Outside India, Scopus Indexed)</b>
+                <ol start="3">
+                  <li>
+                    Manu, V. T., &amp; Mehtre, B. M. (2017). Blind technique using blocking artifacts and entropy of
+                    histograms for image tampering detection. In <i>Second International Workshop on Pattern
+                    Recognition</i> (SPIE Proceedings, Vol. 10443, p. 104430T). International Society for Optics
+                    and Photonics, Singapore.
+                    <a href="https://doi.org/10.1117/12.2280306" target="_blank">DOI</a><br>
+                    Venue: Nanyang Technological University, Singapore.<br>
+                    Date: May 1–3, 2017<br>
+                  </li>
+                </ol>
+              </ul>
+
+              <ul><b>International Conferences (In India, Scopus Indexed)</b>
+                <ol start="4">
+                  <li>
+                    Manu, V. T., &amp; Mehtre, B. M. (2016). Detection of copy-move forgery in images using segmentation
+                    and SURF. In <i>Advances in Signal Processing and Intelligent Recognition Systems</i> (pp. 645–654).
+                    Springer, Cham.
+                  </li>
+                  <li>
+                    Manu, V. T., &amp; Mehtre, B. M. (2015). Visual artifacts based image splicing detection in
+                    uncompressed images. In <i>Computer Graphics, Vision and Information Security (CGVIS)</i>, IEEE
+                    International Conference (pp. 145–150). IEEE.
+                  </li>
+                  <li>
+                    Manu, V. T., &amp; Simon, P. (2012). A Novel Statistical Fusion Rule for Image Fusion in Non
+                    Subsampled Contourlet Transform Domain. In <i>International Conference on Computer Science and
+                    Information Technology</i> (pp. 367–376). Springer, Berlin.
+                  </li>
+                </ol>
+              </ul>
+
+              <ul><b>Book Chapters (Scopus Indexed)</b>
+                <ol start="7">
+                  <li>
+                    K. Sitara and Manu V.T. (2022). Security concerns and forensic aspects of IoHT. In:
+                    <i>Smart and Secure Internet of Healthcare Things</i>. Editors: Dr. Nitin Gupta et al., CRC Press,
+                    Taylor and Francis Group.
+                  </li>
+                  <li>
+                    Manu, V. T., &amp; Mehtre, B. M. (2018). Review of Image Tampering Detection Techniques. In:
+                    S. Ramakrishnan, ed., <i>Cryptographic and Information Security Approaches for Images and Videos</i>,
+                    1st ed. Boca Raton: CRC Press, p.986.
+                  </li>
+                </ol>
+              </ul>
+
+              <ul><b>Misc. Journals</b>
+                <ol start="9">
+                  <li>
+                    Manu, V. T., &amp; Simon, P. (2012). A novel statistical fusion rule for image fusion and its
+                    comparison in non subsampled contourlet transform domain and wavelet domain. <i>arXiv preprint</i>
+                    arXiv:1205.1648.
+                  </li>
+                </ol>
+              </ul>
+            </ol>
+          </div>
         </div>
       </div>
 
-      <br>
-
-      <div class="card" role="region" aria-label="Clock widget">
-        <div id="time" aria-live="polite">--:--:--</div>
-        <div id="date">Loading date...</div>
-        <div class="meta">
-          <div id="tzLabel">Local time</div>
-        </div>
-
-        <div class="controls">
-          <label>
-            <span class="sr-only">Choose timezone</span>
-            <select id="tzSelect" title="Choose timezone">
-              <option value="local">Local</option>
-              <option value="UTC">UTC</option>
-              <option value="+05:30">UTC+05:30</option>
-              <option value="-04:00">UTC-04:00</option>
-            </select>
-          </label>
-
-          <label>
-            <input type="checkbox" id="toggle12" />
-            <span style="user-select:none">12-hour</span>
-          </label>
+      <!-- Educational Qualifications -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingEdu">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseEdu"
+            aria-expanded="false"
+            aria-controls="collapseEdu"
+          >
+            Educational Qualifications
+          </button>
+        </h2>
+        <div
+          id="collapseEdu"
+          class="accordion-collapse collapse"
+          aria-labelledby="headingEdu"
+          data-bs-parent="#mainAccordion"
+        >
+          <div class="accordion-body text-dark">
+            <ul>
+              <li>
+                B.Tech (2003–2007) Computer Science &amp; Engineering<br>
+                NIT Calicut
+              </li>
+              <li>
+                M.Tech (2009–2011) Computer Science with Specialization in Digital Image Computing<br>
+                Department of Computer Science, University of Kerala, Kariyavattom Campus
+              </li>
+              <li>
+                PhD (2013–2018) Computer Science<br>
+                School of Computer and Information Sciences (SCIS), University of Hyderabad (Central University)<br>
+                &amp;<br>
+                Center of Excellence in Cyber Security (formerly)<br>
+                Institute for Development and Research in Banking Technology (IDRBT), Hyderabad<br>
+                (Estd. by Reserve Bank of India)
+              </li>
+            </ul>
+            <p>NB: All of the above are done in Regular–Full Time mode.</p>
+          </div>
         </div>
       </div>
 
-      <script>
-        const timeEl = document.getElementById('time');
-        const dateEl = document.getElementById('date');
-        const tzSelect = document.getElementById('tzSelect');
-        const tzLabel = document.getElementById('tzLabel');
-        const toggle12 = document.getElementById('toggle12');
-
-        function formatTime(date, tz, use12) {
-          const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: use12 };
-          if (tz && tz !== 'local') {
-            if (/^[\+\-]\d{2}:\d{2}$/.test(tz)) tz = 'UTC' + tz;
-            options.timeZone = tz;
-          }
-          return new Intl.DateTimeFormat(undefined, options).format(date);
-        }
-
-        function formatDate(date, tz) {
-          const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-          if (tz && tz !== 'local') {
-            if (/^[\+\-]\d{2}:\d{2}$/.test(tz)) tz = 'UTC' + tz;
-            options.timeZone = tz;
-          }
-          return new Intl.DateTimeFormat(undefined, options).format(date);
-        }
-
-        function getTZLabel(value) {
-          return value === 'local' ? 'Local time' : (value === 'UTC' ? 'UTC' : value);
-        }
-
-        function scheduleTick(fn) {
-          const now = performance.now();
-          const msToNextSecond = 1000 - (now % 1000);
-          return setTimeout(() => {
-            fn();
-            const id = setInterval(fn, 1000);
-            scheduleTick.intervalId = id;
-          }, msToNextSecond);
-        }
-
-        function update() {
-          const tz = tzSelect.value;
-          const use12 = toggle12.checked;
-          const now = new Date();
-          timeEl.textContent = formatTime(now, tz === 'local' ? undefined : tz, use12);
-          dateEl.textContent = formatDate(now, tz === 'local' ? undefined : tz);
-          tzLabel.textContent = getTZLabel(tz);
-        }
-
-        function startClock() {
-          if (scheduleTick.timeoutId) clearTimeout(scheduleTick.timeoutId);
-          if (scheduleTick.intervalId) clearInterval(scheduleTick.intervalId);
-          update();
-          scheduleTick.timeoutId = scheduleTick(update);
-        }
-
-        tzSelect.addEventListener('change', startClock);
-        toggle12.addEventListener('change', startClock);
-
-        startClock();
-
-        document.addEventListener('visibilitychange', () => {
-          if (!document.hidden) startClock();
-        });
-      </script>
-
-      <script>
-        var acc = document.getElementsByClassName("accordion");
-
-        for (var i = 0; i < acc.length; i++) {
-          acc[i].addEventListener("click", function () {
-            var panel = this.nextElementSibling;
-
-            var isAlreadyOpen = panel.style.maxHeight;
-
-            // Close all panels
-            var allPanels = document.getElementsByClassName("panel");
-            var allButtons = document.getElementsByClassName("accordion");
-            for (var j = 0; j < allPanels.length; j++) {
-              allPanels[j].style.maxHeight = null;
-              allButtons[j].classList.remove("active");
-            }
-
-            // Toggle current one if it wasn't already open
-            if (!isAlreadyOpen) {
-              this.classList.add("active");
-              panel.style.maxHeight = panel.scrollHeight + "px";
-            }
-          });
-        }
-      </script>
-
-      <script>
-        function openCity(evt, cityName) {
-          var i, tabcontent, tablinks;
-          tabcontent = document.getElementsByClassName("tabcontent");
-          for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-          }
-          tablinks = document.getElementsByClassName("tablinks");
-          for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-          }
-          document.getElementById(cityName).style.display = "block";
-          evt.currentTarget.className += " active";
-        }
-
-        // Get the element with id="defaultOpen" and click on it
-        // (Note: make sure there is an element with id="defaultOpen" if you use this)
-        // document.getElementById("defaultOpen").click();
-      </script>
-
-    </div>
-  </div>
-
-</body>
-</html>
+      <!-- Certifications -->
+      <
