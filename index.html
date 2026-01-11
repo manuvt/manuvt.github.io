@@ -11,6 +11,29 @@
 body { margin:0; padding:0; }
 header { padding:1.5rem 1rem; background:#111827; }
 header h2, header p { margin:0; }
+.now-teaching {
+  background: #16a34a !important;
+  color: white !important;
+  animation: pulse 1.5s infinite;
+  font-weight: bold;
+  position: relative;
+}
+
+.now-teaching::after {
+  content: " NOW";
+  font-size: 0.7em;
+  background: #22c55e;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 6px;
+  margin-left: 6px;
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(34,197,94,.6); }
+  70%  { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
+  100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
 
 .accordion-item + .accordion-item { margin-top:.5rem; }
 
@@ -21,6 +44,65 @@ header h2, header p { margin:0; }
 .bg-purple { background:#8e44ad !important; color:white !important; }
 </style>
 </head>
+<script>
+const timetable = {
+  Mon: [
+    { start: "11:30", end: "13:30", id: "MAF Lab" },
+    { start: "16:00", end: "17:00", id: "MAF" }
+  ],
+  Tue: [
+    { start: "10:30", end: "11:30", id: "MA" },
+    { start: "15:00", end: "16:00", id: "BCDF" },
+    { start: "16:00", end: "17:00", id: "MAF" }
+  ],
+  Wed: [
+    { start: "10:30", end: "12:30", id: "MA Lab" },
+    { start: "15:00", end: "16:00", id: "BCDF" }
+  ],
+  Thu: [
+    { start: "10:30", end: "11:30", id: "MAF" },
+    { start: "15:00", end: "16:00", id: "BCDF" },
+    { start: "16:00", end: "17:00", id: "MA" }
+  ],
+  Fri: [
+    { start: "10:30", end: "11:30", id: "MA" },
+    { start: "15:00", end: "16:00", id: "BCDF" }
+  ]
+};
+
+function timeToMin(t) {
+  const [h,m] = t.split(":").map(Number);
+  return h*60 + m;
+}
+
+function getNowMinutes() {
+  const d = new Date();
+  return d.getHours()*60 + d.getMinutes();
+}
+
+function updateNowTeaching() {
+  document.querySelectorAll(".now-teaching").forEach(e=>e.classList.remove("now-teaching"));
+
+  const now = new Date();
+  const day = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][now.getDay()];
+  if (!timetable[day]) return;
+
+  const nowMin = getNowMinutes();
+
+  for (const cls of timetable[day]) {
+    if (nowMin >= timeToMin(cls.start) && nowMin < timeToMin(cls.end)) {
+      document.querySelectorAll("td").forEach(td=>{
+        if (td.innerText.trim() === cls.id) {
+          td.classList.add("now-teaching");
+        }
+      });
+    }
+  }
+}
+
+setInterval(updateNowTeaching, 30000);
+updateNowTeaching();
+</script>
 
 <body class="bg-dark text-light">
 
