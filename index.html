@@ -121,6 +121,7 @@ Academic Time Table
 <div class="accordion-body">
 
 <div class="table-responsive">
+
 <table class="table table-bordered text-center align-middle small">
 <thead class="table-light">
 <tr>
@@ -137,61 +138,110 @@ Academic Time Table
 </thead>
 
 <tbody>
+
 <tr>
 <th>Mon</th>
 <td></td>
-<td colspan="2" class="bg-primary text-white" data-class="MAF Lab">MAF Lab</td>
+
+<td colspan="2" class="bg-primary text-white"
+    data-day="Mon" data-start="11:30" data-end="13:30" data-class="MAF Lab">
+  MAF Lab
+</td>
+
 <td rowspan="5" class="bg-secondary text-white fw-bold">Lunch</td>
 <td></td>
 <td></td>
-<td class="bg-info text-dark" data-class="MAF">MAF</td>
+
+<td class="bg-info text-dark"
+    data-day="Mon" data-start="16:00" data-end="17:00" data-class="MAF">
+  MAF
+</td>
 <td></td>
 </tr>
 
 <tr>
 <th>Tue</th>
-<td class="bg-danger text-white" data-class="MA">MA</td>
+<td class="bg-danger text-white"
+    data-day="Tue" data-start="10:30" data-end="11:30" data-class="MA">
+  MA
+</td>
 <td></td>
 <td></td>
 <td></td>
-<td class="bg-purple" data-class="BCDF">BCDF</td>
-<td class="bg-info text-dark" data-class="MAF">MAF</td>
+
+<td class="bg-purple"
+    data-day="Tue" data-start="15:00" data-end="16:00" data-class="BCDF">
+  BCDF
+</td>
+
+<td class="bg-info text-dark"
+    data-day="Tue" data-start="16:00" data-end="17:00" data-class="MAF">
+  MAF
+</td>
 <td></td>
 </tr>
 
 <tr>
 <th>Wed</th>
-<td colspan="2" class="bg-danger text-white" data-class="MA Lab">MA Lab</td>
+<td colspan="2" class="bg-danger text-white"
+    data-day="Wed" data-start="10:30" data-end="12:30" data-class="MA Lab">
+  MA Lab
+</td>
 <td></td>
 <td></td>
-<td class="bg-purple" data-class="BCDF">BCDF</td>
+
+<td class="bg-purple"
+    data-day="Wed" data-start="15:00" data-end="16:00" data-class="BCDF">
+  BCDF
+</td>
 <td></td>
 <td></td>
 </tr>
 
 <tr>
 <th>Thu</th>
-<td class="bg-info text-dark" data-class="MAF">MAF</td>
+<td class="bg-info text-dark"
+    data-day="Thu" data-start="10:30" data-end="11:30" data-class="MAF">
+  MAF
+</td>
 <td></td>
 <td></td>
 <td></td>
-<td class="bg-purple" data-class="BCDF">BCDF</td>
-<td class="bg-danger text-white" data-class="MA">MA</td>
+
+<td class="bg-purple"
+    data-day="Thu" data-start="15:00" data-end="16:00" data-class="BCDF">
+  BCDF
+</td>
+
+<td class="bg-danger text-white"
+    data-day="Thu" data-start="16:00" data-end="17:00" data-class="MA">
+  MA
+</td>
 <td></td>
 </tr>
 
 <tr>
 <th>Fri</th>
-<td class="bg-danger text-white" data-class="MA">MA</td>
+<td class="bg-danger text-white"
+    data-day="Fri" data-start="10:30" data-end="11:30" data-class="MA">
+  MA
+</td>
 <td></td>
 <td></td>
 <td></td>
-<td class="bg-purple" data-class="BCDF">BCDF</td>
+
+<td class="bg-purple"
+    data-day="Fri" data-start="15:00" data-end="16:00" data-class="BCDF">
+  BCDF
+</td>
 <td></td>
 <td></td>
 </tr>
+
 </tbody>
 </table>
+
+  
 </div>
 
 
@@ -600,49 +650,25 @@ setInterval(updateClock, 1000);
 updateClock();
 </script>
 <script>
-const timetable = {
-  Mon: [
-    { start: "11:30", end: "13:30", name: "MAF Lab" },
-    { start: "16:00", end: "17:00", name: "MAF" }
-  ],
-  Tue: [
-    { start: "10:30", end: "11:30", name: "MA" },
-    { start: "15:00", end: "16:00", name: "BCDF" },
-    { start: "16:00", end: "17:00", name: "MAF" }
-  ],
-  Wed: [
-    { start: "10:30", end: "12:30", name: "MA Lab" },
-    { start: "15:00", end: "16:00", name: "BCDF" }
-  ],
-  Thu: [
-    { start: "10:30", end: "11:30", name: "MAF" },
-    { start: "15:00", end: "16:00", name: "BCDF" },
-    { start: "16:00", end: "17:00", name: "MA" }
-  ],
-  Fri: [
-    { start: "10:30", end: "11:30", name: "MA" },
-    { start: "15:00", end: "16:00", name: "BCDF" }
-  ]
-};
-
 function toMin(t){
   const [h,m] = t.split(":").map(Number);
   return h*60 + m;
 }
 
 function updateNowTeaching(){
-  document.querySelectorAll(".now-teaching").forEach(x=>x.classList.remove("now-teaching"));
-
   const now = new Date();
   const day = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][now.getDay()];
-  if (!timetable[day]) return;
-
   const nowMin = now.getHours()*60 + now.getMinutes();
 
-  timetable[day].forEach(cls=>{
-    if(nowMin >= toMin(cls.start) && nowMin < toMin(cls.end)){
-      document.querySelectorAll(`[data-class="${cls.name}"]`)
-        .forEach(cell => cell.classList.add("now-teaching"));
+  document.querySelectorAll("[data-class]").forEach(cell=>{
+    cell.classList.remove("now-teaching");
+
+    const cDay   = cell.dataset.day;
+    const start  = toMin(cell.dataset.start);
+    const end    = toMin(cell.dataset.end);
+
+    if (cDay === day && nowMin >= start && nowMin < end) {
+      cell.classList.add("now-teaching");
     }
   });
 }
