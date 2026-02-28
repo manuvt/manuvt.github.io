@@ -8,17 +8,79 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-body { margin:0; padding:0; }
-header { padding:1.5rem 1rem; background:#111827; }
-header h2, header p { margin:0; }
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0; padding: 0;
+  background: #00000a !important;
+  color: #e8eaf6;
+  overflow-x: hidden;
+}
+
+#spaceCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+header {
+  padding: 1.5rem 1rem;
+  background: rgba(5, 7, 20, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  z-index: 10;
+  border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+}
+header h2 {
+  margin: 0;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  background: linear-gradient(90deg, #00f5ff 0%, #bf00ff 50%, #ff00cc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  filter: drop-shadow(0 0 8px rgba(0,245,255,0.7)) drop-shadow(0 0 20px rgba(191,0,255,0.4));
+  animation: headerPulse 3s ease-in-out infinite alternate;
+}
+@keyframes headerPulse {
+  from { filter: drop-shadow(0 0 6px rgba(0,245,255,0.6)) drop-shadow(0 0 16px rgba(191,0,255,0.3)); }
+  to   { filter: drop-shadow(0 0 14px rgba(0,245,255,0.9)) drop-shadow(0 0 35px rgba(255,0,204,0.5)); }
+}
+header .desig-1 {
+  margin: 0.15rem 0 0;
+  color: #7ecfff;
+  text-shadow: 0 0 8px rgba(126,207,255,0.7);
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  letter-spacing: 0.05em;
+}
+header .desig-2 {
+  margin: 0;
+  color: rgba(180, 210, 255, 0.75);
+  text-shadow: 0 0 6px rgba(126,207,255,0.4);
+  font-size: clamp(0.75rem, 1.8vw, 0.92rem);
+}
+header .desig-3 {
+  margin: 0;
+  color: rgba(160, 190, 255, 0.6);
+  font-size: clamp(0.7rem, 1.6vw, 0.85rem);
+}
+
+main { position: relative; z-index: 10; }
+
 .now-teaching {
   background: #16a34a !important;
   color: white !important;
-  animation: pulse 1.5s infinite;
+  animation: pulseGreen 1.5s infinite;
   font-weight: bold;
   position: relative;
 }
-
 .now-teaching::after {
   content: " NOW";
   font-size: 0.7em;
@@ -28,667 +90,997 @@ header h2, header p { margin:0; }
   border-radius: 6px;
   margin-left: 6px;
 }
-
-@keyframes pulse {
+@keyframes pulseGreen {
   0%   { box-shadow: 0 0 0 0 rgba(34,197,94,.6); }
   70%  { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
   100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
 }
 
-.accordion-item + .accordion-item { margin-top:.5rem; }
+.accordion-item + .accordion-item { margin-top: .5rem; }
 
-.accordion-body { background:#fff !important; color:#000 !important; line-height:1.6; }
-.accordion-button { background:#f8f9fa !important; color:#000 !important; }
-.accordion-button:not(.collapsed) { background:#e9ecef !important; color:#000 !important; }
+.accordion-item {
+  background: transparent !important;
+  border: 1px solid rgba(80, 180, 255, 0.15) !important;
+  border-radius: 6px !important;
+  overflow: hidden;
+}
 
-.bg-purple { background:#8e44ad !important; color:white !important; }
+.accordion-button {
+  background: rgba(8, 15, 40, 0.82) !important;
+  color: #a8d4ff !important;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(80, 180, 255, 0.1) !important;
+  box-shadow: none !important;
+}
+
+.accordion-button:not(.collapsed) {
+  background: rgba(0, 20, 60, 0.92) !important;
+  color: #7ecfff !important;
+  text-shadow: 0 0 10px rgba(126, 207, 255, 0.5);
+  border-bottom: 1px solid rgba(0, 245, 255, 0.2) !important;
+}
+
+/* Tweak the default caret color */
+.accordion-button::after {
+  filter: invert(70%) sepia(60%) saturate(400%) hue-rotate(180deg);
+}
+.accordion-button:not(.collapsed)::after {
+  filter: invert(80%) sepia(80%) saturate(500%) hue-rotate(165deg) brightness(1.2);
+}
+
+.accordion-body {
+  background: rgba(4, 10, 30, 0.88) !important;
+  color: #ccdeff !important;
+  line-height: 1.7;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(80, 180, 255, 0.08);
+}
+
+/* Links inside accordion */
+.accordion-body a {
+  color: #7ecfff;
+  text-decoration: none;
+}
+.accordion-body a:hover {
+  color: #00f5ff;
+  text-shadow: 0 0 8px rgba(0, 245, 255, 0.6);
+}
+
+/* Tables inside accordion */
+.accordion-body .table {
+  color: #ccdeff !important;
+}
+.accordion-body .table-light th {
+  background: rgba(20, 40, 90, 0.9) !important;
+  color: #a8d4ff !important;
+  border-color: rgba(80, 180, 255, 0.2) !important;
+}
+.accordion-body .table td,
+.accordion-body .table th {
+  border-color: rgba(80, 180, 255, 0.15) !important;
+}
+.accordion-body .table-bordered {
+  border-color: rgba(80, 180, 255, 0.2) !important;
+}
+
+/* Headings inside accordion body */
+.accordion-body h5 {
+  color: #7ecfff;
+  text-shadow: 0 0 8px rgba(126, 207, 255, 0.3);
+  margin-top: 1rem;
+  border-bottom: 1px solid rgba(80, 180, 255, 0.15);
+  padding-bottom: 0.3rem;
+}
+
+.bg-purple  { background: #8e44ad !important; color: white !important; }
+.bg-maf-lab { background: #0e7c6e !important; color: white !important; }
+.bg-ma-lab  { background: #b5451b !important; color: white !important; }
+
+/* Course + semester sub-label inside timetable cells */
+.tt-sub {
+  display: block;
+  font-size: 0.65em;
+  opacity: 0.82;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+.card.bg-dark {
+  background: rgba(8, 12, 35, 0.72) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(80, 180, 255, 0.22) !important;
+  box-shadow: 0 0 28px rgba(80, 180, 255, 0.08), inset 0 0 20px rgba(0,0,0,.3);
+  padding: 1rem 1.5rem;
+}
+#clock-time {
+  font-size: 2rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 0.1em;
+  color: #7ecfff;
+  text-shadow: 0 0 12px #7ecfff, 0 0 30px rgba(126,207,255,.4);
+}
+#clock-date {
+  color: rgba(180, 210, 255, 0.65);
+  font-size: 0.9rem;
+  margin-top: .25rem;
+}
 </style>
 </head>
-<body class="bg-dark text-light">
+<body class="text-light">
+
+<canvas id="spaceCanvas"></canvas>
 
 <header>
   <h2>Dr. Manu V. T.</h2>
-  <p>Assistant Professor</p>
-  <p>Department of Cyber Security and Digital Forensics</p>
-  <p>National Forensic Sciences University, Bhopal</p>
+  <p class="desig-1">Assistant Professor</p>
+  <p class="desig-2">Department of Cyber Security and Digital Forensics</p>
+  <p class="desig-3">National Forensic Sciences University, Bhopal</p>
 </header>
 
 <main class="container py-4">
 <div class="accordion" id="mainAccordion">
 
-<!-- ABOUT ME -->
 <div class="accordion-item">
 <h2 class="accordion-header">
 <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#about">About Me</button>
 </h2>
-<div id="about" class="accordion-collapse collapse">
+<div id="about" class="accordion-collapse collapse" data-bs-parent="#mainAccordion">
 <div class="accordion-body">
-    <p>
-            Teaching has always been close to my heart — a passion shaped by my mother, who served as a
-            state award–winning teacher in the government school system. Inspired by her dedication and impact,
-            I chose to pursue a life in academia where I could blend learning, discovery, and the joy of guiding
-            future engineers.
-          </p>
-          <p>
-            My academic journey began with a B.Tech. in Computer Science and Engineering from NIT Calicut,
-            followed by an M.Tech. from the University of Kerala, Department of Computer Science. I then completed
-            my Ph.D. in Computer Science at the University of Hyderabad (Central University). My doctoral research
-            was carried out at the Center of Excellence in Cyber Security, IDRBT — an institute established by
-            the Reserve Bank of India to strengthen cybersecurity in the financial sector.
-          </p>
-          <p>
-            I had the privilege of being mentored by Prof. B. M. Mehtre, a pioneer behind India’s first Automated
-            Fingerprint Identification System (AFIS), whose work continues to support law enforcement agencies
-            across India and overseas. Working alongside such impactful researcher helped shape my interest in
-            digital forensics and security.
-          </p>
-          <p>
-            Over the years, my research has led to publications in reputable journals including Elsevier’s
-            <em>Forensic Science International</em> (SCI, Q1) and Springer’s <em>Signal, Image and Video Processing</em>
-            (SCIE, Q2), as well as multiple Scopus-indexed conference papers and book chapters. My technical
-            contributions also extend to cybersecurity readiness initiatives in the Indian banking sector. At IDRBT,
-            I led and coordinated teams for large-scale cyber drills involving more than 25 participants at a time,
-            helping banks improve their incident response capabilities in line with RBI directives. I also participated
-            in CERT-In national cyber mock drills, worked on forensic lab design, and delivered hands-on security
-            training for banking professionals.
-          </p>
-          <p>
-            My digital forensics experience includes working with the FRED forensic workstation and industry-standard
-            tools such as EnCase, Oxygen Forensics, and Paraben SIM analysis suites. I hold professional certifications
-            including CISA (Certified Information Systems Auditor) and ISO 27001:2022 ISMS Lead Auditor.
-          </p>
-          <p>
-            Today, my research spans image forensics and cyber defense analytics. My work continues to be driven by a
-            belief that technology should enable trust — and that education empowers individuals to secure the world
-            they build.
-          </p>
-          <p>
-            Outside of work, I enjoy exploring new technologies, mentoring enthusiastic learners, and finding creative
-            ways to bring real-world security challenges into the classroom.
-          </p>
+    <p>Teaching has always been close to my heart — a passion shaped by my mother, who served as a state award–winning teacher in the government school system. Inspired by her dedication and impact, I chose to pursue a life in academia where I could blend learning, discovery, and the joy of guiding future engineers.</p>
+    <p>My academic journey began with a B.Tech. in Computer Science and Engineering from NIT Calicut, followed by an M.Tech. from the University of Kerala, Department of Computer Science. I then completed my Ph.D. in Computer Science at the University of Hyderabad (Central University). My doctoral research was carried out at the Center of Excellence in Cyber Security, IDRBT — an institute established by the Reserve Bank of India to strengthen cybersecurity in the financial sector.</p>
+    <p>I had the privilege of being mentored by Prof. B. M. Mehtre, a pioneer behind India's first Automated Fingerprint Identification System (AFIS), whose work continues to support law enforcement agencies across India and overseas. Working alongside such impactful researcher helped shape my interest in digital forensics and security.</p>
+    <p>Over the years, my research has led to publications in reputable journals including Elsevier's <em>Forensic Science International</em> (SCI, Q1) and Springer's <em>Signal, Image and Video Processing</em> (SCIE, Q2), as well as multiple Scopus-indexed conference papers and book chapters. My technical contributions also extend to cybersecurity readiness initiatives in the Indian banking sector. At IDRBT, I led and coordinated teams for large-scale cyber drills involving more than 25 participants at a time, helping banks improve their incident response capabilities in line with RBI directives. I also participated in CERT-In national cyber mock drills, worked on forensic lab design, and delivered hands-on security training for banking professionals.</p>
+    <p>My digital forensics experience includes working with the FRED forensic workstation and industry-standard tools such as EnCase, Oxygen Forensics, and Paraben SIM analysis suites. I hold professional certifications including CISA (Certified Information Systems Auditor) and ISO 27001:2022 ISMS Lead Auditor.</p>
+    <p>Today, my research spans image forensics and cyber defense analytics. My work continues to be driven by a belief that technology should enable trust — and that education empowers individuals to secure the world they build.</p>
+    <p>Outside of work, I enjoy exploring new technologies, mentoring enthusiastic learners, and finding creative ways to bring real-world security challenges into the classroom.</p>
 </div>
 </div>
 </div>
 
-<!-- ACADEMIC TIME TABLE -->
 <div class="accordion-item">
 <h2 class="accordion-header">
-<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#timetable">
-Academic Time Table
-</button>
+<button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#timetable">Academic Time Table</button>
 </h2>
-<div id="timetable" class="accordion-collapse collapse">
+<div id="timetable" class="accordion-collapse collapse" data-bs-parent="#mainAccordion">
 <div class="accordion-body">
+<style>
+/* ── Fluid timetable ── */
+.tt-wrap { width: 100%; overflow: hidden; }
 
-<div class="table-responsive">
+.tt-wrap table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: clamp(0.6rem, 1.4vw, 0.82rem);
+}
 
-<table class="table table-bordered text-center align-middle small">
+.tt-wrap th,
+.tt-wrap td {
+  border: 1px solid #dee2e6;
+  text-align: center;
+  vertical-align: middle;
+  padding: clamp(2px, 0.5vw, 8px) clamp(1px, 0.3vw, 4px);
+  word-break: break-word;
+  hyphens: auto;
+  line-height: 1.2;
+}
+
+/* Day column narrower; time columns share remaining space equally */
+.tt-wrap col.tt-day  { width: 7%; }
+.tt-wrap col.tt-time { width: 11.625%; } /* (100-7) / 8 */
+
+/* On very small screens abbreviate the time header text */
+.tt-wrap .tt-hdr { display: none; }
+.tt-wrap .tt-hdr-sm { display: inline; }
+
+@media (min-width: 480px) {
+  .tt-wrap .tt-hdr    { display: inline; }
+  .tt-wrap .tt-hdr-sm { display: none;   }
+}
+</style>
+
+<div class="tt-wrap">
+<table class="table table-bordered">
+  <colgroup>
+    <col class="tt-day">
+    <col class="tt-time"><col class="tt-time"><col class="tt-time">
+    <col class="tt-time"><col class="tt-time"><col class="tt-time">
+    <col class="tt-time"><col class="tt-time">
+  </colgroup>
   <thead class="table-light">
     <tr>
       <th>Day</th>
-      <th>10:30–11:30</th>
-      <th>11:30–12:30</th>
-      <th>12:30–1:30</th>
-      <th>1:30–2:00</th>
-      <th>2:00–3:00</th>
-      <th>3:00–4:00</th>
-      <th>4:00–5:00</th>
-      <th>5:00–6:00</th>
+      <th><span class="tt-hdr">10:30–11:30</span><span class="tt-hdr-sm">10:30</span></th>
+      <th><span class="tt-hdr">11:30–12:30</span><span class="tt-hdr-sm">11:30</span></th>
+      <th><span class="tt-hdr">12:30–1:30</span><span class="tt-hdr-sm">12:30</span></th>
+      <th><span class="tt-hdr">1:30–2:00</span><span class="tt-hdr-sm">1:30</span></th>
+      <th><span class="tt-hdr">2:00–3:00</span><span class="tt-hdr-sm">2:00</span></th>
+      <th><span class="tt-hdr">3:00–4:00</span><span class="tt-hdr-sm">3:00</span></th>
+      <th><span class="tt-hdr">4:00–5:00</span><span class="tt-hdr-sm">4:00</span></th>
+      <th><span class="tt-hdr">5:00–6:00</span><span class="tt-hdr-sm">5:00</span></th>
     </tr>
   </thead>
-
   <tbody>
-
     <tr>
       <th>Mon</th>
-
-      <td colspan="2" class="bg-primary text-white"
-          data-day="Mon" data-start="10:30" data-end="12:30" data-class="MAF Lab">
-        MAF Lab
-      </td>
-
-      <td class="bg-warning text-dark"
-          data-day="Mon" data-start="12:30" data-end="13:30" data-class="MMF">
-        MMF
-      </td>
-
+      <td colspan="2" class="bg-maf-lab" data-day="Mon" data-start="10:30" data-end="12:30" data-class="MAF Lab"><strong>MAF Lab</strong><span class="tt-sub">2nd Sem, DFIS</span></td>
+      <td class="bg-warning text-dark" data-day="Mon" data-start="12:30" data-end="13:30" data-class="MMF"><strong>MMF</strong><span class="tt-sub">4th Sem, BSc-MSc FS</span></td>
       <td rowspan="5" class="bg-secondary text-white fw-bold">Lunch</td>
-
-      <td></td>
-      <td></td>
-
-      <td class="bg-info text-dark"
-          data-day="Mon" data-start="16:00" data-end="17:00" data-class="MAF">
-        MAF
-      </td>
+      <td></td><td></td>
+      <td class="bg-info text-dark" data-day="Mon" data-start="16:00" data-end="17:00" data-class="MAF"><strong>MAF</strong><span class="tt-sub">2nd Sem, MSc DFIS</span></td>
       <td></td>
     </tr>
-
     <tr>
       <th>Tue</th>
-      <td class="bg-danger text-white"
-          data-day="Tue" data-start="10:30" data-end="11:30" data-class="MA">
-        MA
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-
-      <td class="bg-purple"
-          data-day="Tue" data-start="15:00" data-end="16:00" data-class="BCDF">
-        BCDF
-      </td>
-
-      <td class="bg-info text-dark"
-          data-day="Tue" data-start="16:00" data-end="17:00" data-class="MAF">
-        MAF
-      </td>
+      <td class="bg-danger text-white" data-day="Tue" data-start="10:30" data-end="11:30" data-class="MA"><strong>MA</strong><span class="tt-sub">2nd Sem, MSc CS</span></td>
+      <td></td><td></td><td></td>
+      <td class="bg-purple" data-day="Tue" data-start="15:00" data-end="16:00" data-class="BCDF"><strong>BCDF</strong><span class="tt-sub">2nd Sem, MSc FS</span></td>
+      <td class="bg-info text-dark" data-day="Tue" data-start="16:00" data-end="17:00" data-class="MAF"><strong>MAF</strong><span class="tt-sub">2nd Sem, MSc DFIS</span></td>
       <td></td>
     </tr>
-
     <tr>
       <th>Wed</th>
-      <td colspan="2" class="bg-danger text-white"
-          data-day="Wed" data-start="10:30" data-end="12:30" data-class="MA Lab">
-        MA Lab
-      </td>
-
-      <!-- MMF added at 12:30–1:30 -->
-      <td class="bg-warning text-dark"
-          data-day="Wed" data-start="12:30" data-end="13:30" data-class="MMF">
-        MMF
-      </td>
-
+      <td colspan="2" class="bg-ma-lab" data-day="Wed" data-start="10:30" data-end="12:30" data-class="MA Lab"><strong>MA Lab</strong><span class="tt-sub">2nd Sem, MSc CS</span></td>
+      <td class="bg-warning text-dark" data-day="Wed" data-start="12:30" data-end="13:30" data-class="MMF"><strong>MMF</strong><span class="tt-sub">4th Sem, BSc-MSc FS</span></td>
       <td></td>
-
-      <td class="bg-purple"
-          data-day="Wed" data-start="15:00" data-end="16:00" data-class="BCDF">
-        BCDF
-      </td>
-      <td></td>
-      <td></td>
+      <td class="bg-purple" data-day="Wed" data-start="15:00" data-end="16:00" data-class="BCDF"><strong>BCDF</strong><span class="tt-sub">2nd Sem, MSc FS</span></td>
+      <td></td><td></td>
     </tr>
-
     <tr>
       <th>Thu</th>
-      <td class="bg-info text-dark"
-          data-day="Thu" data-start="10:30" data-end="11:30" data-class="MAF">
-        MAF
-      </td>
-      <td></td>
-      <td></td>
-      <td class="bg-danger text-white"
-          data-day="Thu" data-start="14:00" data-end="15:00" data-class="MA">
-        MA
-      </td>
-
-      <td class="bg-purple"
-          data-day="Thu" data-start="15:00" data-end="16:00" data-class="BCDF">
-        BCDF
-      </td>
-
-      <!-- 4:00–5:00 slot cleared -->
-      <td></td>
-      <td></td>
+      <td class="bg-info text-dark" data-day="Thu" data-start="10:30" data-end="11:30" data-class="MAF"><strong>MAF</strong><span class="tt-sub">2nd Sem, MSc DFIS</span></td>
+      <td></td><td></td>
+      <td class="bg-danger text-white" data-day="Thu" data-start="14:00" data-end="15:00" data-class="MA"><strong>MA</strong><span class="tt-sub">2nd Sem, MSc CS</span></td>
+      <td class="bg-purple" data-day="Thu" data-start="15:00" data-end="16:00" data-class="BCDF"><strong>BCDF</strong><span class="tt-sub">2nd Sem, MSc FS</span></td>
+      <td></td><td></td>
     </tr>
-
     <tr>
       <th>Fri</th>
-      <td class="bg-danger text-white"
-          data-day="Fri" data-start="10:30" data-end="11:30" data-class="MA">
-        MA
-      </td>
-      <td></td>
-      <td></td>
-      <td></td>
-
-      <td class="bg-purple"
-          data-day="Fri" data-start="15:00" data-end="16:00" data-class="BCDF">
-        BCDF
-      </td>
-      <td></td>
-      <td></td>
+      <td class="bg-danger text-white" data-day="Fri" data-start="10:30" data-end="11:30" data-class="MA"><strong>MA</strong><span class="tt-sub">2nd Sem, MSc CS</span></td>
+      <td></td><td></td><td></td>
+      <td class="bg-purple" data-day="Fri" data-start="15:00" data-end="16:00" data-class="BCDF"><strong>BCDF</strong><span class="tt-sub">2nd Sem, MSc FS</span></td>
+      <td></td><td></td>
     </tr>
-
   </tbody>
 </table>
-
-
-  
 </div>
-
-
 </div>
 </div>
 </div>
 
-<!-- CONTACT -->
-   <!-- Contact & Research Profiles -->
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingContact">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseContact" aria-expanded="false" aria-controls="collapseContact">
-          Contact &amp; Research Profiles
-        </button>
-      </h2>
-      <div id="collapseContact" class="accordion-collapse collapse" aria-labelledby="headingContact" data-bs-parent="#mainAccordion">
-        <div class="accordion-body">
-          <ul>
-           <li>Scopus: <a href="https://www.scopus.com/authid/detail.uri?authorId=55339839700" target="_blank">55339839700</a></li>
-<li>ORCiD: <a href="https://orcid.org/0000-0001-5696-4851" target="_blank">0000-0001-5696-4851</a></li>
-<li>Google Scholar: <a href="https://scholar.google.com/citations?user=4grbJmcAAAAJ" target="_blank">4grbJmcAAAAJ</a></li>
-<li>Personal mail: <a href="mailto:manuvt.nitc@gmail.com">manuvt.nitc@gmail.com</a></li>
-<li>Official mail: <a href="mailto:manu.vt@nfsu.ac.in">manu.vt@nfsu.ac.in</a>, <a href="mailto:manu.vt@nfsu.edu.in">manu.vt@nfsu.edu.in</a></li>
-<li>Official Homepage: <a href="https://www.nfsu.ac.in/Faculty/profile?userid=688" target="_blank">https://bhopal.nfsu.ac.in/Faculty/manuvt</a></li>
-
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Publication List -->
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingPubs">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapsePubs" aria-expanded="false" aria-controls="collapsePubs">
-          Publication List
-        </button>
-      </h2>
-      <div id="collapsePubs" class="accordion-collapse collapse" aria-labelledby="headingPubs" data-bs-parent="#mainAccordion">
-        <div class="accordion-body">
-
-          <!-- Filter toolbar -->
-          <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 gap-2">
-            <div class="btn-group btn-group-sm" role="group" aria-label="Filter publications">
-              <button type="button" class="btn btn-outline-primary active" data-pub-filter="all">All</button>
-              <button type="button" class="btn btn-outline-primary" data-pub-filter="journal">Journals</button>
-              <button type="button" class="btn btn-outline-primary" data-pub-filter="conference">Conferences</button>
-              <button type="button" class="btn btn-outline-primary" data-pub-filter="book">Book Chapters</button>
-              <button type="button" class="btn btn-outline-primary" data-pub-filter="misc">Misc.</button>
-            </div>
-          </div>
-
-          <div id="pubSections">
-
-            <!-- Journals -->
-            <div class="pub-section mb-4" data-category="journal">
-              <h5>International Peer-Reviewed Journals</h5>
-              <ol>
-                <li>
-                  <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
-                    <span class="badge rounded-pill text-bg-success">Q1 Journal</span>
-                    <span class="badge rounded-pill text-bg-info text-dark">SCI</span>
-                    <span class="badge rounded-pill text-bg-secondary">Scopus</span>
-                    <span class="badge rounded-pill text-bg-light text-dark border pub-citations">
-                      Citations: 15
-                    </span>
-                  </span><br>
-                  Manu, V. T., &amp; Mehtre, B. M. (2019).
-                  Tamper detection of social media images using quality artifacts and texture features.
-                  <em>Forensic Science International</em>, Elsevier, 295, 100–112.<br>
-                  <strong>DOI:</strong>
-                  <a href="https://doi.org/10.1016/j.forsciint.2018.11.025" target="_blank">
-                    10.1016/j.forsciint.2018.11.025
-                  </a><br>
-                  <strong>Indexing:</strong> SCI, Scopus, DBLP<br>
-                  <strong>Impact Factor:</strong> 2.395
-                </li>
-
-                <li class="mt-3">
-                  <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
-                    <span class="badge rounded-pill text-bg-warning text-dark">Q2 Journal</span>
-                    <span class="badge rounded-pill text-bg-info text-dark">SCIE</span>
-                    <span class="badge rounded-pill text-bg-secondary">Scopus</span>
-                    <span class="badge rounded-pill text-bg-light text-dark border pub-citations">
-                      Citations: 29
-                    </span>
-                  </span><br>
-                  Manu, V. T., &amp; Mehtre, B. M. (2018).
-                  Copy-move tampering detection using affine transformation property preservation on clustered keypoints.
-                  <em>Signal, Image and Video Processing</em>, Springer, 12(3), 549–556.<br>
-                  <strong>DOI:</strong>
-                  <a href="https://doi.org/10.1007/s11760-017-1191-7" target="_blank">
-                    10.1007/s11760-017-1191-7
-                  </a><br>
-                  <strong>Indexing:</strong> SCIE, Scopus, DBLP<br>
-                  <strong>Impact Factor:</strong> 2.157
-                </li>
-              </ol>
-            </div>
-
-            <!-- International Conferences (Outside India) -->
-            <div class="pub-section mb-4" data-category="conference">
-              <h5>International Conferences (Outside India, Scopus Indexed)</h5>
-              <ol start="3">
-                <li>
-                  <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
-                    <span class="badge rounded-pill text-bg-secondary">Scopus Indexed</span>
-                    <span class="badge rounded-pill text-bg-light text-dark border pub-citations">
-                      Citations: 6
-                    </span>
-                  </span><br>
-                  Manu, V. T., &amp; Mehtre, B. M. (2017).
-                  Blind technique using blocking artifacts and entropy of histograms for image tampering detection.
-                  In <em>Second International Workshop on Pattern Recognition</em>
-                  (SPIE Proceedings, Vol. 10443, p. 104430T). International Society for Optics and Photonics.<br>
-                  <strong>Venue:</strong> Nanyang Technological University<br>
-                  <strong>Country:</strong> Singapore<br>
-                  <strong>Date:</strong> May 1–3, 2017<br>
-                  <strong>Indexing:</strong> Scopus<br>
-                  <strong>DOI:</strong>
-                  <a href="https://doi.org/10.1117/12.2280306" target="_blank">10.1117/12.2280306</a>
-                </li>
-              </ol>
-            </div>
-
-            <!-- International Conferences (In India) -->
-            <div class="pub-section mb-4" data-category="conference">
-              <h5>International Conferences (In India, Scopus Indexed)</h5>
-              <ol start="4">
-                <li>
-                  <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
-                    <span class="badge rounded-pill text-bg-secondary">Scopus Indexed</span>
-                    <span class="badge rounded-pill text-bg-light text-dark border pub-citations">
-                      Citations: 56
-                    </span>
-                  </span><br>
-                  Manu, V. T., &amp; Mehtre, B. M. (2016).
-                  Detection of copy-move forgery in images using segmentation and SURF.
-                  In <em>Advances in Signal Processing and Intelligent Recognition Systems</em> (pp. 645–654).
-                  Springer, Cham.
-                </li>
-
-                <li class="mt-3">
-                  <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
-                    <span class="badge rounded-pill text-bg-secondary">Scopus Indexed</span>
-                    <span class="badge rounded-pill text-bg-light text-dark border pub-citations">
-                      Citations: 14
-                    </span>
-                  </span><br>
-                  Manu, V. T., &amp; Mehtre, B. M. (2015).
-                  Visual artifacts based image splicing detection in uncompressed images.
-                  In <em>Computer Graphics, Vision and Information Security (CGVIS)</em>,
-                  IEEE International Conference (pp. 145–150). IEEE.
-                </li>
-
-                <li class="mt-3">
-                  <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
-                    <span class="badge rounded-pill text-bg-secondary">Scopus Indexed</span>
-                    <span class="badge rounded-pill text-bg-light text-dark border pub-citations">
-                      Citations: 26
-                    </span>
-                  </span><br>
-                  Manu, V. T., &amp; Simon, P. (2012).
-                  A Novel Statistical Fusion Rule for Image Fusion in Non Subsampled Contourlet Transform Domain.
-                  In <em>International Conference on Computer Science and Information Technology</em> (pp. 367–376).
-                  Springer, Berlin.
-                </li>
-              </ol>
-            </div>
-
-            <!-- Book Chapters -->
-            <div class="pub-section mb-4" data-category="book">
-              <h5>Book Chapters (Scopus Indexed)</h5>
-              <ol start="7">
-                <li>
-                  <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
-                    <span class="badge rounded-pill text-bg-secondary">Book Chapter</span>
-                    <span class="badge rounded-pill text-bg-light text-dark border pub-citations">
-                      Citations: 0
-                    </span>
-                  </span><br>
-                  Sitara, K., &amp; Manu V. T. (2022).
-                  Security concerns and forensic aspects of IoHT.
-                  In <em>Smart and Secure Internet of Healthcare Things</em>.
-                  CRC Press, Taylor &amp; Francis Group.
-                </li>
-
-                <li class="mt-3">
-                  <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
-                    <span class="badge rounded-pill text-bg-secondary">Book Chapter</span>
-                    <span class="badge rounded-pill text-bg-light text-dark border pub-citations">
-                      Citations: 0
-                    </span>
-                  </span><br>
-                  Manu, V. T., &amp; Mehtre, B. M. (2018).
-                  Review of Image Tampering Detection Techniques.
-                  In S. Ramakrishnan (Ed.),
-                  <em>Cryptographic and Information Security Approaches for Images and Videos</em>, 1st Ed.
-                  Boca Raton: CRC Press, p. 986.
-                </li>
-              </ol>
-            </div>
-
-            <!-- Misc Journals -->
-            <div class="pub-section mb-0" data-category="misc">
-              <h5>Miscellaneous Journals</h5>
-              <ol start="9">
-                <li>
-                  <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
-                    <span class="badge rounded-pill text-bg-light text-dark border pub-citations">
-                      Citations: 2
-                    </span>
-                  </span><br>
-                  Manu, V. T., &amp; Simon, P. (2012).
-                  A novel statistical fusion rule for image fusion and its comparison in Non-Subsampled
-                  Contourlet Transform and Wavelet domains.
-                  <em>arXiv preprint</em> arXiv:1205.1648.
-                </li>
-              </ol>
-            </div>
-
-          </div> <!-- /#pubSections -->
-        </div>
-      </div>
-    </div>
-
-    <!-- Educational Qualifications -->
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingEdu">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseEdu" aria-expanded="false" aria-controls="collapseEdu">
-          Educational Qualifications
-        </button>
-      </h2>
-      <div id="collapseEdu" class="accordion-collapse collapse" aria-labelledby="headingEdu" data-bs-parent="#mainAccordion">
-        <div class="accordion-body">
-          <ul class="list-unstyled ps-1">
-            <li class="mb-3">
-              <strong>B.Tech (2003–2007)</strong> — Computer Science &amp; Engineering<br>
-              National Institute of Technology (NIT) Calicut
-            </li>
-
-            <li class="mb-3">
-              <strong>M.Tech (2009–2011)</strong> — Computer Science<br>
-              <em>Specialization: Digital Image Computing</em><br>
-              Department of Computer Science, University of Kerala, Kariyavattom Campus
-            </li>
-
-            <li class="mb-3">
-              <strong>Ph.D (2013–2018)</strong> — Computer Science<br>
-              School of Computer and Information Sciences (SCIS), University of Hyderabad
-              <span class="fst-italic">(Central University)</span><br>
-              &amp;<br>
-              Center of Excellence in Cyber Security (formerly),<br>
-              Institute for Development and Research in Banking Technology (IDRBT), Hyderabad
-              <span class="fst-italic">(Estd. by Reserve Bank of India)</span>
-            </li>
-          </ul>
-
-          <p class="mt-3 mb-0 small fst-italic">
-            NB: All of the above academic programs were completed in Regular Full-Time mode.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Certifications -->
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingCerts">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseCerts" aria-expanded="false" aria-controls="collapseCerts">
-          Certifications
-        </button>
-      </h2>
-      <div id="collapseCerts" class="accordion-collapse collapse" aria-labelledby="headingCerts" data-bs-parent="#mainAccordion">
-        <div class="accordion-body">
-
-          <h5 class="mt-3">Professional Certifications</h5>
-          <ul class="list-unstyled ps-3">
-            <li class="mb-2">
-              <strong>CISA</strong> — Certified Information Systems Auditor<sup>&reg;</sup><br>
-              Conducting Body: ISACA<br>
-              Status: Awarded (January 2024)<br>
-              <small>
-                <a href="https://www.credly.com/badges/07c191c0-923e-4935-9af2-1d305fd7c28b/public_url"
-                   target="_blank" rel="noopener">
-                  View Digital Credential
-                </a>
-              </small>
-            </li>
-            <li class="mb-2">
-              <strong>ISO/IEC 27001:2022</strong> — ISMS Lead Auditor<br>
-              Conducting Body: TÜV SÜD<br>
-              Status: Awarded (October 2025)
-            </li>
-            <li class="mb-2">
-              <strong>AWS Academy Graduate</strong> — AWS Academy Cloud Foundations<br>
-              Conducting Body: AWS Academy<br>
-              Status: Completed
-            </li>
-          </ul>
-
-          <h5>Academic Certifications</h5>
-          <ul class="list-unstyled ps-3">
-            <li class="mb-2">
-              <strong>UGC-NET</strong> — Computer Science and Applications<br>
-              Conducting Body: UGC<br>
-              Status: Pass (December 2012)
-            </li>
-            <li class="mb-2">
-              <strong>GATE</strong> — Graduate Aptitude Test in Engineering (Computer Science)<br>
-              Conducting Body: NCB–MHRD<br>
-              Status: Awarded (March 2017)
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-  </div> <!-- /accordion -->
-
-  <!-- Clock widget -->
-  <div class="card bg-dark text-light border-secondary mt-4" role="region" aria-label="Clock widget">
-    <div id="time">--:--:--</div>
-    <div id="date">Loading date...</div>
-    <div class="controls mt-2">
-      <label>
-        Choose timezone:
-        <select id="tzSelect">
-          <option value="local">Local</option>
-          <option value="UTC">UTC</option>
-          <option value="+05:30">UTC+05:30</option>
-        </select>
-      </label>
-      <label class="ms-2">
-        <input type="checkbox" id="toggle12"> 12-hour
-      </label>
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContact">Contact &amp; Research Profiles</button>
+  </h2>
+  <div id="collapseContact" class="accordion-collapse collapse" data-bs-parent="#mainAccordion">
+    <div class="accordion-body">
+      <ul>
+        <li>Scopus: <a href="https://www.scopus.com/authid/detail.uri?authorId=55339839700" target="_blank">55339839700</a></li>
+        <li>ORCiD: <a href="https://orcid.org/0000-0001-5696-4851" target="_blank">0000-0001-5696-4851</a></li>
+        <li>Google Scholar: <a href="https://scholar.google.com/citations?user=4grbJmcAAAAJ" target="_blank">4grbJmcAAAAJ</a></li>
+        <li>Personal mail: <a href="/cdn-cgi/l/email-protection#ee838f809b989ac080879a8dae89838f8782c08d8183"><span class="__cf_email__" data-cfemail="dcb1bdb2a9aaa8f2b2b5a8bf9cbbb1bdb5b0f2bfb3b1">[email&#160;protected]</span></a></li>
+        <li>Official mail: <a href="/cdn-cgi/l/email-protection#90fdf1fee5bee6e4d0fef6e3e5bef1f3bef9fe"><span class="__cf_email__" data-cfemail="8ee3efe0fba0f8facee0e8fdfba0efeda0e7e0">[email&#160;protected]</span></a>, <a href="/cdn-cgi/l/email-protection#c8a5a9a6bde6bebc88a6aebbbde6adacbde6a1a6"><span class="__cf_email__" data-cfemail="670a060912491113270901141249020312490e09">[email&#160;protected]</span></a></li>
+        <li>Official Homepage: <a href="https://www.nfsu.ac.in/Faculty/profile?userid=688" target="_blank">https://bhopal.nfsu.ac.in/Faculty/manuvt</a></li>
+      </ul>
     </div>
   </div>
+</div>
+
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePubs">Publication List</button>
+  </h2>
+  <div id="collapsePubs" class="accordion-collapse collapse" data-bs-parent="#mainAccordion">
+    <div class="accordion-body">
+      <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 gap-2">
+        <div class="btn-group btn-group-sm" role="group">
+          <button type="button" class="btn btn-outline-primary active" data-pub-filter="all">All</button>
+          <button type="button" class="btn btn-outline-primary" data-pub-filter="journal">Journals</button>
+          <button type="button" class="btn btn-outline-primary" data-pub-filter="conference">Conferences</button>
+          <button type="button" class="btn btn-outline-primary" data-pub-filter="book">Book Chapters</button>
+          <button type="button" class="btn btn-outline-primary" data-pub-filter="misc">Misc.</button>
+        </div>
+      </div>
+      <div id="pubSections">
+        <div class="pub-section mb-4" data-category="journal">
+          <h5>International Peer-Reviewed Journals</h5>
+          <ol>
+            <li>
+              <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+                <span class="badge rounded-pill text-bg-success">Q1 Journal</span>
+                <span class="badge rounded-pill text-bg-info text-dark">SCI</span>
+                <span class="badge rounded-pill text-bg-secondary">Scopus</span>
+                <span class="badge rounded-pill text-bg-light text-dark border">Citations: 15</span>
+              </span><br>
+              Manu, V. T., &amp; Mehtre, B. M. (2019). Tamper detection of social media images using quality artifacts and texture features. <em>Forensic Science International</em>, Elsevier, 295, 100–112.<br>
+              <strong>DOI:</strong> <a href="https://doi.org/10.1016/j.forsciint.2018.11.025" target="_blank">10.1016/j.forsciint.2018.11.025</a> &nbsp; <strong>IF:</strong> 2.395
+            </li>
+            <li class="mt-3">
+              <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+                <span class="badge rounded-pill text-bg-warning text-dark">Q2 Journal</span>
+                <span class="badge rounded-pill text-bg-info text-dark">SCIE</span>
+                <span class="badge rounded-pill text-bg-secondary">Scopus</span>
+                <span class="badge rounded-pill text-bg-light text-dark border">Citations: 29</span>
+              </span><br>
+              Manu, V. T., &amp; Mehtre, B. M. (2018). Copy-move tampering detection using affine transformation property preservation on clustered keypoints. <em>Signal, Image and Video Processing</em>, Springer, 12(3), 549–556.<br>
+              <strong>DOI:</strong> <a href="https://doi.org/10.1007/s11760-017-1191-7" target="_blank">10.1007/s11760-017-1191-7</a> &nbsp; <strong>IF:</strong> 2.157
+            </li>
+          </ol>
+        </div>
+        <div class="pub-section mb-4" data-category="conference">
+          <h5>International Conferences (Outside India, Scopus Indexed)</h5>
+          <ol start="3">
+            <li>
+              <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+                <span class="badge rounded-pill text-bg-secondary">Scopus Indexed</span>
+                <span class="badge rounded-pill text-bg-light text-dark border">Citations: 6</span>
+              </span><br>
+              Manu, V. T., &amp; Mehtre, B. M. (2017). Blind technique using blocking artifacts and entropy of histograms for image tampering detection. In <em>Second International Workshop on Pattern Recognition</em> (SPIE Proceedings, Vol. 10443). NTU, Singapore, May 1–3, 2017.<br>
+              <strong>DOI:</strong> <a href="https://doi.org/10.1117/12.2280306" target="_blank">10.1117/12.2280306</a>
+            </li>
+          </ol>
+        </div>
+        <div class="pub-section mb-4" data-category="conference">
+          <h5>International Conferences (In India, Scopus Indexed)</h5>
+          <ol start="4">
+            <li>
+              <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+                <span class="badge rounded-pill text-bg-secondary">Scopus Indexed</span>
+                <span class="badge rounded-pill text-bg-light text-dark border">Citations: 56</span>
+              </span><br>
+              Manu, V. T., &amp; Mehtre, B. M. (2016). Detection of copy-move forgery in images using segmentation and SURF. In <em>Advances in Signal Processing and Intelligent Recognition Systems</em> (pp. 645–654). Springer, Cham.
+            </li>
+            <li class="mt-3">
+              <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+                <span class="badge rounded-pill text-bg-secondary">Scopus Indexed</span>
+                <span class="badge rounded-pill text-bg-light text-dark border">Citations: 14</span>
+              </span><br>
+              Manu, V. T., &amp; Mehtre, B. M. (2015). Visual artifacts based image splicing detection in uncompressed images. In <em>Computer Graphics, Vision and Information Security (CGVIS)</em>, IEEE International Conference (pp. 145–150). IEEE.
+            </li>
+            <li class="mt-3">
+              <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+                <span class="badge rounded-pill text-bg-secondary">Scopus Indexed</span>
+                <span class="badge rounded-pill text-bg-light text-dark border">Citations: 26</span>
+              </span><br>
+              Manu, V. T., &amp; Simon, P. (2012). A Novel Statistical Fusion Rule for Image Fusion in Non Subsampled Contourlet Transform Domain. In <em>International Conference on Computer Science and Information Technology</em> (pp. 367–376). Springer, Berlin.
+            </li>
+          </ol>
+        </div>
+        <div class="pub-section mb-4" data-category="book">
+          <h5>Book Chapters (Scopus Indexed)</h5>
+          <ol start="7">
+            <li>
+              <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+                <span class="badge rounded-pill text-bg-secondary">Book Chapter</span>
+                <span class="badge rounded-pill text-bg-light text-dark border">Citations: 0</span>
+              </span><br>
+              Sitara, K., &amp; Manu V. T. (2022). Security concerns and forensic aspects of IoHT. In <em>Smart and Secure Internet of Healthcare Things</em>. CRC Press, Taylor &amp; Francis Group.
+            </li>
+            <li class="mt-3">
+              <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+                <span class="badge rounded-pill text-bg-secondary">Book Chapter</span>
+                <span class="badge rounded-pill text-bg-light text-dark border">Citations: 0</span>
+              </span><br>
+              Manu, V. T., &amp; Mehtre, B. M. (2018). Review of Image Tampering Detection Techniques. In S. Ramakrishnan (Ed.), <em>Cryptographic and Information Security Approaches for Images and Videos</em>, 1st Ed. CRC Press, p. 986.
+            </li>
+          </ol>
+        </div>
+        <div class="pub-section mb-0" data-category="misc">
+          <h5>Miscellaneous Journals</h5>
+          <ol start="9">
+            <li>
+              <span class="d-inline-flex flex-wrap align-items-center gap-1 mb-1">
+                <span class="badge rounded-pill text-bg-light text-dark border">Citations: 2</span>
+              </span><br>
+              Manu, V. T., &amp; Simon, P. (2012). A novel statistical fusion rule for image fusion and its comparison in Non-Subsampled Contourlet Transform and Wavelet domains. <em>arXiv preprint</em> arXiv:1205.1648.
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEdu">Educational Qualifications</button>
+  </h2>
+  <div id="collapseEdu" class="accordion-collapse collapse" data-bs-parent="#mainAccordion">
+    <div class="accordion-body">
+      <ul class="list-unstyled ps-1">
+        <li class="mb-3"><strong>B.Tech (2003–2007)</strong> — Computer Science &amp; Engineering<br>National Institute of Technology (NIT) Calicut</li>
+        <li class="mb-3"><strong>M.Tech (2009–2011)</strong> — Computer Science<br><em>Specialization: Digital Image Computing</em><br>Department of Computer Science, University of Kerala, Kariyavattom Campus</li>
+        <li class="mb-3"><strong>Ph.D (2013–2018)</strong> — Computer Science<br>School of Computer and Information Sciences (SCIS), University of Hyderabad <span class="fst-italic">(Central University)</span><br>&amp;<br>Center of Excellence in Cyber Security (formerly),<br>Institute for Development and Research in Banking Technology (IDRBT), Hyderabad <span class="fst-italic">(Estd. by Reserve Bank of India)</span></li>
+      </ul>
+      <p class="mt-3 mb-0 small fst-italic">NB: All of the above academic programs were completed in Regular Full-Time mode.</p>
+    </div>
+  </div>
+</div>
+
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCerts">Certifications</button>
+  </h2>
+  <div id="collapseCerts" class="accordion-collapse collapse" data-bs-parent="#mainAccordion">
+    <div class="accordion-body">
+      <h5 class="mt-3">Professional Certifications</h5>
+      <ul class="list-unstyled ps-3">
+        <li class="mb-2"><strong>CISA</strong> — Certified Information Systems Auditor<sup>&reg;</sup><br>Conducting Body: ISACA &nbsp; Status: Awarded (January 2024)<br><small><a href="https://www.credly.com/badges/07c191c0-923e-4935-9af2-1d305fd7c28b/public_url" target="_blank" rel="noopener">View Digital Credential</a></small></li>
+        <li class="mb-2"><strong>ISO/IEC 27001:2022</strong> — ISMS Lead Auditor<br>Conducting Body: TÜV SÜD &nbsp; Status: Awarded (October 2025)</li>
+        <li class="mb-2"><strong>AWS Academy Graduate</strong> — AWS Academy Cloud Foundations<br>Conducting Body: AWS Academy &nbsp; Status: Completed</li>
+      </ul>
+      <h5>Academic Certifications</h5>
+      <ul class="list-unstyled ps-3">
+        <li class="mb-2"><strong>UGC-NET</strong> — Computer Science and Applications<br>Conducting Body: UGC &nbsp; Status: Pass (December 2012)</li>
+        <li class="mb-2"><strong>GATE</strong> — Graduate Aptitude Test in Engineering (Computer Science)<br>Conducting Body: NCB–MHRD &nbsp; Status: Awarded (March 2017)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div><!-- /accordion -->
+
+<div class="card bg-dark text-light border-secondary mt-4" role="region" aria-label="Clock widget">
+  <div id="clock-time">--:--:--</div>
+  <div id="clock-date">Loading date...</div>
+  <div class="controls mt-2">
+    <label>Choose timezone:
+      <select id="tzSelect">
+        <option value="local">Local</option>
+        <option value="UTC">UTC</option>
+        <option value="+05:30">UTC+05:30</option>
+      </select>
+    </label>
+    <label class="ms-2"><input type="checkbox" id="toggle12"> 12-hour</label>
+  </div>
+</div>
 
 </main>
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-// === Publication filters ===
-const filterButtons = document.querySelectorAll('[data-pub-filter]');
-const pubSections = document.querySelectorAll('#pubSections .pub-section');
+/* ================================================================
+   ULTRA-REALISTIC SPACE CANVAS ENGINE
+   ================================================================ */
+(function () {
+  const canvas = document.getElementById('spaceCanvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H;
 
-filterButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const filter = btn.getAttribute('data-pub-filter');
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = Math.max(window.innerHeight, document.body.scrollHeight);
+  }
+  window.addEventListener('resize', () => { resize(); buildStarField(); });
+  resize();
 
-    filterButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+  const rand  = (a, b) => a + Math.random() * (b - a);
+  const randI = (a, b) => Math.floor(rand(a, b));
+  const lerp  = (a, b, t) => a + (b - a) * t;
 
-    pubSections.forEach(section => {
-      const cat = section.getAttribute('data-category');
-      if (filter === 'all' || filter === cat) {
-        section.classList.remove('d-none');
-      } else {
-        section.classList.add('d-none');
+  /* ── Spectral star palette ── */
+  const STAR_COLORS = [
+    '#9bb0ff','#aabfff','#cad7ff','#f8f7ff',
+    '#fff4ea','#ffd2a1','#ffcc6f','#b0c8ff',
+    '#e8f0ff','#fff8f0','#ffecec',
+  ];
+
+  /* ──────────────────────────────────────────
+     1.  STATIC STAR FIELD  (with twinkle)
+  ────────────────────────────────────────── */
+  let stars = [];
+
+  function buildStarField() {
+    stars = [];
+    const n = Math.round((W * H) / 1600);
+    for (let i = 0; i < n; i++) {
+      const big = Math.random() > 0.93;
+      stars.push({
+        x: rand(0, W), y: rand(0, H),
+        r: big ? rand(1.3, 2.8) : rand(0.25, 1.1),
+        color:   STAR_COLORS[randI(0, STAR_COLORS.length)],
+        base:    rand(0.3, 1.0),
+        phase:   rand(0, Math.PI * 2),
+        speed:   rand(0.2, 2.8),
+        spike:   big && Math.random() > 0.45,
+        alpha:   0,
+      });
+    }
+  }
+  buildStarField();
+
+  function drawStars(t) {
+    for (const s of stars) {
+      s.alpha = s.base * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
+      ctx.save();
+      ctx.globalAlpha = s.alpha;
+
+      if (s.r > 1.0) {
+        // soft halo
+        const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 6);
+        g.addColorStop(0,   s.color + 'cc');
+        g.addColorStop(0.4, s.color + '44');
+        g.addColorStop(1,   'transparent');
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r * 6, 0, Math.PI * 2);
+        ctx.fillStyle = g;
+        ctx.fill();
       }
+
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = s.color;
+      ctx.fill();
+
+      if (s.spike) {
+        ctx.globalAlpha = s.alpha * 0.45;
+        ctx.strokeStyle = s.color;
+        ctx.lineWidth   = 0.6;
+        const len = s.r * 9;
+        ctx.beginPath();
+        ctx.moveTo(s.x - len, s.y); ctx.lineTo(s.x + len, s.y);
+        ctx.moveTo(s.x, s.y - len); ctx.lineTo(s.x, s.y + len);
+        ctx.stroke();
+        // diagonal spikes (smaller)
+        const d = len * 0.5;
+        ctx.beginPath();
+        ctx.moveTo(s.x - d, s.y - d); ctx.lineTo(s.x + d, s.y + d);
+        ctx.moveTo(s.x + d, s.y - d); ctx.lineTo(s.x - d, s.y + d);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+  }
+
+  /* ──────────────────────────────────────────
+     2.  METEOR SHOWER
+     All meteors radiate from a single radiant
+     point (like Perseids / Leonids), giving the
+     realistic "shower" fan-out effect.
+  ────────────────────────────────────────── */
+  const meteors = [];
+  let mTimer = 0;
+
+  // Radiant point — upper-left quadrant, drifts slowly
+  let radiantX = W * 0.25, radiantY = H * 0.08;
+
+  // Realistic meteor colors: white-hot core → orange/yellow trail
+  const METEOR_COLORS = [
+    [255,255,255], [255,240,220], [255,220,180],
+    [255,200,140], [255,180,100], [200,220,255],
+    [220,235,255],
+  ];
+
+  function spawnMeteor() {
+    if (meteors.length >= 22) return;
+
+    // Spread angle from radiant: realistic shower has ~30° cone
+    const baseAngle = rand(15, 50) * Math.PI / 180; // mostly downward-right
+    const spread    = rand(-0.28, 0.28);
+    const angle     = baseAngle + spread;
+    const spd       = rand(9, 28);
+    const col       = METEOR_COLORS[randI(0, METEOR_COLORS.length)];
+    const len       = rand(80, 380); // tail length in px
+    const width     = rand(0.8, 2.8);
+
+    // Start position near radiant with small random offset
+    const startX = radiantX + rand(-80, 80);
+    const startY = radiantY + rand(-30, 30);
+
+    meteors.push({
+      x: startX, y: startY,
+      vx: Math.cos(angle) * spd,
+      vy: Math.sin(angle) * spd,
+      col, width, len,
+      alpha: 0,
+      life: 0,
+      // each meteor lives exactly long enough to cross the screen
+      max: Math.round(rand(40, 110)),
+      trail: [],
+      // fragmentation: bigger meteors occasionally split
+      hasFrag: width > 2.0 && Math.random() > 0.6,
+      fragSpawned: false,
+    });
+  }
+
+  function spawnFragment(parent) {
+    const col  = parent.col;
+    const ang2 = Math.atan2(parent.vy, parent.vx) + rand(-0.4, 0.4);
+    const spd2 = Math.sqrt(parent.vx**2 + parent.vy**2) * rand(0.3, 0.7);
+    meteors.push({
+      x: parent.x, y: parent.y,
+      vx: Math.cos(ang2) * spd2,
+      vy: Math.sin(ang2) * spd2,
+      col, width: parent.width * rand(0.3, 0.5),
+      len: parent.len * 0.4,
+      alpha: 0, life: 0,
+      max: randI(20, 50),
+      trail: [],
+      hasFrag: false, fragSpawned: true,
+    });
+  }
+
+  function updateMeteors() {
+    // Vary spawn rate: bursts of 1-3 per interval to mimic shower intensity
+    mTimer++;
+    const interval = rand(8, 30);
+    if (mTimer > interval) {
+      mTimer = 0;
+      const burst = randI(1, 4);
+      for (let b = 0; b < burst; b++) spawnMeteor();
+    }
+
+    // Slowly drift radiant
+    radiantX += Math.sin(frame * 0.0008) * 0.15;
+    radiantY += Math.cos(frame * 0.0005) * 0.08;
+
+    for (let i = meteors.length - 1; i >= 0; i--) {
+      const m = meteors[i];
+      m.life++;
+
+      // Record trail
+      m.trail.push({ x: m.x, y: m.y });
+      const maxTrail = Math.round(m.len / Math.sqrt(m.vx**2 + m.vy**2));
+      if (m.trail.length > Math.max(maxTrail, 8)) m.trail.shift();
+
+      m.x += m.vx;
+      m.y += m.vy;
+      m.vy += 0.06; // atmospheric drag bends trajectory slightly
+
+      // Fade in fast, hold, fade out
+      if (m.life < 8) m.alpha = m.life / 8;
+      else if (m.life > m.max - 15) m.alpha = Math.max(0, (m.max - m.life) / 15);
+      else m.alpha = 1;
+
+      // Spawn fragment at ~40% of life
+      if (m.hasFrag && !m.fragSpawned && m.life > m.max * 0.4) {
+        m.fragSpawned = true;
+        spawnFragment(m);
+      }
+
+      if (m.life >= m.max || m.x > W + 300 || m.y > H + 300 || m.x < -300)
+        meteors.splice(i, 1);
+    }
+  }
+
+  function drawMeteors() {
+    for (const m of meteors) {
+      if (m.trail.length < 2) continue;
+      const [r, g, b] = m.col;
+
+      ctx.save();
+      ctx.globalAlpha = m.alpha;
+
+      // Draw trail as gradient segments — bright at head, fading to transparent
+      for (let i = 1; i < m.trail.length; i++) {
+        const t  = i / m.trail.length;  // 0=tail end, 1=head
+        const p0 = m.trail[i - 1];
+        const p1 = m.trail[i];
+
+        // Colour shifts from white-hot head → orange/dim tail
+        const rr = Math.round(lerp(r * 0.3, r, t));
+        const gg = Math.round(lerp(g * 0.15, g, t));
+        const bb = Math.round(lerp(b * 0.05, b, t));
+
+        ctx.beginPath();
+        ctx.moveTo(p0.x, p0.y);
+        ctx.lineTo(p1.x, p1.y);
+        ctx.strokeStyle = `rgba(${rr},${gg},${bb},${t * 0.95})`;
+        ctx.lineWidth   = m.width * t;
+        ctx.lineCap     = 'round';
+        ctx.shadowColor = `rgba(255,200,120,${t * 0.6})`;
+        ctx.shadowBlur  = 6 * t;
+        ctx.stroke();
+      }
+
+      // Bright ablation glow at head
+      const hx = m.x, hy = m.y;
+      const glowR = m.width * 5;
+      const grd = ctx.createRadialGradient(hx, hy, 0, hx, hy, glowR);
+      grd.addColorStop(0,   `rgba(255,255,255,0.95)`);
+      grd.addColorStop(0.3, `rgba(${r},${g},${b},0.7)`);
+      grd.addColorStop(0.7, `rgba(255,160,60,0.2)`);
+      grd.addColorStop(1,   'transparent');
+      ctx.shadowBlur = 20;
+      ctx.shadowColor = 'rgba(255,200,100,0.8)';
+      ctx.beginPath();
+      ctx.arc(hx, hy, glowR, 0, Math.PI * 2);
+      ctx.fillStyle = grd;
+      ctx.fill();
+
+      // Tiny white-hot nucleus
+      ctx.shadowBlur = 0;
+      ctx.beginPath();
+      ctx.arc(hx, hy, m.width * 0.9, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffffff';
+      ctx.fill();
+
+      ctx.restore();
+    }
+  }
+
+  /* ──────────────────────────────────────────
+     3.  DRIFTING NEBULA CLOUDS  (kept)
+         ASTEROIDS  (kept, add more variety)
+         COMETS     (kept)
+         PLANETS    (removed)
+  ────────────────────────────────────────── */
+  const bodies = [];
+
+  function initBodies() {
+    /* Nebula clouds */
+    const nebPalettes = [
+      [0,170,255],[180,0,255],[255,80,20],[0,220,130],
+      [255,180,0],[80,40,255],[255,40,120],[0,255,220],
+    ];
+    for (let i = 0; i < 7; i++) {
+      const nc  = nebPalettes[randI(0, nebPalettes.length)];
+      const spd = rand(0.1, 0.45);
+      const ang = rand(0, Math.PI * 2);
+      bodies.push({
+        kind:  'nebula',
+        x: rand(0, W), y: rand(0, H),
+        rw: rand(120, 450), rh: rand(80, 280),
+        vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd,
+        col: nc, alpha: rand(0.025, 0.09),
+        angle: rand(0, Math.PI), rotV: rand(-0.0008, 0.0008),
+        wobbleAmp: rand(0.05, 0.2), wobbleFreq: rand(0.003, 0.01),
+        wobbleOff: rand(0, Math.PI * 2),
+      });
+    }
+
+    /* Asteroids */
+    for (let i = 0; i < 18; i++) {
+      const pts = [];
+      const n   = randI(5, 9);
+      for (let k = 0; k < n; k++)
+        pts.push({ a: (k / n) * Math.PI * 2, d: rand(0.55, 1.0) });
+      const spd = rand(0.3, 2.5);
+      const ang = rand(0, Math.PI * 2);
+      bodies.push({
+        kind: 'asteroid',
+        x: rand(-20, W + 20), y: rand(-20, H),
+        r: rand(2, 12),
+        vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd,
+        ax: rand(-0.003, 0.003), ay: rand(-0.003, 0.003),
+        rot: rand(0, Math.PI * 2), rotV: rand(-0.035, 0.035),
+        pts, fill: `hsl(${randI(15,55)},${randI(8,30)}%,${randI(20,50)}%)`,
+        alpha: rand(0.35, 0.85),
+      });
+    }
+
+    /* Comets */
+    const cometCols = [[210,245,255],[255,210,140],[180,255,230],[255,170,255]];
+    for (let i = 0; i < 4; i++) {
+      const spd = rand(1.2, 4.0);
+      const ang = rand(-0.4, 0.7);
+      bodies.push({
+        kind: 'comet',
+        x: rand(-W * 0.1, W * 0.5), y: rand(-80, H * 0.4),
+        vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd + rand(0.2, 0.9),
+        r: rand(2, 5),
+        col: cometCols[randI(0, cometCols.length)],
+        alpha: rand(0.45, 0.9), trail: [],
+      });
+    }
+  }
+  initBodies();
+
+  function updateBodies() {
+    const pad = 200;
+    for (const b of bodies) {
+      if (b.kind === 'nebula') {
+        b.angle += b.rotV;
+        b.x += b.vx + Math.sin(frame * b.wobbleFreq + b.wobbleOff) * b.wobbleAmp;
+        b.y += b.vy + Math.cos(frame * b.wobbleFreq * 0.7 + b.wobbleOff) * b.wobbleAmp * 0.5;
+      } else {
+        b.x += b.vx; b.y += b.vy;
+      }
+      if (b.kind === 'asteroid') {
+        b.vx += b.ax; b.vy += b.ay;
+        const spd = Math.sqrt(b.vx**2 + b.vy**2);
+        if (spd > 3.2) { b.vx *= 0.97; b.vy *= 0.97; }
+        b.rot += b.rotV;
+      }
+      if (b.kind === 'comet') {
+        b.vy += 0.007;
+        b.trail.push({ x: b.x, y: b.y });
+        if (b.trail.length > 100) b.trail.shift();
+      }
+      if (b.x > W + pad) b.x = -pad;
+      if (b.x < -pad)    b.x = W + pad;
+      if (b.y > H + pad) b.y = -pad;
+    }
+  }
+
+  function drawBodies() {
+    for (const b of bodies) {
+      ctx.save();
+      ctx.globalAlpha = b.alpha;
+
+      if (b.kind === 'nebula') {
+        const [r, g, bl] = b.col;
+        ctx.save();
+        ctx.translate(b.x, b.y); ctx.rotate(b.angle);
+        const mx = Math.max(b.rw, b.rh);
+        const grd = ctx.createRadialGradient(0,0,0, 0,0, mx/2);
+        grd.addColorStop(0,   `rgba(${r},${g},${bl},0.2)`);
+        grd.addColorStop(0.5, `rgba(${r},${g},${bl},0.07)`);
+        grd.addColorStop(1,   'transparent');
+        ctx.scale(b.rw/mx, b.rh/mx);
+        ctx.beginPath(); ctx.arc(0,0, mx/2, 0, Math.PI*2);
+        ctx.fillStyle = grd; ctx.fill();
+        ctx.restore();
+      }
+
+      else if (b.kind === 'asteroid') {
+        ctx.save();
+        ctx.translate(b.x, b.y); ctx.rotate(b.rot);
+        ctx.beginPath();
+        const fp = b.pts[0];
+        ctx.moveTo(Math.cos(fp.a)*b.r*fp.d, Math.sin(fp.a)*b.r*fp.d);
+        for (let k = 1; k < b.pts.length; k++) {
+          const p = b.pts[k];
+          ctx.lineTo(Math.cos(p.a)*b.r*p.d, Math.sin(p.a)*b.r*p.d);
+        }
+        ctx.closePath();
+        ctx.fillStyle = b.fill; ctx.fill();
+        ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+        ctx.lineWidth = 0.5; ctx.stroke();
+        if (b.r > 6) {
+          ctx.globalAlpha = 0.18;
+          ctx.beginPath(); ctx.arc(b.r*0.2, -b.r*0.25, b.r*0.28, 0, Math.PI*2);
+          ctx.strokeStyle = 'rgba(0,0,0,0.5)'; ctx.lineWidth = 1; ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      else if (b.kind === 'comet') {
+        if (b.trail.length > 2) {
+          const [r, g, bl] = b.col;
+          for (let i = 1; i < b.trail.length; i++) {
+            const t = i / b.trail.length;
+            const p0 = b.trail[i-1], p1 = b.trail[i];
+            ctx.beginPath(); ctx.moveTo(p0.x, p0.y); ctx.lineTo(p1.x, p1.y);
+            ctx.strokeStyle = `rgba(${r},${g},${bl},${t*0.75})`;
+            ctx.lineWidth = t * 2.5;
+            ctx.shadowColor = `rgb(${r},${g},${bl})`;
+            ctx.shadowBlur = 8 * t; ctx.stroke();
+          }
+        }
+        const cgrd = ctx.createRadialGradient(b.x,b.y,0, b.x,b.y, b.r*4);
+        cgrd.addColorStop(0, '#ffffff');
+        cgrd.addColorStop(0.25, `rgba(${b.col.join(',')},0.9)`);
+        cgrd.addColorStop(1, 'transparent');
+        ctx.beginPath(); ctx.arc(b.x, b.y, b.r*4, 0, Math.PI*2);
+        ctx.fillStyle = cgrd; ctx.fill();
+      }
+
+      ctx.restore();
+    }
+  }
+
+  /* ──────────────────────────────────────────
+     4.  MILKY WAY BAND
+  ────────────────────────────────────────── */
+  function drawMilkyWay() {
+    ctx.save();
+    ctx.globalAlpha = 0.06;
+    ctx.translate(W / 2, H / 2);
+    ctx.rotate(-0.44);
+    const grd = ctx.createLinearGradient(-W, 0, W, 0);
+    grd.addColorStop(0,   'transparent');
+    grd.addColorStop(0.25,'rgba(170,190,255,1)');
+    grd.addColorStop(0.5, 'rgba(210,225,255,1)');
+    grd.addColorStop(0.75,'rgba(170,190,255,1)');
+    grd.addColorStop(1,   'transparent');
+    ctx.fillStyle = grd;
+    ctx.fillRect(-W, -H * 0.13, W * 2, H * 0.26);
+    ctx.restore();
+  }
+
+  /* ──────────────────────────────────────────
+     5.  RENDER LOOP
+  ────────────────────────────────────────── */
+  let frame = 0;
+  function loop() {
+    requestAnimationFrame(loop);
+    frame++;
+    const t = frame / 60;
+
+    ctx.clearRect(0, 0, W, H);
+
+    // deep space gradient
+    const bg = ctx.createLinearGradient(0, 0, W * 0.5, H);
+    bg.addColorStop(0,   '#00000c');
+    bg.addColorStop(0.4, '#000618');
+    bg.addColorStop(0.7, '#010012');
+    bg.addColorStop(1,   '#00000c');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    drawMilkyWay();
+    updateBodies(); drawBodies();
+    drawStars(t);
+    updateMeteors(); drawMeteors();
+  }
+  loop();
+})();
+</script>
+
+<!-- PAGE SCRIPTS -->
+<script>
+// Publication filters
+document.querySelectorAll('[data-pub-filter]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const f = btn.getAttribute('data-pub-filter');
+    document.querySelectorAll('[data-pub-filter]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('#pubSections .pub-section').forEach(s => {
+      s.classList.toggle('d-none', f !== 'all' && s.dataset.category !== f);
     });
   });
 });
 
-// === Clock script ===
-const timeEl = document.getElementById("time");
-const dateEl = document.getElementById("date");
-const tzSelect = document.getElementById("tzSelect");
-const toggle12 = document.getElementById("toggle12");
+// Clock
+const timeEl  = document.getElementById("clock-time");
+const dateEl  = document.getElementById("clock-date");
+const tzSel   = document.getElementById("tzSelect");
+const chk12   = document.getElementById("toggle12");
 
-function formatTime(date, tz, use12) {
-  const options = { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: use12 };
-  if (tz && tz !== "local") {
-    if (/^[+-]\d{2}:\d{2}$/.test(tz)) tz = "UTC" + tz;
-    options.timeZone = tz;
+function resolveTimezone(raw) {
+  if (!raw || raw === "local") return undefined;
+  // "+05:30" → "UTC+05:30"
+  if (/^[+-]\d{2}:\d{2}$/.test(raw)) return "UTC" + raw;
+  return raw; // "UTC" passes through as-is
+}
+
+function tick() {
+  try {
+    const tz   = resolveTimezone(tzSel.value);
+    const now  = new Date();
+    const use12 = chk12.checked;
+
+    const timeOpts = { hour:"2-digit", minute:"2-digit", second:"2-digit", hour12: use12 };
+    const dateOpts = { weekday:"long", year:"numeric", month:"long", day:"numeric" };
+    if (tz) { timeOpts.timeZone = tz; dateOpts.timeZone = tz; }
+
+    timeEl.textContent = new Intl.DateTimeFormat(undefined, timeOpts).format(now);
+    dateEl.textContent = new Intl.DateTimeFormat(undefined, dateOpts).format(now);
+  } catch (e) {
+    timeEl.textContent = new Date().toLocaleTimeString();
+    dateEl.textContent = new Date().toLocaleDateString(undefined, { weekday:"long", year:"numeric", month:"long", day:"numeric" });
   }
-  return new Intl.DateTimeFormat(undefined, options).format(date);
 }
 
-function formatDate(date, tz) {
-  const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
-  if (tz && tz !== "local") {
-    if (/^[+-]\d{2}:\d{2}$/.test(tz)) tz = "UTC" + tz;
-    options.timeZone = tz;
-  }
-  return new Intl.DateTimeFormat(undefined, options).format(date);
-}
+tzSel.addEventListener("change", tick);
+chk12.addEventListener("change", tick);
+setInterval(tick, 1000);
+tick();
 
-function updateClock() {
-  const tz = tzSelect.value;
-  const use12 = toggle12.checked;
-  const now = new Date();
-  timeEl.textContent = formatTime(now, tz === "local" ? undefined : tz, use12);
-  dateEl.textContent = formatDate(now, tz === "local" ? undefined : tz);
-}
-
-tzSelect.addEventListener("change", updateClock);
-toggle12.addEventListener("change", updateClock);
-
-setInterval(updateClock, 1000);
-updateClock();
-</script>
-<script>
-function toMin(t){
-  const [h,m] = t.split(":").map(Number);
-  return h*60 + m;
-}
-
-function updateNowTeaching(){
+// Now Teaching
+function toMin(t) { const [h,m] = t.split(":").map(Number); return h*60+m; }
+function markTeaching() {
   const now = new Date();
   const day = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][now.getDay()];
-  const nowMin = now.getHours()*60 + now.getMinutes();
-
-  document.querySelectorAll("[data-class]").forEach(cell=>{
-    cell.classList.remove("now-teaching");
-
-    const cDay   = cell.dataset.day;
-    const start  = toMin(cell.dataset.start);
-    const end    = toMin(cell.dataset.end);
-
-    if (cDay === day && nowMin >= start && nowMin < end) {
-      cell.classList.add("now-teaching");
-    }
+  const cur = now.getHours()*60 + now.getMinutes();
+  document.querySelectorAll("[data-class]").forEach(c => {
+    c.classList.toggle("now-teaching",
+      c.dataset.day === day &&
+      cur >= toMin(c.dataset.start) &&
+      cur < toMin(c.dataset.end)
+    );
   });
 }
-
-setInterval(updateNowTeaching, 30000);
-updateNowTeaching();
+setInterval(markTeaching, 30000);
+markTeaching();
 </script>
-
 </body>
 </html>
