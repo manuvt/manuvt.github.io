@@ -547,7 +547,8 @@ main { position: relative; z-index: 10; }
 
 <script>
 /* ================================================================
-   ULTRA-REALISTIC SPACE CANVAS ENGINE
+   STAR FIELD ENGINE — vigorous independent glow & dim per star
+   No meteors, no celestial bodies. Stars only.
    ================================================================ */
 (function () {
   const canvas = document.getElementById('spaceCanvas');
@@ -558,437 +559,174 @@ main { position: relative; z-index: 10; }
     W = canvas.width  = window.innerWidth;
     H = canvas.height = Math.max(window.innerHeight, document.body.scrollHeight);
   }
-  window.addEventListener('resize', () => { resize(); buildStarField(); });
+  window.addEventListener('resize', () => { resize(); buildStars(); });
   resize();
 
   const rand  = (a, b) => a + Math.random() * (b - a);
   const randI = (a, b) => Math.floor(rand(a, b));
-  const lerp  = (a, b, t) => a + (b - a) * t;
 
-  /* ── Spectral star palette ── */
-  const STAR_COLORS = [
-    '#9bb0ff','#aabfff','#cad7ff','#f8f7ff',
-    '#fff4ea','#ffd2a1','#ffcc6f','#b0c8ff',
-    '#e8f0ff','#fff8f0','#ffecec',
+  /* Spectral palette — O/B blue-white through K/M orange-red */
+  const COLORS = [
+    '#b8ccff','#c8d8ff','#dde8ff','#f0f4ff',  // hot blue-white
+    '#ffffff','#fffdf5','#fff9e8',              // white / yellow-white
+    '#ffeacc','#ffd89a','#ffca70',             // warm yellow / orange
+    '#9ec8ff','#aad4ff',                        // blue
   ];
 
-  /* ──────────────────────────────────────────
-     1.  STATIC STAR FIELD  (with twinkle)
-  ────────────────────────────────────────── */
+  /* ── Star types ──
+     tiny   : sub-pixel dust, barely visible, very fast flicker
+     small  : small dot, moderate twinkle
+     medium : visible dot with soft halo, strong pulse
+     large  : bright star with halo + diffraction spikes, dramatic throb
+     giant  : rare super-bright, massive halo, slow deep breathe
+  */
   let stars = [];
 
-  function buildStarField() {
+  function buildStars() {
     stars = [];
-    const n = Math.round((W * H) / 1600);
-    for (let i = 0; i < n; i++) {
-      const big = Math.random() > 0.93;
+    const area = W * H;
+
+    // layer 1 — tiny dust (very dense)
+    const nTiny = Math.round(area / 800);
+    for (let i = 0; i < nTiny; i++) {
       stars.push({
         x: rand(0, W), y: rand(0, H),
-        r: big ? rand(1.3, 2.8) : rand(0.25, 1.1),
-        color:   STAR_COLORS[randI(0, STAR_COLORS.length)],
-        base:    rand(0.3, 1.0),
-        phase:   rand(0, Math.PI * 2),
-        speed:   rand(0.2, 2.8),
-        spike:   big && Math.random() > 0.45,
-        alpha:   0,
+        r: rand(0.15, 0.45),
+        color: COLORS[randI(0, COLORS.length)],
+        // vigorous: each star has TWO overlapping sine waves at coprime frequencies
+        f1: rand(1.5, 6.0),   f2: rand(2.5, 9.0),
+        p1: rand(0, Math.PI*2), p2: rand(0, Math.PI*2),
+        minA: rand(0.0, 0.15), maxA: rand(0.5, 1.0),
+        spike: false, halo: false,
+      });
+    }
+
+    // layer 2 — small
+    const nSmall = Math.round(area / 2200);
+    for (let i = 0; i < nSmall; i++) {
+      stars.push({
+        x: rand(0, W), y: rand(0, H),
+        r: rand(0.45, 0.9),
+        color: COLORS[randI(0, COLORS.length)],
+        f1: rand(1.2, 5.0), f2: rand(2.0, 7.5),
+        p1: rand(0, Math.PI*2), p2: rand(0, Math.PI*2),
+        minA: rand(0.0, 0.2), maxA: rand(0.6, 1.0),
+        spike: false, halo: false,
+      });
+    }
+
+    // layer 3 — medium (halo)
+    const nMed = Math.round(area / 7000);
+    for (let i = 0; i < nMed; i++) {
+      stars.push({
+        x: rand(0, W), y: rand(0, H),
+        r: rand(0.9, 1.6),
+        color: COLORS[randI(0, COLORS.length)],
+        f1: rand(0.8, 4.0), f2: rand(1.5, 6.0),
+        p1: rand(0, Math.PI*2), p2: rand(0, Math.PI*2),
+        minA: rand(0.05, 0.3), maxA: rand(0.7, 1.0),
+        spike: false, halo: true,
+      });
+    }
+
+    // layer 4 — large (halo + spikes)
+    const nLarge = Math.round(area / 28000);
+    for (let i = 0; i < nLarge; i++) {
+      stars.push({
+        x: rand(0, W), y: rand(0, H),
+        r: rand(1.6, 2.6),
+        color: COLORS[randI(0, COLORS.length)],
+        f1: rand(0.5, 2.5), f2: rand(1.0, 4.0),
+        p1: rand(0, Math.PI*2), p2: rand(0, Math.PI*2),
+        minA: rand(0.1, 0.4), maxA: rand(0.75, 1.0),
+        spike: true, halo: true,
+      });
+    }
+
+    // layer 5 — giants (rare, dramatic breathe)
+    const nGiant = Math.max(3, Math.round(area / 120000));
+    for (let i = 0; i < nGiant; i++) {
+      stars.push({
+        x: rand(0, W), y: rand(0, H),
+        r: rand(2.6, 4.2),
+        color: COLORS[randI(0, COLORS.length)],
+        // slow deep throb: one slow + one fast overtone
+        f1: rand(0.2, 0.9), f2: rand(1.8, 5.0),
+        p1: rand(0, Math.PI*2), p2: rand(0, Math.PI*2),
+        minA: rand(0.15, 0.45), maxA: 1.0,
+        spike: true, halo: true, giant: true,
       });
     }
   }
-  buildStarField();
+  buildStars();
+
+  /* Milky Way faint band */
+  function drawMilkyWay() {
+    ctx.save();
+    ctx.globalAlpha = 0.055;
+    ctx.translate(W/2, H/2);
+    ctx.rotate(-0.44);
+    const g = ctx.createLinearGradient(-W, 0, W, 0);
+    g.addColorStop(0,    'transparent');
+    g.addColorStop(0.25, 'rgba(170,190,255,1)');
+    g.addColorStop(0.5,  'rgba(210,225,255,1)');
+    g.addColorStop(0.75, 'rgba(170,190,255,1)');
+    g.addColorStop(1,    'transparent');
+    ctx.fillStyle = g;
+    ctx.fillRect(-W, -H*0.12, W*2, H*0.24);
+    ctx.restore();
+  }
 
   function drawStars(t) {
     for (const s of stars) {
-      s.alpha = s.base * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
-      ctx.save();
-      ctx.globalAlpha = s.alpha;
+      // Two-frequency vigorous pulse — each star beats to its own rhythm
+      const wave = 0.5 * Math.sin(t * s.f1 + s.p1)
+                 + 0.5 * Math.sin(t * s.f2 + s.p2);
+      // wave ∈ [-1, 1] → map to [minA, maxA]
+      const alpha = s.minA + (s.maxA - s.minA) * (0.5 + 0.5 * wave);
 
-      if (s.r > 1.0) {
-        // soft halo
-        const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 6);
+      ctx.save();
+      ctx.globalAlpha = alpha;
+
+      // Halo (medium / large / giant)
+      if (s.halo) {
+        const haloR = s.giant ? s.r * 10 : s.r * 6;
+        const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, haloR);
         g.addColorStop(0,   s.color + 'cc');
-        g.addColorStop(0.4, s.color + '44');
+        g.addColorStop(0.3, s.color + '55');
         g.addColorStop(1,   'transparent');
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r * 6, 0, Math.PI * 2);
+        ctx.arc(s.x, s.y, haloR, 0, Math.PI*2);
         ctx.fillStyle = g;
         ctx.fill();
       }
 
+      // Core dot
       ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
       ctx.fillStyle = s.color;
       ctx.fill();
 
+      // Diffraction spikes (large / giant)
       if (s.spike) {
-        ctx.globalAlpha = s.alpha * 0.45;
+        ctx.globalAlpha = alpha * 0.5;
         ctx.strokeStyle = s.color;
-        ctx.lineWidth   = 0.6;
-        const len = s.r * 9;
+        ctx.lineWidth   = s.giant ? 0.9 : 0.55;
+        const len  = s.r * (s.giant ? 11 : 8);
+        const lenD = len * 0.55;
         ctx.beginPath();
-        ctx.moveTo(s.x - len, s.y); ctx.lineTo(s.x + len, s.y);
-        ctx.moveTo(s.x, s.y - len); ctx.lineTo(s.x, s.y + len);
+        ctx.moveTo(s.x - len, s.y);   ctx.lineTo(s.x + len, s.y);
+        ctx.moveTo(s.x, s.y - len);   ctx.lineTo(s.x, s.y + len);
+        ctx.moveTo(s.x-lenD, s.y-lenD); ctx.lineTo(s.x+lenD, s.y+lenD);
+        ctx.moveTo(s.x+lenD, s.y-lenD); ctx.lineTo(s.x-lenD, s.y+lenD);
         ctx.stroke();
-        // diagonal spikes (smaller)
-        const d = len * 0.5;
-        ctx.beginPath();
-        ctx.moveTo(s.x - d, s.y - d); ctx.lineTo(s.x + d, s.y + d);
-        ctx.moveTo(s.x + d, s.y - d); ctx.lineTo(s.x - d, s.y + d);
-        ctx.stroke();
-      }
-      ctx.restore();
-    }
-  }
-
-  /* ──────────────────────────────────────────
-     2.  METEOR SHOWER
-     All meteors radiate from a single radiant
-     point (like Perseids / Leonids), giving the
-     realistic "shower" fan-out effect.
-  ────────────────────────────────────────── */
-  const meteors = [];
-  let mTimer = 0;
-
-  // Radiant point — upper-left quadrant, drifts slowly
-  let radiantX = W * 0.25, radiantY = H * 0.08;
-
-  // Realistic meteor colors: white-hot core → orange/yellow trail
-  const METEOR_COLORS = [
-    [255,255,255], [255,240,220], [255,220,180],
-    [255,200,140], [255,180,100], [200,220,255],
-    [220,235,255],
-  ];
-
-  function spawnMeteor() {
-    if (meteors.length >= 22) return;
-
-    // Spread angle from radiant: realistic shower has ~30° cone
-    const baseAngle = rand(15, 50) * Math.PI / 180; // mostly downward-right
-    const spread    = rand(-0.28, 0.28);
-    const angle     = baseAngle + spread;
-    const spd       = rand(9, 28);
-    const col       = METEOR_COLORS[randI(0, METEOR_COLORS.length)];
-    const len       = rand(80, 380); // tail length in px
-    const width     = rand(0.8, 2.8);
-
-    // Start position near radiant with small random offset
-    const startX = radiantX + rand(-80, 80);
-    const startY = radiantY + rand(-30, 30);
-
-    meteors.push({
-      x: startX, y: startY,
-      vx: Math.cos(angle) * spd,
-      vy: Math.sin(angle) * spd,
-      col, width, len,
-      alpha: 0,
-      life: 0,
-      // each meteor lives exactly long enough to cross the screen
-      max: Math.round(rand(40, 110)),
-      trail: [],
-      // fragmentation: bigger meteors occasionally split
-      hasFrag: width > 2.0 && Math.random() > 0.6,
-      fragSpawned: false,
-    });
-  }
-
-  function spawnFragment(parent) {
-    const col  = parent.col;
-    const ang2 = Math.atan2(parent.vy, parent.vx) + rand(-0.4, 0.4);
-    const spd2 = Math.sqrt(parent.vx**2 + parent.vy**2) * rand(0.3, 0.7);
-    meteors.push({
-      x: parent.x, y: parent.y,
-      vx: Math.cos(ang2) * spd2,
-      vy: Math.sin(ang2) * spd2,
-      col, width: parent.width * rand(0.3, 0.5),
-      len: parent.len * 0.4,
-      alpha: 0, life: 0,
-      max: randI(20, 50),
-      trail: [],
-      hasFrag: false, fragSpawned: true,
-    });
-  }
-
-  function updateMeteors() {
-    // Vary spawn rate: bursts of 1-3 per interval to mimic shower intensity
-    mTimer++;
-    const interval = rand(8, 30);
-    if (mTimer > interval) {
-      mTimer = 0;
-      const burst = randI(1, 4);
-      for (let b = 0; b < burst; b++) spawnMeteor();
-    }
-
-    // Slowly drift radiant
-    radiantX += Math.sin(frame * 0.0008) * 0.15;
-    radiantY += Math.cos(frame * 0.0005) * 0.08;
-
-    for (let i = meteors.length - 1; i >= 0; i--) {
-      const m = meteors[i];
-      m.life++;
-
-      // Record trail
-      m.trail.push({ x: m.x, y: m.y });
-      const maxTrail = Math.round(m.len / Math.sqrt(m.vx**2 + m.vy**2));
-      if (m.trail.length > Math.max(maxTrail, 8)) m.trail.shift();
-
-      m.x += m.vx;
-      m.y += m.vy;
-      m.vy += 0.06; // atmospheric drag bends trajectory slightly
-
-      // Fade in fast, hold, fade out
-      if (m.life < 8) m.alpha = m.life / 8;
-      else if (m.life > m.max - 15) m.alpha = Math.max(0, (m.max - m.life) / 15);
-      else m.alpha = 1;
-
-      // Spawn fragment at ~40% of life
-      if (m.hasFrag && !m.fragSpawned && m.life > m.max * 0.4) {
-        m.fragSpawned = true;
-        spawnFragment(m);
-      }
-
-      if (m.life >= m.max || m.x > W + 300 || m.y > H + 300 || m.x < -300)
-        meteors.splice(i, 1);
-    }
-  }
-
-  function drawMeteors() {
-    for (const m of meteors) {
-      if (m.trail.length < 2) continue;
-      const [r, g, b] = m.col;
-
-      ctx.save();
-      ctx.globalAlpha = m.alpha;
-
-      // Draw trail as gradient segments — bright at head, fading to transparent
-      for (let i = 1; i < m.trail.length; i++) {
-        const t  = i / m.trail.length;  // 0=tail end, 1=head
-        const p0 = m.trail[i - 1];
-        const p1 = m.trail[i];
-
-        // Colour shifts from white-hot head → orange/dim tail
-        const rr = Math.round(lerp(r * 0.3, r, t));
-        const gg = Math.round(lerp(g * 0.15, g, t));
-        const bb = Math.round(lerp(b * 0.05, b, t));
-
-        ctx.beginPath();
-        ctx.moveTo(p0.x, p0.y);
-        ctx.lineTo(p1.x, p1.y);
-        ctx.strokeStyle = `rgba(${rr},${gg},${bb},${t * 0.95})`;
-        ctx.lineWidth   = m.width * t;
-        ctx.lineCap     = 'round';
-        ctx.shadowColor = `rgba(255,200,120,${t * 0.6})`;
-        ctx.shadowBlur  = 6 * t;
-        ctx.stroke();
-      }
-
-      // Bright ablation glow at head
-      const hx = m.x, hy = m.y;
-      const glowR = m.width * 5;
-      const grd = ctx.createRadialGradient(hx, hy, 0, hx, hy, glowR);
-      grd.addColorStop(0,   `rgba(255,255,255,0.95)`);
-      grd.addColorStop(0.3, `rgba(${r},${g},${b},0.7)`);
-      grd.addColorStop(0.7, `rgba(255,160,60,0.2)`);
-      grd.addColorStop(1,   'transparent');
-      ctx.shadowBlur = 20;
-      ctx.shadowColor = 'rgba(255,200,100,0.8)';
-      ctx.beginPath();
-      ctx.arc(hx, hy, glowR, 0, Math.PI * 2);
-      ctx.fillStyle = grd;
-      ctx.fill();
-
-      // Tiny white-hot nucleus
-      ctx.shadowBlur = 0;
-      ctx.beginPath();
-      ctx.arc(hx, hy, m.width * 0.9, 0, Math.PI * 2);
-      ctx.fillStyle = '#ffffff';
-      ctx.fill();
-
-      ctx.restore();
-    }
-  }
-
-  /* ──────────────────────────────────────────
-     3.  DRIFTING NEBULA CLOUDS  (kept)
-         ASTEROIDS  (kept, add more variety)
-         COMETS     (kept)
-         PLANETS    (removed)
-  ────────────────────────────────────────── */
-  const bodies = [];
-
-  function initBodies() {
-    /* Nebula clouds */
-    const nebPalettes = [
-      [0,170,255],[180,0,255],[255,80,20],[0,220,130],
-      [255,180,0],[80,40,255],[255,40,120],[0,255,220],
-    ];
-    for (let i = 0; i < 7; i++) {
-      const nc  = nebPalettes[randI(0, nebPalettes.length)];
-      const spd = rand(0.1, 0.45);
-      const ang = rand(0, Math.PI * 2);
-      bodies.push({
-        kind:  'nebula',
-        x: rand(0, W), y: rand(0, H),
-        rw: rand(120, 450), rh: rand(80, 280),
-        vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd,
-        col: nc, alpha: rand(0.025, 0.09),
-        angle: rand(0, Math.PI), rotV: rand(-0.0008, 0.0008),
-        wobbleAmp: rand(0.05, 0.2), wobbleFreq: rand(0.003, 0.01),
-        wobbleOff: rand(0, Math.PI * 2),
-      });
-    }
-
-    /* Asteroids */
-    for (let i = 0; i < 18; i++) {
-      const pts = [];
-      const n   = randI(5, 9);
-      for (let k = 0; k < n; k++)
-        pts.push({ a: (k / n) * Math.PI * 2, d: rand(0.55, 1.0) });
-      const spd = rand(0.3, 2.5);
-      const ang = rand(0, Math.PI * 2);
-      bodies.push({
-        kind: 'asteroid',
-        x: rand(-20, W + 20), y: rand(-20, H),
-        r: rand(2, 12),
-        vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd,
-        ax: rand(-0.003, 0.003), ay: rand(-0.003, 0.003),
-        rot: rand(0, Math.PI * 2), rotV: rand(-0.035, 0.035),
-        pts, fill: `hsl(${randI(15,55)},${randI(8,30)}%,${randI(20,50)}%)`,
-        alpha: rand(0.35, 0.85),
-      });
-    }
-
-    /* Comets */
-    const cometCols = [[210,245,255],[255,210,140],[180,255,230],[255,170,255]];
-    for (let i = 0; i < 4; i++) {
-      const spd = rand(1.2, 4.0);
-      const ang = rand(-0.4, 0.7);
-      bodies.push({
-        kind: 'comet',
-        x: rand(-W * 0.1, W * 0.5), y: rand(-80, H * 0.4),
-        vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd + rand(0.2, 0.9),
-        r: rand(2, 5),
-        col: cometCols[randI(0, cometCols.length)],
-        alpha: rand(0.45, 0.9), trail: [],
-      });
-    }
-  }
-  initBodies();
-
-  function updateBodies() {
-    const pad = 200;
-    for (const b of bodies) {
-      if (b.kind === 'nebula') {
-        b.angle += b.rotV;
-        b.x += b.vx + Math.sin(frame * b.wobbleFreq + b.wobbleOff) * b.wobbleAmp;
-        b.y += b.vy + Math.cos(frame * b.wobbleFreq * 0.7 + b.wobbleOff) * b.wobbleAmp * 0.5;
-      } else {
-        b.x += b.vx; b.y += b.vy;
-      }
-      if (b.kind === 'asteroid') {
-        b.vx += b.ax; b.vy += b.ay;
-        const spd = Math.sqrt(b.vx**2 + b.vy**2);
-        if (spd > 3.2) { b.vx *= 0.97; b.vy *= 0.97; }
-        b.rot += b.rotV;
-      }
-      if (b.kind === 'comet') {
-        b.vy += 0.007;
-        b.trail.push({ x: b.x, y: b.y });
-        if (b.trail.length > 100) b.trail.shift();
-      }
-      if (b.x > W + pad) b.x = -pad;
-      if (b.x < -pad)    b.x = W + pad;
-      if (b.y > H + pad) b.y = -pad;
-    }
-  }
-
-  function drawBodies() {
-    for (const b of bodies) {
-      ctx.save();
-      ctx.globalAlpha = b.alpha;
-
-      if (b.kind === 'nebula') {
-        const [r, g, bl] = b.col;
-        ctx.save();
-        ctx.translate(b.x, b.y); ctx.rotate(b.angle);
-        const mx = Math.max(b.rw, b.rh);
-        const grd = ctx.createRadialGradient(0,0,0, 0,0, mx/2);
-        grd.addColorStop(0,   `rgba(${r},${g},${bl},0.2)`);
-        grd.addColorStop(0.5, `rgba(${r},${g},${bl},0.07)`);
-        grd.addColorStop(1,   'transparent');
-        ctx.scale(b.rw/mx, b.rh/mx);
-        ctx.beginPath(); ctx.arc(0,0, mx/2, 0, Math.PI*2);
-        ctx.fillStyle = grd; ctx.fill();
-        ctx.restore();
-      }
-
-      else if (b.kind === 'asteroid') {
-        ctx.save();
-        ctx.translate(b.x, b.y); ctx.rotate(b.rot);
-        ctx.beginPath();
-        const fp = b.pts[0];
-        ctx.moveTo(Math.cos(fp.a)*b.r*fp.d, Math.sin(fp.a)*b.r*fp.d);
-        for (let k = 1; k < b.pts.length; k++) {
-          const p = b.pts[k];
-          ctx.lineTo(Math.cos(p.a)*b.r*p.d, Math.sin(p.a)*b.r*p.d);
-        }
-        ctx.closePath();
-        ctx.fillStyle = b.fill; ctx.fill();
-        ctx.strokeStyle = 'rgba(255,255,255,0.07)';
-        ctx.lineWidth = 0.5; ctx.stroke();
-        if (b.r > 6) {
-          ctx.globalAlpha = 0.18;
-          ctx.beginPath(); ctx.arc(b.r*0.2, -b.r*0.25, b.r*0.28, 0, Math.PI*2);
-          ctx.strokeStyle = 'rgba(0,0,0,0.5)'; ctx.lineWidth = 1; ctx.stroke();
-        }
-        ctx.restore();
-      }
-
-      else if (b.kind === 'comet') {
-        if (b.trail.length > 2) {
-          const [r, g, bl] = b.col;
-          for (let i = 1; i < b.trail.length; i++) {
-            const t = i / b.trail.length;
-            const p0 = b.trail[i-1], p1 = b.trail[i];
-            ctx.beginPath(); ctx.moveTo(p0.x, p0.y); ctx.lineTo(p1.x, p1.y);
-            ctx.strokeStyle = `rgba(${r},${g},${bl},${t*0.75})`;
-            ctx.lineWidth = t * 2.5;
-            ctx.shadowColor = `rgb(${r},${g},${bl})`;
-            ctx.shadowBlur = 8 * t; ctx.stroke();
-          }
-        }
-        const cgrd = ctx.createRadialGradient(b.x,b.y,0, b.x,b.y, b.r*4);
-        cgrd.addColorStop(0, '#ffffff');
-        cgrd.addColorStop(0.25, `rgba(${b.col.join(',')},0.9)`);
-        cgrd.addColorStop(1, 'transparent');
-        ctx.beginPath(); ctx.arc(b.x, b.y, b.r*4, 0, Math.PI*2);
-        ctx.fillStyle = cgrd; ctx.fill();
       }
 
       ctx.restore();
     }
   }
 
-  /* ──────────────────────────────────────────
-     4.  MILKY WAY BAND
-  ────────────────────────────────────────── */
-  function drawMilkyWay() {
-    ctx.save();
-    ctx.globalAlpha = 0.06;
-    ctx.translate(W / 2, H / 2);
-    ctx.rotate(-0.44);
-    const grd = ctx.createLinearGradient(-W, 0, W, 0);
-    grd.addColorStop(0,   'transparent');
-    grd.addColorStop(0.25,'rgba(170,190,255,1)');
-    grd.addColorStop(0.5, 'rgba(210,225,255,1)');
-    grd.addColorStop(0.75,'rgba(170,190,255,1)');
-    grd.addColorStop(1,   'transparent');
-    ctx.fillStyle = grd;
-    ctx.fillRect(-W, -H * 0.13, W * 2, H * 0.26);
-    ctx.restore();
-  }
-
-  /* ──────────────────────────────────────────
-     5.  RENDER LOOP
-  ────────────────────────────────────────── */
+  /* ── Render loop ── */
   let frame = 0;
   function loop() {
     requestAnimationFrame(loop);
@@ -997,19 +735,17 @@ main { position: relative; z-index: 10; }
 
     ctx.clearRect(0, 0, W, H);
 
-    // deep space gradient
-    const bg = ctx.createLinearGradient(0, 0, W * 0.5, H);
+    // Deep space background
+    const bg = ctx.createLinearGradient(0, 0, W*0.4, H);
     bg.addColorStop(0,   '#00000c');
-    bg.addColorStop(0.4, '#000618');
-    bg.addColorStop(0.7, '#010012');
+    bg.addColorStop(0.4, '#000516');
+    bg.addColorStop(0.7, '#010010');
     bg.addColorStop(1,   '#00000c');
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
     drawMilkyWay();
-    updateBodies(); drawBodies();
     drawStars(t);
-    updateMeteors(); drawMeteors();
   }
   loop();
 })();
