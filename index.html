@@ -113,22 +113,53 @@
   /* NAV */
   .sticky-nav {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(5,10,18,0.88);
-    backdrop-filter: blur(14px);
+    background: linear-gradient(180deg, rgba(9,18,33,0.94), rgba(5,10,18,0.88));
+    backdrop-filter: blur(16px) saturate(140%);
     border-bottom: 1px solid var(--border);
+    box-shadow: 0 12px 32px -12px rgba(0,0,0,0.55), 0 1px 0 rgba(56,180,220,0.1);
     padding: 14px 0; margin: 0 -24px;
     padding-left: 24px; padding-right: 24px;
   }
+  .sticky-nav::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -1px;
+    height: 1px; pointer-events: none;
+    background: linear-gradient(90deg, transparent, var(--accent) 20%, var(--accent2) 50%, var(--accent) 80%, transparent);
+    opacity: 0.55;
+  }
   .nav-inner { display: flex; gap: 28px; flex-wrap: wrap; }
   .nav-inner a {
+    position: relative;
     font-family: var(--mono-font); font-size: 11px;
     letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--muted); text-decoration: none; transition: color 0.2s;
+    color: var(--muted); text-decoration: none;
+    padding: 4px 1px 8px;
+    transition: color 0.25s ease, transform 0.25s ease, text-shadow 0.25s ease;
   }
-  .nav-inner a:hover { color: var(--accent); }
+  .nav-inner a::before {
+    content: ''; position: absolute; left: 50%; bottom: 0;
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--accent2); opacity: 0;
+    transform: translate(-50%, 4px) scale(0.5);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .nav-inner a::after {
+    content: ''; position: absolute; left: 50%; right: 50%; bottom: 0;
+    height: 2px; border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: left 0.3s cubic-bezier(.4,0,.2,1), right 0.3s cubic-bezier(.4,0,.2,1);
+  }
+  .nav-inner a:hover {
+    color: #fff; transform: translateY(-2px);
+    text-shadow: 0 0 14px rgba(56,180,220,0.55);
+  }
+  .nav-inner a:hover::after { left: 0; right: 0; }
+  .nav-inner a:hover::before { opacity: 1; transform: translate(-50%, 4px) scale(1); }
+  .nav-inner a.active { color: var(--accent2); }
+  .nav-inner a.active::after { left: 0; right: 0; background: linear-gradient(90deg, var(--accent2), var(--accent)); }
+  .nav-inner a.active::before { opacity: 1; transform: translate(-50%, 4px) scale(1); }
 
   /* SECTION */
-  .section { padding: 72px 0 0; }
+  .section { padding: 72px 0 0; content-visibility: auto; contain-intrinsic-size: 1px 800px; }
   .section-label {
     font-family: var(--mono-font); font-size: 10px;
     letter-spacing: 0.35em; text-transform: uppercase;
@@ -157,20 +188,34 @@
     margin-top: 6px; color: var(--accent); font-style: italic;
   }
 
-  /* TIMETABLE */
-  .tt-accordion { display: flex; flex-direction: column; gap: 8px; }
-  .tt-day {
+  /* ACCORDION (shared base for Timetable + Consultancy) */
+  .acc-item {
     border: 1px solid var(--border); border-radius: 6px;
     overflow: hidden; background: var(--surface);
     backdrop-filter: blur(8px); transition: border-color 0.25s;
   }
-  .tt-day.open { border-color: var(--accent); }
-  .tt-trigger {
+  .acc-item.open { border-color: var(--accent); }
+  .acc-trigger {
     display: flex; align-items: center;
     justify-content: space-between;
+    width: 100%; text-align: left;
     padding: 16px 22px; cursor: pointer;
     user-select: none; gap: 16px;
+    background: none; border: none; color: inherit; font: inherit;
   }
+  .acc-chevron {
+    width: 18px; height: 18px; flex-shrink: 0;
+    transition: transform 0.35s ease; color: var(--accent);
+  }
+  .acc-item.open .acc-chevron { transform: rotate(180deg); }
+  .acc-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.42s cubic-bezier(0.4,0,0.2,1);
+  }
+  .acc-item.open .acc-body { max-height: 1200px; }
+
+  /* TIMETABLE */
+  .tt-accordion { display: flex; flex-direction: column; gap: 8px; }
   .tt-trigger:hover .tt-day-name { color: var(--accent); }
   .tt-day-name {
     font-family: var(--heading-font); font-size: 1.25rem;
@@ -185,13 +230,6 @@
     color: var(--accent2); background: rgba(0,229,192,0.06);
     text-transform: uppercase; white-space: nowrap;
   }
-  .tt-chevron {
-    width: 18px; height: 18px; flex-shrink: 0;
-    transition: transform 0.35s ease; color: var(--accent);
-  }
-  .tt-day.open .tt-chevron { transform: rotate(180deg); }
-  .tt-body { max-height: 0; overflow: hidden; transition: max-height 0.42s cubic-bezier(0.4,0,0.2,1); }
-  .tt-day.open .tt-body { max-height: 600px; }
   .tt-slots { border-top: 1px solid var(--border); display: flex; flex-direction: column; }
   .tt-slot {
     display: flex; align-items: stretch;
@@ -324,9 +362,7 @@
   .cert-body { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
   .cert-status { display: inline-block; margin-top: 10px; font-family: var(--mono-font); font-size: 9px; letter-spacing: 0.15em; color: var(--accent2); text-transform: uppercase; }
 
-  /* ══════════════════════════════════════════
-     CONSULTANCY SERVICES
-  ══════════════════════════════════════════ */
+  /* CONSULTANCY */
   .consultancy-ref {
     font-family: var(--mono-font); font-size: 10px;
     letter-spacing: 0.1em; color: var(--muted);
@@ -337,14 +373,6 @@
     background: rgba(0,229,192,0.04); line-height: 2;
   }
   .consultancy-ref span { color: var(--accent2); }
-
-  .cs-cat-label {
-    font-family: var(--mono-font); font-size: 10px;
-    letter-spacing: 0.28em; text-transform: uppercase;
-    color: var(--gold); margin: 36px 0 16px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(232,200,122,0.15);
-  }
 
   /* CDC tier table */
   .cs-tier-table {
@@ -411,41 +439,15 @@
     color: rgba(122,155,181,0.5);
   }
 
-  /* Consultancy Accordion */
   .cs-accordion { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
-  .cs-acc-item {
-    border: 1px solid var(--border); border-radius: 6px;
-    overflow: hidden; background: var(--surface);
-    backdrop-filter: blur(8px); transition: border-color 0.25s;
-  }
-  .cs-acc-item.open { border-color: var(--accent); }
-  .cs-acc-trigger {
-    display: flex; align-items: center;
-    justify-content: space-between;
-    padding: 16px 22px; cursor: pointer;
-    user-select: none; gap: 16px;
-  }
   .cs-acc-trigger:hover .cs-acc-title { color: var(--accent); }
   .cs-acc-title {
     font-family: var(--mono-font); font-size: 10px;
     letter-spacing: 0.28em; text-transform: uppercase;
     color: var(--gold); transition: color 0.2s;
   }
-  .cs-acc-chevron {
-    width: 18px; height: 18px; flex-shrink: 0;
-    transition: transform 0.35s ease; color: var(--accent);
-  }
-  .cs-acc-item.open .cs-acc-chevron { transform: rotate(180deg); }
-  .cs-acc-body {
-    max-height: 0; overflow: hidden;
-    transition: max-height 0.48s cubic-bezier(0.4,0,0.2,1);
-    border-top: 0px solid var(--border);
-  }
-  .cs-acc-item.open .cs-acc-body {
-    max-height: 1200px;
-    border-top: 1px solid var(--border);
-  }
   .cs-acc-inner { padding: 20px 22px 24px; }
+  .acc-item.open .cs-acc-inner { border-top: 1px solid var(--border); }
 
   /* Notes */
   .cs-notes { display: flex; flex-direction: column; gap: 10px; margin-top: 30px; }
@@ -479,27 +481,30 @@
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: rgba(56,180,220,0.3); border-radius: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  }
 </style>
 </head>
 <body>
 
-<canvas id="bg-canvas"></canvas>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
 
 <div class="page-wrap">
 
   <!-- HERO -->
   <section class="hero" id="home">
-    <div class="hero-eyebrow">Academic Portfolio · NFSU Bhopal</div>
+    <div class="hero-eyebrow">Academic Portfolio &middot; NFSU Bhopal</div>
     <h1>Dr. Manu <em>V. T.</em></h1>
     <div class="hero-role">Assistant Professor</div>
-    <div class="hero-dept">Cyber Security &amp; Digital Forensics · NFSU Bhopal</div>
-    <div class="hero-coord">Programme Coordinator — <em>M.Sc. Digital Forensics &amp; Information Security</em></div>
+    <div class="hero-dept">Cyber Security &amp; Digital Forensics &middot; NFSU Bhopal</div>
+    <div class="hero-coord">Programme Coordinator &mdash; <em>M.Sc. Digital Forensics &amp; Information Security</em></div>
     <div class="hero-certs">
-      <span class="cert-badge">B.Tech CSE — NIT Calicut</span>
-    
-      <span class="cert-badge">Ph.D — University of Hyderabad</span>
-      <span class="cert-badge">CISA — ISACA 2024</span>
-      <span class="cert-badge">ISO 27001:2022 Lead Auditor</span>
+      <span class="cert-badge">B.Tech CSE &mdash; NIT Calicut</span>
+      <span class="cert-badge">Ph.D &mdash; University of Hyderabad</span>
+      <span class="cert-badge">CISA (Certified Information Systems Auditor)</span>
+      <span class="cert-badge">ISO 27001:2022 Lead Auditor &mdash; Information Security Management Systems (ISMS)</span>
     </div>
     <div class="scroll-hint">
       <span class="scroll-line"></span>
@@ -511,133 +516,156 @@
   <nav class="sticky-nav">
     <div class="nav-inner">
       <a href="#about">About</a>
+      <a href="#education">Education</a>
       <a href="#timetable">Timetable</a>
       <a href="#consultancy">Consultancy</a>
       <a href="#publications">Publications</a>
       <a href="#contact">Contact</a>
-      <a href="#education">Education</a>
       <a href="#certifications">Certifications</a>
     </div>
   </nav>
 
   <!-- ABOUT -->
   <section class="section fade-in" id="about">
-    <div class="section-label"></div>
     <h2 class="section-title">About Me</h2>
     <div class="about-text">
-      <p>Teaching has always been close to my heart — a passion shaped by my mother, who served as a state award–winning teacher in the government school system. Inspired by her dedication and impact, I chose to pursue a life in academia where I could blend learning, discovery, and the joy of guiding future engineers.</p>
-      <p>My academic journey began with a B.Tech. in Computer Science and Engineering from NIT Calicut, followed by an M.Tech. from the University of Kerala. I then completed my Ph.D. in Computer Science at the University of Hyderabad, with doctoral research carried out at the Center of Excellence in Cyber Security, IDRBT — an institute established by the Reserve Bank of India.</p>
+      <p>Teaching has always been close to my heart &mdash; a passion shaped by my mother, who served as a state award&ndash;winning teacher in the government school system. Inspired by her dedication and impact, I chose to pursue a life in academia where I could blend learning, discovery, and the joy of guiding future engineers.</p>
+      <p>My academic journey began with a B.Tech. in Computer Science and Engineering from NIT Calicut, followed by an M.Tech. from the University of Kerala. I then completed my Ph.D. in Computer Science at the University of Hyderabad, with doctoral research carried out at the Center of Excellence in Cyber Security, IDRBT &mdash; an institute established by the Reserve Bank of India.</p>
       <p>I had the privilege of being mentored by <strong>Prof. B. M. Mehtre</strong>, a pioneer behind India's first Automated Fingerprint Identification System (AFIS). Over the years, my research has led to publications in <em>Forensic Science International</em> (SCI, Q1) and <em>Signal, Image and Video Processing</em> (SCIE, Q2), as well as multiple Scopus-indexed conference papers and book chapters.</p>
       <p>At IDRBT, I led large-scale cyber drills involving more than 25 participants at a time, helping banks improve incident response capabilities in line with RBI directives. My digital forensics experience includes the FRED forensic workstation and tools such as EnCase, Oxygen Forensics, and Paraben SIM analysis suites.</p>
-      <p>Today, my research spans <strong>image forensics</strong> and <strong>cyber defense analytics</strong> — driven by a belief that technology should enable trust, and that education empowers individuals to secure the world they build.</p>
+      <p>Today, my research spans <strong>image forensics</strong> and <strong>cyber defense analytics</strong> &mdash; driven by a belief that technology should enable trust, and that education empowers individuals to secure the world they build.</p>
     </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EDUCATION -->
+  <section class="section fade-in" id="education">
+    <h2 class="section-title">Educational Qualifications</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">2013 &ndash; 2018</div>
+        <div class="tl-degree">Ph.D &mdash; Computer Science</div>
+        <div class="tl-inst">School of Computer and Information Sciences (SCIS), University of Hyderabad (Central University)<br>&amp; Center of Excellence in Cyber Security, IDRBT, Hyderabad<br><em style="color:var(--accent);font-size:0.82rem;">(Established by Reserve Bank of India)</em></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2009 &ndash; 2011</div>
+        <div class="tl-degree">M.Tech &mdash; Computer Science</div>
+        <div class="tl-inst">Specialization: Digital Image Computing<br>Department of Computer Science, University of Kerala, Kariyavattom Campus</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2003 &ndash; 2007</div>
+        <div class="tl-degree">B.Tech &mdash; CSE</div>
+        <div class="tl-inst">Computer Science &amp; Engineering<br>National Institute of Technology (NIT) Calicut</div>
+      </div>
+    </div>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:20px;font-family:var(--mono-font);">NB: All academic programs completed in Regular Full-Time mode.</p>
   </section>
 
   <div class="divider"></div>
 
   <!-- TIMETABLE -->
   <section class="section fade-in" id="timetable">
-    <div class="section-label"></div>
     <h2 class="section-title">Academic Timetable</h2>
-    <div class="tt-accordion">
+    <div class="tt-accordion" data-accordion>
 
-      <div class="tt-day">
-        <div class="tt-trigger">
+      <div class="acc-item tt-day">
+        <button class="acc-trigger tt-trigger" aria-expanded="false">
           <span class="tt-day-name">Monday</span>
           <div class="tt-day-preview">
             <span class="tt-preview-chip">MAF Lab</span><span class="tt-preview-chip">MMF</span><span class="tt-preview-chip">MAF</span>
           </div>
-          <svg class="tt-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="tt-body"><div class="tt-slots">
-          <div class="tt-slot"><div class="tt-slot-time">10:30–11:30</div><div class="tt-slot-content"><span class="tt-subject">MAF Lab</span><span class="tt-sub">2nd Sem, DFIS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30–12:30</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot"><div class="tt-slot-time">12:30–1:30</div><div class="tt-slot-content"><span class="tt-subject">MMF</span><span class="tt-sub">4th Sem, BSc-MSc FS</span></div></div>
-          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30–2:00</div><div class="tt-slot-content">— Lunch Break —</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">2:00–3:00</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">3:00–4:00</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot"><div class="tt-slot-time">4:00–5:00</div><div class="tt-slot-content"><span class="tt-subject">MAF</span><span class="tt-sub">2nd Sem, MSc DFIS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00–6:00</div><div class="tt-slot-content">Free</div></div>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="acc-body"><div class="tt-slots">
+          <div class="tt-slot"><div class="tt-slot-time">10:30&ndash;11:30</div><div class="tt-slot-content"><span class="tt-subject">MAF Lab</span><span class="tt-sub">2nd Sem, DFIS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30&ndash;12:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">12:30&ndash;1:30</div><div class="tt-slot-content"><span class="tt-subject">MMF</span><span class="tt-sub">4th Sem, BSc-MSc FS</span></div></div>
+          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30&ndash;2:00</div><div class="tt-slot-content">&mdash; Lunch Break &mdash;</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">2:00&ndash;3:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">3:00&ndash;4:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">4:00&ndash;5:00</div><div class="tt-slot-content"><span class="tt-subject">MAF</span><span class="tt-sub">2nd Sem, MSc DFIS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00&ndash;6:00</div><div class="tt-slot-content">Free</div></div>
         </div></div>
       </div>
 
-      <div class="tt-day">
-        <div class="tt-trigger">
+      <div class="acc-item tt-day">
+        <button class="acc-trigger tt-trigger" aria-expanded="false">
           <span class="tt-day-name">Tuesday</span>
           <div class="tt-day-preview">
             <span class="tt-preview-chip">MA</span><span class="tt-preview-chip">BCDF</span><span class="tt-preview-chip">MAF</span>
           </div>
-          <svg class="tt-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="tt-body"><div class="tt-slots">
-          <div class="tt-slot"><div class="tt-slot-time">10:30–11:30</div><div class="tt-slot-content"><span class="tt-subject">MA</span><span class="tt-sub">2nd Sem, MSc CS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30–12:30</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:30–1:30</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30–2:00</div><div class="tt-slot-content">— Lunch Break —</div></div>
-          <div class="tt-slot"><div class="tt-slot-time">2:00–3:00</div><div class="tt-slot-content"><span class="tt-subject">BCDF</span><span class="tt-sub">2nd Sem, MSc FS</span></div></div>
-          <div class="tt-slot"><div class="tt-slot-time">3:00–4:00</div><div class="tt-slot-content"><span class="tt-subject">MAF</span><span class="tt-sub">2nd Sem, MSc DFIS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">4:00–5:00</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00–6:00</div><div class="tt-slot-content">Free</div></div>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="acc-body"><div class="tt-slots">
+          <div class="tt-slot"><div class="tt-slot-time">10:30&ndash;11:30</div><div class="tt-slot-content"><span class="tt-subject">MA</span><span class="tt-sub">2nd Sem, MSc CS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30&ndash;12:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:30&ndash;1:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30&ndash;2:00</div><div class="tt-slot-content">&mdash; Lunch Break &mdash;</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">2:00&ndash;3:00</div><div class="tt-slot-content"><span class="tt-subject">BCDF</span><span class="tt-sub">2nd Sem, MSc FS</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">3:00&ndash;4:00</div><div class="tt-slot-content"><span class="tt-subject">MAF</span><span class="tt-sub">2nd Sem, MSc DFIS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">4:00&ndash;5:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00&ndash;6:00</div><div class="tt-slot-content">Free</div></div>
         </div></div>
       </div>
 
-      <div class="tt-day">
-        <div class="tt-trigger">
+      <div class="acc-item tt-day">
+        <button class="acc-trigger tt-trigger" aria-expanded="false">
           <span class="tt-day-name">Wednesday</span>
           <div class="tt-day-preview">
             <span class="tt-preview-chip">MA Lab</span><span class="tt-preview-chip">MMF</span><span class="tt-preview-chip">BCDF</span>
           </div>
-          <svg class="tt-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="tt-body"><div class="tt-slots">
-          <div class="tt-slot"><div class="tt-slot-time">10:30–11:30</div><div class="tt-slot-content"><span class="tt-subject">MA Lab</span><span class="tt-sub">2nd Sem, MSc CS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30–12:30</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot"><div class="tt-slot-time">12:30–1:30</div><div class="tt-slot-content"><span class="tt-subject">MMF</span><span class="tt-sub">4th Sem, BSc-MSc FS</span></div></div>
-          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30–2:00</div><div class="tt-slot-content">— Lunch Break —</div></div>
-          <div class="tt-slot"><div class="tt-slot-time">2:00–3:00</div><div class="tt-slot-content"><span class="tt-subject">BCDF</span><span class="tt-sub">2nd Sem, MSc FS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">3:00–4:00</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">4:00–5:00</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00–6:00</div><div class="tt-slot-content">Free</div></div>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="acc-body"><div class="tt-slots">
+          <div class="tt-slot"><div class="tt-slot-time">10:30&ndash;11:30</div><div class="tt-slot-content"><span class="tt-subject">MA Lab</span><span class="tt-sub">2nd Sem, MSc CS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30&ndash;12:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">12:30&ndash;1:30</div><div class="tt-slot-content"><span class="tt-subject">MMF</span><span class="tt-sub">4th Sem, BSc-MSc FS</span></div></div>
+          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30&ndash;2:00</div><div class="tt-slot-content">&mdash; Lunch Break &mdash;</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">2:00&ndash;3:00</div><div class="tt-slot-content"><span class="tt-subject">BCDF</span><span class="tt-sub">2nd Sem, MSc FS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">3:00&ndash;4:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">4:00&ndash;5:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00&ndash;6:00</div><div class="tt-slot-content">Free</div></div>
         </div></div>
       </div>
 
-      <div class="tt-day">
-        <div class="tt-trigger">
+      <div class="acc-item tt-day">
+        <button class="acc-trigger tt-trigger" aria-expanded="false">
           <span class="tt-day-name">Thursday</span>
           <div class="tt-day-preview">
             <span class="tt-preview-chip">MAF</span><span class="tt-preview-chip">MA</span><span class="tt-preview-chip">BCDF</span>
           </div>
-          <svg class="tt-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="tt-body"><div class="tt-slots">
-          <div class="tt-slot"><div class="tt-slot-time">10:30–11:30</div><div class="tt-slot-content"><span class="tt-subject">MAF</span><span class="tt-sub">2nd Sem, MSc DFIS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30–12:30</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:30–1:30</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30–2:00</div><div class="tt-slot-content">— Lunch Break —</div></div>
-          <div class="tt-slot"><div class="tt-slot-time">2:00–3:00</div><div class="tt-slot-content"><span class="tt-subject">MA</span><span class="tt-sub">2nd Sem, MSc CS</span></div></div>
-          <div class="tt-slot"><div class="tt-slot-time">3:00–4:00</div><div class="tt-slot-content"><span class="tt-subject">BCDF</span><span class="tt-sub">2nd Sem, MSc FS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">4:00–5:00</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00–6:00</div><div class="tt-slot-content">Free</div></div>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="acc-body"><div class="tt-slots">
+          <div class="tt-slot"><div class="tt-slot-time">10:30&ndash;11:30</div><div class="tt-slot-content"><span class="tt-subject">MAF</span><span class="tt-sub">2nd Sem, MSc DFIS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30&ndash;12:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:30&ndash;1:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30&ndash;2:00</div><div class="tt-slot-content">&mdash; Lunch Break &mdash;</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">2:00&ndash;3:00</div><div class="tt-slot-content"><span class="tt-subject">MA</span><span class="tt-sub">2nd Sem, MSc CS</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">3:00&ndash;4:00</div><div class="tt-slot-content"><span class="tt-subject">BCDF</span><span class="tt-sub">2nd Sem, MSc FS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">4:00&ndash;5:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00&ndash;6:00</div><div class="tt-slot-content">Free</div></div>
         </div></div>
       </div>
 
-      <div class="tt-day">
-        <div class="tt-trigger">
+      <div class="acc-item tt-day">
+        <button class="acc-trigger tt-trigger" aria-expanded="false">
           <span class="tt-day-name">Friday</span>
           <div class="tt-day-preview">
             <span class="tt-preview-chip">MA</span><span class="tt-preview-chip">BCDF</span>
           </div>
-          <svg class="tt-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="tt-body"><div class="tt-slots">
-          <div class="tt-slot"><div class="tt-slot-time">10:30–11:30</div><div class="tt-slot-content"><span class="tt-subject">MA</span><span class="tt-sub">2nd Sem, MSc CS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30–12:30</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:30–1:30</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30–2:00</div><div class="tt-slot-content">— Lunch Break —</div></div>
-          <div class="tt-slot"><div class="tt-slot-time">2:00–3:00</div><div class="tt-slot-content"><span class="tt-subject">BCDF</span><span class="tt-sub">2nd Sem, MSc FS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">3:00–4:00</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">4:00–5:00</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00–6:00</div><div class="tt-slot-content">Free</div></div>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="acc-body"><div class="tt-slots">
+          <div class="tt-slot"><div class="tt-slot-time">10:30&ndash;11:30</div><div class="tt-slot-content"><span class="tt-subject">MA</span><span class="tt-sub">2nd Sem, MSc CS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30&ndash;12:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:30&ndash;1:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30&ndash;2:00</div><div class="tt-slot-content">&mdash; Lunch Break &mdash;</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">2:00&ndash;3:00</div><div class="tt-slot-content"><span class="tt-subject">BCDF</span><span class="tt-sub">2nd Sem, MSc FS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">3:00&ndash;4:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">4:00&ndash;5:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00&ndash;6:00</div><div class="tt-slot-content">Free</div></div>
         </div></div>
       </div>
 
@@ -646,35 +674,33 @@
 
   <div class="divider"></div>
 
-  <!-- ══════════════════════════════════════════════
-       CONSULTANCY SERVICES  ← NEW SECTION
-  ══════════════════════════════════════════════ -->
+  <!-- CONSULTANCY SERVICES -->
   <section class="section fade-in" id="consultancy">
-    <div class="section-label">NFSU · Ministry of Home Affairs, Govt. of India</div>
+    <div class="section-label">NFSU &middot; Ministry of Home Affairs, Govt. of India</div>
     <h2 class="section-title">Consultancy Services</h2>
 
     <div class="consultancy-ref">
-      Ref: <span>ADM/NFSU/FCNotification/1554/2023</span> &nbsp;·&nbsp; Dated: <span>17-04-2023</span><br>
-      National Forensic Sciences University (NFSU) &nbsp;·&nbsp; Ministry of Home Affairs, Government of India
+      Ref: <span>ADM/NFSU/FCNotification/1554/2023</span> &nbsp;&middot;&nbsp; Dated: <span>17-04-2023</span><br>
+      National Forensic Sciences University (NFSU) &nbsp;&middot;&nbsp; Ministry of Home Affairs, Government of India
     </div>
 
-    <div class="cs-accordion">
+    <div class="cs-accordion" data-accordion>
 
       <!-- 01: Cyber Defence Centre Services -->
-      <div class="cs-acc-item">
-        <div class="cs-acc-trigger">
+      <div class="acc-item">
+        <button class="acc-trigger cs-acc-trigger" aria-expanded="false">
           <span class="cs-acc-title">01 &mdash; Cyber Defence Centre Services</span>
-          <svg class="cs-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="cs-acc-body">
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="acc-body">
           <div class="cs-acc-inner">
             <table class="cs-tier-table">
               <thead>
                 <tr>
-                  <th>Service</th>
-                  <th>Govt Agencies (MHA)</th>
-                  <th>Other Govt</th>
-                  <th>Private / Industries</th>
+                  <th scope="col">Service</th>
+                  <th scope="col">Govt Agencies (MHA)</th>
+                  <th scope="col">Other Govt</th>
+                  <th scope="col">Private / Industries</th>
                 </tr>
               </thead>
               <tbody>
@@ -683,9 +709,9 @@
                     <span class="cs-svc-name">Digital Forensic As-A-Service</span>
                     <span class="cs-svc-sub">per Exhibit</span>
                   </td>
-                  <td><span class="cs-price">₹ 13,310 /-</span></td>
-                  <td><span class="cs-price">₹ 13,310 /- <span class="cs-same">same</span></span></td>
-                  <td><span class="cs-price">₹ 13,310 /- <span class="cs-same">same</span></span></td>
+                  <td><span class="cs-price">&#8377; 13,310 /-</span></td>
+                  <td><span class="cs-price">&#8377; 13,310 /- <span class="cs-same">same</span></span></td>
+                  <td><span class="cs-price">&#8377; 13,310 /- <span class="cs-same">same</span></span></td>
                 </tr>
               </tbody>
             </table>
@@ -694,59 +720,42 @@
       </div>
 
       <!-- 02: Audit & Security Services -->
-      <div class="cs-acc-item">
-        <div class="cs-acc-trigger">
+      <div class="acc-item">
+        <button class="acc-trigger cs-acc-trigger" aria-expanded="false">
           <span class="cs-acc-title">02 &mdash; Audit &amp; Security Services</span>
-          <svg class="cs-acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-        <div class="cs-acc-body">
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="acc-body">
           <div class="cs-acc-inner">
             <div class="cs-rows">
-
               <div class="cs-row">
                 <div class="cs-row-name">System Audit</div>
-                <div class="cs-row-price">
-                  ₹ 1,000 /-
-                  <span class="cs-unit">per Endpoint</span>
-                </div>
+                <div class="cs-row-price">&#8377; 1,000 /-<span class="cs-unit">per Endpoint</span></div>
               </div>
-
               <div class="cs-row">
                 <div class="cs-row-name">Network Audit &amp; Assessment</div>
                 <div class="cs-row-price"><span class="cs-scope">Scope-based</span></div>
               </div>
-
               <div class="cs-row">
                 <div class="cs-row-name">Web Application Audit</div>
                 <div class="cs-row-price"><span class="cs-scope">Scope-based</span></div>
               </div>
-
               <div class="cs-row">
                 <div class="cs-row-name">Mobile Application Audit</div>
                 <div class="cs-row-price"><span class="cs-scope">Scope-based</span></div>
               </div>
-
               <div class="cs-row">
                 <div class="cs-row-name">Managed Security Service Provider</div>
                 <div class="cs-row-price"><span class="cs-scope">Scope-based</span></div>
               </div>
-
               <div class="cs-row">
                 <div class="cs-row-name">Onsite Audit &amp; Compliance</div>
-                <div class="cs-row-price">
-                  ₹ 18,000 /-
-                  <span class="cs-unit">per day / consultant</span>
-                </div>
+                <div class="cs-row-price">&#8377; 18,000 /-<span class="cs-unit">per day / consultant</span></div>
               </div>
-
               <div class="cs-row">
                 <div class="cs-row-name">Incident Response &amp; Management</div>
-                <div class="cs-row-price">
-                  ₹ 18,000 /-
-                  <span class="cs-unit">per day / consultant</span>
-                </div>
+                <div class="cs-row-price">&#8377; 18,000 /-<span class="cs-unit">per day / consultant</span></div>
               </div>
-
             </div>
           </div>
         </div>
@@ -760,15 +769,13 @@
       <div class="cs-note"><span class="cs-note-num">03</span><span>Economic viability of on-premises audit and assessment will be evaluated prior to execution.</span></div>
     </div>
   </section>
-  <!-- ══ END CONSULTANCY ══ -->
 
   <div class="divider"></div>
 
   <!-- PUBLICATIONS -->
   <section class="section fade-in" id="publications">
-    <div class="section-label"></div>
     <h2 class="section-title">Publication List</h2>
-    <div class="pub-filter">
+    <div class="pub-filter" role="tablist">
       <button class="filter-btn active" data-filter="all">All</button>
       <button class="filter-btn" data-filter="journal">Journals</button>
       <button class="filter-btn" data-filter="conference">Conferences</button>
@@ -782,50 +789,50 @@
         <div class="pub-num">1.</div>
         <div class="pub-body">
           <div class="pub-tags"><span class="tag q1">Q1 Journal</span><span class="tag scopus">SCI</span><span class="tag scopus">Scopus</span><span class="tag cite">Citations: 15</span></div>
-          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2019). Tamper detection of social media images using quality artifacts and texture features. <em>Forensic Science International</em>, Elsevier, 295, 100–112.</div>
-          <a class="pub-doi" href="https://doi.org/10.1016/j.forsciint.2018.11.025" target="_blank">↗ DOI: 10.1016/j.forsciint.2018.11.025 · IF: 2.395</a>
+          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2019). Tamper detection of social media images using quality artifacts and texture features. <em>Forensic Science International</em>, Elsevier, 295, 100&ndash;112.</div>
+          <a class="pub-doi" href="https://doi.org/10.1016/j.forsciint.2018.11.025" target="_blank" rel="noopener">&#8599; DOI: 10.1016/j.forsciint.2018.11.025 &middot; IF: 2.395</a>
         </div>
       </div>
       <div class="pub-item">
         <div class="pub-num">2.</div>
         <div class="pub-body">
           <div class="pub-tags"><span class="tag q2">Q2 Journal</span><span class="tag scopus">SCIE</span><span class="tag scopus">Scopus</span><span class="tag cite">Citations: 29</span></div>
-          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2018). Copy-move tampering detection using affine transformation property preservation on clustered keypoints. <em>Signal, Image and Video Processing</em>, Springer, 12(3), 549–556.</div>
-          <a class="pub-doi" href="https://doi.org/10.1007/s11760-017-1191-7" target="_blank">↗ DOI: 10.1007/s11760-017-1191-7 · IF: 2.157</a>
+          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2018). Copy-move tampering detection using affine transformation property preservation on clustered keypoints. <em>Signal, Image and Video Processing</em>, Springer, 12(3), 549&ndash;556.</div>
+          <a class="pub-doi" href="https://doi.org/10.1007/s11760-017-1191-7" target="_blank" rel="noopener">&#8599; DOI: 10.1007/s11760-017-1191-7 &middot; IF: 2.157</a>
         </div>
       </div>
     </div>
 
     <div class="pub-group" data-type="conference">
-      <div class="pub-group-title">International Conferences — Outside India (Scopus Indexed)</div>
+      <div class="pub-group-title">International Conferences &mdash; Outside India (Scopus Indexed)</div>
       <div class="pub-item">
         <div class="pub-num">3.</div>
         <div class="pub-body">
           <div class="pub-tags"><span class="tag scopus">Scopus Indexed</span><span class="tag cite">Citations: 6</span></div>
-          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2017). Blind technique using blocking artifacts and entropy of histograms for image tampering detection. In <em>Second International Workshop on Pattern Recognition</em> (SPIE Proceedings, Vol. 10443). NTU, Singapore, May 1–3, 2017.</div>
-          <a class="pub-doi" href="https://doi.org/10.1117/12.2280306" target="_blank">↗ DOI: 10.1117/12.2280306</a>
+          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2017). Blind technique using blocking artifacts and entropy of histograms for image tampering detection. In <em>Second International Workshop on Pattern Recognition</em> (SPIE Proceedings, Vol. 10443). NTU, Singapore, May 1&ndash;3, 2017.</div>
+          <a class="pub-doi" href="https://doi.org/10.1117/12.2280306" target="_blank" rel="noopener">&#8599; DOI: 10.1117/12.2280306</a>
         </div>
       </div>
-      <div class="pub-group-title">International Conferences — In India (Scopus Indexed)</div>
+      <div class="pub-group-title">International Conferences &mdash; In India (Scopus Indexed)</div>
       <div class="pub-item">
         <div class="pub-num">4.</div>
         <div class="pub-body">
           <div class="pub-tags"><span class="tag scopus">Scopus Indexed</span><span class="tag cite">Citations: 56</span></div>
-          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2016). Detection of copy-move forgery in images using segmentation and SURF. In <em>Advances in Signal Processing and Intelligent Recognition Systems</em> (pp. 645–654). Springer, Cham.</div>
+          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2016). Detection of copy-move forgery in images using segmentation and SURF. In <em>Advances in Signal Processing and Intelligent Recognition Systems</em> (pp. 645&ndash;654). Springer, Cham.</div>
         </div>
       </div>
       <div class="pub-item">
         <div class="pub-num">5.</div>
         <div class="pub-body">
           <div class="pub-tags"><span class="tag scopus">Scopus Indexed</span><span class="tag cite">Citations: 14</span></div>
-          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2015). Visual artifacts based image splicing detection in uncompressed images. In <em>Computer Graphics, Vision and Information Security (CGVIS)</em>, IEEE International Conference (pp. 145–150). IEEE.</div>
+          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2015). Visual artifacts based image splicing detection in uncompressed images. In <em>Computer Graphics, Vision and Information Security (CGVIS)</em>, IEEE International Conference (pp. 145&ndash;150). IEEE.</div>
         </div>
       </div>
       <div class="pub-item">
         <div class="pub-num">6.</div>
         <div class="pub-body">
           <div class="pub-tags"><span class="tag scopus">Scopus Indexed</span><span class="tag cite">Citations: 26</span></div>
-          <div class="pub-text">Manu, V. T., &amp; Simon, P. (2012). A Novel Statistical Fusion Rule for Image Fusion in Non Subsampled Contourlet Transform Domain. In <em>International Conference on Computer Science and Information Technology</em> (pp. 367–376). Springer, Berlin.</div>
+          <div class="pub-text">Manu, V. T., &amp; Simon, P. (2012). A Novel Statistical Fusion Rule for Image Fusion in Non Subsampled Contourlet Transform Domain. In <em>International Conference on Computer Science and Information Technology</em> (pp. 367&ndash;376). Springer, Berlin.</div>
         </div>
       </div>
     </div>
@@ -864,61 +871,33 @@
 
   <!-- CONTACT -->
   <section class="section fade-in" id="contact">
-    <div class="section-label"></div>
     <h2 class="section-title">Contact &amp; Research Profiles</h2>
     <div class="contact-grid">
-      <div class="contact-card"><div class="contact-label">Scopus</div><div class="contact-val"><a href="https://www.scopus.com/authid/detail.uri?authorId=55339839700" target="_blank">55339839700 ↗</a></div></div>
-      <div class="contact-card"><div class="contact-label">ORCiD</div><div class="contact-val"><a href="https://orcid.org/0000-0001-5696-4851" target="_blank">0000-0001-5696-4851 ↗</a></div></div>
-      <div class="contact-card"><div class="contact-label">Google Scholar</div><div class="contact-val"><a href="https://scholar.google.com/citations?user=4grbJmcAAAAJ" target="_blank">View Profile ↗</a></div></div>
+      <div class="contact-card"><div class="contact-label">Scopus</div><div class="contact-val"><a href="https://www.scopus.com/authid/detail.uri?authorId=55339839700" target="_blank" rel="noopener">55339839700 &#8599;</a></div></div>
+      <div class="contact-card"><div class="contact-label">ORCiD</div><div class="contact-val"><a href="https://orcid.org/0000-0001-5696-4851" target="_blank" rel="noopener">0000-0001-5696-4851 &#8599;</a></div></div>
+      <div class="contact-card"><div class="contact-label">Google Scholar</div><div class="contact-val"><a href="https://scholar.google.com/citations?user=4grbJmcAAAAJ" target="_blank" rel="noopener">View Profile &#8599;</a></div></div>
       <div class="contact-card"><div class="contact-label">Personal Email</div><div class="contact-val">manuvt [at] gmail.com</div></div>
-      <div class="contact-card"><div class="contact-label">Official Homepage</div><div class="contact-val"><a href="https://www.nfsu.ac.in/Faculty/profile?userid=688" target="_blank">NFSU Faculty Profile ↗</a></div></div>
+      <div class="contact-card"><div class="contact-label">Official Homepage</div><div class="contact-val"><a href="https://www.nfsu.ac.in/Faculty/profile?userid=688" target="_blank" rel="noopener">NFSU Faculty Profile &#8599;</a></div></div>
       <div class="contact-card"><div class="contact-label">Institution</div><div class="contact-val">NFSU, Bhopal Campus<br>Dept. of Cyber Security &amp; Digital Forensics</div></div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- EDUCATION -->
-  <section class="section fade-in" id="education">
-    <div class="section-label"></div>
-    <h2 class="section-title">Educational Qualifications</h2>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-year">2013 – 2018</div>
-        <div class="tl-degree">Ph.D — Computer Science</div>
-        <div class="tl-inst">School of Computer and Information Sciences (SCIS), University of Hyderabad (Central University)<br>&amp; Center of Excellence in Cyber Security, IDRBT, Hyderabad<br><em style="color:var(--accent);font-size:0.82rem;">(Established by Reserve Bank of India)</em></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">2009 – 2011</div>
-        <div class="tl-degree">M.Tech — Computer Science</div>
-        <div class="tl-inst">Specialization: Digital Image Computing<br>Department of Computer Science, University of Kerala, Kariyavattom Campus</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">2003 – 2007</div>
-        <div class="tl-degree">B.Tech — CSE</div>
-        <div class="tl-inst">Computer Science &amp; Engineering<br>National Institute of Technology (NIT) Calicut</div>
-      </div>
-    </div>
-    <p style="font-size:0.78rem;color:var(--muted);margin-top:20px;font-family:var(--mono-font);">NB: All academic programs completed in Regular Full-Time mode.</p>
-  </section>
-
-  <div class="divider"></div>
-
   <!-- CERTIFICATIONS -->
   <section class="section fade-in" id="certifications">
-    <div class="section-label"></div>
     <h2 class="section-title">Certifications</h2>
     <div style="margin-bottom:12px;font-family:var(--mono-font);font-size:10px;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;">Professional</div>
     <div class="cert-grid">
       <div class="cert-card">
         <div class="cert-title">CISA</div>
-        <div class="cert-body">Certified Information Systems Auditor®<br>Conducting Body: ISACA<br><a href="https://www.credly.com/badges/07c191c0-923e-4935-9af2-1d305fd7c28b/public_url" target="_blank" style="color:var(--accent);font-size:0.78rem;">View Digital Credential ↗</a></div>
-        <span class="cert-status">Awarded — January 2024</span>
+        <div class="cert-body">Certified Information Systems Auditor&reg;<br>Conducting Body: ISACA<br><a href="https://www.credly.com/badges/07c191c0-923e-4935-9af2-1d305fd7c28b/public_url" target="_blank" rel="noopener" style="color:var(--accent);font-size:0.78rem;">View Digital Credential &#8599;</a></div>
+        <span class="cert-status">Awarded &mdash; January 2024</span>
       </div>
       <div class="cert-card">
         <div class="cert-title">ISO/IEC 27001:2022</div>
-        <div class="cert-body">ISMS Lead Auditor<br>Conducting Body: TÜV SÜD</div>
-        <span class="cert-status">Awarded — October 2025</span>
+        <div class="cert-body">ISMS Lead Auditor<br>Conducting Body: T&Uuml;V S&Uuml;D</div>
+        <span class="cert-status">Awarded &mdash; October 2025</span>
       </div>
       <div class="cert-card">
         <div class="cert-title">AWS Academy</div>
@@ -931,12 +910,12 @@
       <div class="cert-card">
         <div class="cert-title">UGC-NET</div>
         <div class="cert-body">Computer Science and Applications<br>Conducting Body: UGC</div>
-        <span class="cert-status">Pass — December 2012</span>
+        <span class="cert-status">Pass &mdash; December 2012</span>
       </div>
       <div class="cert-card">
         <div class="cert-title">GATE</div>
-        <div class="cert-body">Graduate Aptitude Test in Engineering<br>Computer Science<br>Conducting Body: NCB–MHRD</div>
-        <span class="cert-status">Awarded — March 2017</span>
+        <div class="cert-body">Graduate Aptitude Test in Engineering<br>Computer Science<br>Conducting Body: NCB&ndash;MHRD</div>
+        <span class="cert-status">Awarded &mdash; March 2017</span>
       </div>
     </div>
   </section>
@@ -949,92 +928,215 @@
 </div>
 
 <script>
-/* ANIMATED BACKGROUND */
-(function() {
+(function () {
+  'use strict';
+
+  /* ---------- ANIMATED BACKGROUND (perf-tuned canvas) ---------- */
   const canvas = document.getElementById('bg-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, nodes, mouse = {x:-9999,y:-9999};
-  const ACCENT=[56,180,220], ACCENT2=[0,229,192], GOLD=[232,200,122];
+  const ctx = canvas.getContext('2d', { alpha: true });
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function resize() { W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; init(); }
-  function init() {
-    const count = Math.floor((W*H)/14000);
-    nodes = [];
-    for (let i=0;i<count;i++) {
-      const c=[ACCENT,ACCENT2,GOLD][Math.floor(Math.random()*3)];
-      nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-0.5)*0.4,vy:(Math.random()-0.5)*0.4,r:Math.random()*2+1,color:c,pulse:Math.random()*Math.PI*2,pulseSpeed:0.02+Math.random()*0.02});
+  const PALETTE = [[56, 180, 220], [0, 229, 192], [232, 200, 122]];
+  const LINK_DIST = 150, LINK_DIST_SQ = LINK_DIST * LINK_DIST;
+  const MOUSE_DIST = 200, MOUSE_DIST_SQ = MOUSE_DIST * MOUSE_DIST;
+  const MAX_NODES = 140; // hard cap regardless of screen size
+
+  let W, H, dpr, nodes = [];
+  let mouse = { x: -9999, y: -9999 };
+  let rafId = null;
+  let running = false;
+
+  function buildNodes() {
+    const target = Math.min(MAX_NODES, Math.floor((W * H) / 16000));
+    nodes = new Array(target);
+    for (let i = 0; i < target; i++) {
+      nodes[i] = {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 2 + 1,
+        color: PALETTE[i % 3],
+        pulse: Math.random() * Math.PI * 2,
+        pulseSpeed: 0.02 + Math.random() * 0.02
+      };
     }
   }
-  function dist(a,b){return Math.hypot(a.x-b.x,a.y-b.y);}
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    buildNodes();
+  }
+
   function draw() {
-    ctx.clearRect(0,0,W,H);
-    for (let i=0;i<nodes.length;i++) {
-      for (let j=i+1;j<nodes.length;j++) {
-        const d=dist(nodes[i],nodes[j]);
-        if (d<150){const a=(1-d/150)*0.35;const[r,g,b]=nodes[i].color;ctx.beginPath();ctx.strokeStyle=`rgba(${r},${g},${b},${a})`;ctx.lineWidth=0.5;ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);ctx.stroke();}
+    ctx.clearRect(0, 0, W, H);
+    const n = nodes.length;
+
+    for (let i = 0; i < n; i++) {
+      const a = nodes[i];
+      for (let j = i + 1; j < n; j++) {
+        const b = nodes[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const dSq = dx * dx + dy * dy;
+        if (dSq < LINK_DIST_SQ) {
+          const alpha = (1 - Math.sqrt(dSq) / LINK_DIST) * 0.35;
+          const [r, g, bl] = a.color;
+          ctx.strokeStyle = `rgba(${r},${g},${bl},${alpha})`;
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
       }
-      const dm=dist(nodes[i],mouse);
-      if (dm<200){const a=(1-dm/200)*0.7;const[r,g,b]=nodes[i].color;ctx.beginPath();ctx.strokeStyle=`rgba(${r},${g},${b},${a})`;ctx.lineWidth=1;ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(mouse.x,mouse.y);ctx.stroke();}
+      const mdx = a.x - mouse.x, mdy = a.y - mouse.y;
+      const mdSq = mdx * mdx + mdy * mdy;
+      if (mdSq < MOUSE_DIST_SQ) {
+        const alpha = (1 - Math.sqrt(mdSq) / MOUSE_DIST) * 0.7;
+        const [r, g, bl] = a.color;
+        ctx.strokeStyle = `rgba(${r},${g},${bl},${alpha})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(mouse.x, mouse.y);
+        ctx.stroke();
+      }
     }
-    for (const n of nodes) {
-      n.pulse+=n.pulseSpeed;
-      const glow=(Math.sin(n.pulse)*0.5+0.5);
-      const[r,g,b]=n.color;
-      const radius=n.r+glow*1.5;
-      const g2=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,radius*4);
-      g2.addColorStop(0,`rgba(${r},${g},${b},${0.3*glow})`);g2.addColorStop(1,`rgba(${r},${g},${b},0)`);
-      ctx.beginPath();ctx.arc(n.x,n.y,radius*4,0,Math.PI*2);ctx.fillStyle=g2;ctx.fill();
-      ctx.beginPath();ctx.arc(n.x,n.y,radius,0,Math.PI*2);ctx.fillStyle=`rgba(${r},${g},${b},${0.7+0.3*glow})`;ctx.fill();
-      n.x+=n.vx;n.y+=n.vy;
-      if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;
+
+    for (let i = 0; i < n; i++) {
+      const node = nodes[i];
+      node.pulse += node.pulseSpeed;
+      const glow = Math.sin(node.pulse) * 0.5 + 0.5;
+      const [r, g, bl] = node.color;
+      const radius = node.r + glow * 1.5;
+
+      const grad = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, radius * 4);
+      grad.addColorStop(0, `rgba(${r},${g},${bl},${0.3 * glow})`);
+      grad.addColorStop(1, `rgba(${r},${g},${bl},0)`);
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, radius * 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = `rgba(${r},${g},${bl},${0.7 + 0.3 * glow})`;
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+      ctx.fill();
+
+      node.x += node.vx;
+      node.y += node.vy;
+      if (node.x < 0 || node.x > W) node.vx *= -1;
+      if (node.y < 0 || node.y > H) node.vy *= -1;
     }
-    requestAnimationFrame(draw);
+
+    if (running) rafId = requestAnimationFrame(draw);
   }
-  window.addEventListener('resize',resize);
-  window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
-  window.addEventListener('mouseleave',()=>{mouse.x=-9999;mouse.y=-9999;});
-  resize();draw();
-})();
 
-/* SCROLL FADE-IN */
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:0.08});
-document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+  function start() {
+    if (running || prefersReducedMotion) return;
+    running = true;
+    rafId = requestAnimationFrame(draw);
+  }
+  function stop() {
+    running = false;
+    if (rafId) cancelAnimationFrame(rafId);
+  }
 
-/* PUBLICATION FILTER */
-document.querySelectorAll('.filter-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter=btn.dataset.filter;
-    document.querySelectorAll('.pub-group').forEach(g=>{
-      if(filter==='all'||g.dataset.type===filter){g.classList.remove('hidden');}else{g.classList.add('hidden');}
+  function debounce(fn, wait) {
+    let t;
+    return function (...args) {
+      clearTimeout(t);
+      t = setTimeout(() => fn.apply(this, args), wait);
+    };
+  }
+
+  window.addEventListener('resize', debounce(resize, 150));
+  window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
+  window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; }, { passive: true });
+  document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
+
+  resize();
+  if (!prefersReducedMotion) start();
+
+  /* ---------- SCROLL FADE-IN ---------- */
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach((el) => fadeObserver.observe(el));
+
+  /* ---------- NAV SCROLLSPY ---------- */
+  const navLinks = document.querySelectorAll('.nav-inner a');
+  const navMap = new Map();
+  navLinks.forEach((link) => {
+    const id = link.getAttribute('href').slice(1);
+    const section = document.getElementById(id);
+    if (section) navMap.set(section, link);
+  });
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const link = navMap.get(entry.target);
+      if (!link) return;
+      if (entry.isIntersecting) {
+        navLinks.forEach((l) => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+  navMap.forEach((_, section) => spyObserver.observe(section));
+
+  /* ---------- PUBLICATION FILTER (event delegation) ---------- */
+  const pubFilter = document.querySelector('.pub-filter');
+  const pubGroups = document.querySelectorAll('.pub-group');
+  if (pubFilter) {
+    pubFilter.addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      pubFilter.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      pubGroups.forEach((g) => g.classList.toggle('hidden', !(filter === 'all' || g.dataset.type === filter)));
+    });
+  }
+
+  /* ---------- ACCORDIONS (shared, delegated, keyboard-accessible) ---------- */
+  document.querySelectorAll('[data-accordion]').forEach((group) => {
+    group.addEventListener('click', (e) => {
+      const trigger = e.target.closest('.acc-trigger');
+      if (!trigger) return;
+      const item = trigger.closest('.acc-item');
+      const isOpen = item.classList.contains('open');
+      group.querySelectorAll('.acc-item.open').forEach((openItem) => {
+        openItem.classList.remove('open');
+        openItem.querySelector('.acc-trigger').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
     });
   });
-});
 
-/* TIMETABLE ACCORDION */
-document.querySelectorAll('.tt-trigger').forEach(trigger=>{
-  trigger.addEventListener('click',()=>{
-    const day=trigger.closest('.tt-day');
-    const isOpen=day.classList.contains('open');
-    document.querySelectorAll('.tt-day').forEach(d=>d.classList.remove('open'));
-    if(!isOpen)day.classList.add('open');
-  });
-});
-
-/* CONSULTANCY ACCORDION */
-document.querySelectorAll('.cs-acc-trigger').forEach(trigger=>{
-  trigger.addEventListener('click',()=>{
-    const item=trigger.closest('.cs-acc-item');
-    const isOpen=item.classList.contains('open');
-    document.querySelectorAll('.cs-acc-item').forEach(i=>i.classList.remove('open'));
-    if(!isOpen)item.classList.add('open');
-  });
-});
-
-/* CLOCK */
-function updateClock(){const now=new Date();const h=String(now.getHours()).padStart(2,'0');const m=String(now.getMinutes()).padStart(2,'0');const s=String(now.getSeconds()).padStart(2,'0');document.getElementById('clock').textContent=`${h}:${m}:${s}`;}
-setInterval(updateClock,1000);updateClock();
+  /* ---------- CLOCK ---------- */
+  const clockEl = document.getElementById('clock');
+  function updateClock() {
+    const now = new Date();
+    clockEl.textContent = now.toLocaleTimeString('en-GB', { hour12: false });
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+})();
 </script>
 </body>
 </html>
