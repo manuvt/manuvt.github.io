@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Dr. Manu V. T. | Personal Homepage</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Josefin+Sans:wght@300;400;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #050a12;
@@ -45,17 +45,10 @@
     padding: 0 24px 80px;
   }
 
-  /* HERO */
   .hero {
     min-height: 100vh; display: flex; flex-direction: column;
     justify-content: center; align-items: flex-start;
     padding: 80px 0 60px;
-  }
-  .hero-eyebrow {
-    font-family: var(--mono-font); font-size: 11px;
-    letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 18px;
-    opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s;
   }
   .hero h1 {
     font-family: var(--heading-font);
@@ -110,7 +103,6 @@
     50% { opacity: 1; width: 50px; }
   }
 
-  /* NAV */
   .sticky-nav {
     position: sticky; top: 0; z-index: 100;
     background: linear-gradient(180deg, rgba(9,18,33,0.94), rgba(5,10,18,0.88));
@@ -158,7 +150,6 @@
   .nav-inner a.active::after { left: 0; right: 0; background: linear-gradient(90deg, var(--accent2), var(--accent)); }
   .nav-inner a.active::before { opacity: 1; transform: translate(-50%, 4px) scale(1); }
 
-  /* SECTION */
   .section { padding: 72px 0 0; content-visibility: auto; contain-intrinsic-size: 1px 800px; }
   .section-label {
     font-family: var(--mono-font); font-size: 10px;
@@ -177,7 +168,6 @@
     margin-top: 10px; width: 100%;
   }
 
-  /* ABOUT */
   .about-text p {
     color: var(--text); font-size: 0.95rem;
     line-height: 1.95; margin-bottom: 1.2em; opacity: 0.9;
@@ -188,7 +178,6 @@
     margin-top: 6px; color: var(--accent); font-style: italic;
   }
 
-  /* ACCORDION (shared base for Timetable + Consultancy) */
   .acc-item {
     border: 1px solid var(--border); border-radius: 6px;
     overflow: hidden; background: var(--surface);
@@ -214,7 +203,6 @@
   }
   .acc-item.open .acc-body { max-height: 1200px; }
 
-  /* TIMETABLE */
   .tt-accordion { display: flex; flex-direction: column; gap: 8px; }
   .tt-trigger:hover .tt-day-name { color: var(--accent); }
   .tt-day-name {
@@ -270,7 +258,6 @@
     color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase;
   }
 
-  /* PUBLICATIONS */
   .pub-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
   .filter-btn {
     font-family: var(--mono-font); font-size: 10px;
@@ -314,7 +301,6 @@
   }
   .pub-doi:hover { border-color: var(--accent2); }
 
-  /* CONTACT */
   .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
   .contact-card {
     padding: 22px 24px; border: 1px solid var(--border);
@@ -327,7 +313,6 @@
   .contact-val a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
   .contact-val a:hover { border-color: var(--accent); }
 
-  /* EDUCATION */
   .timeline { position: relative; padding-left: 24px; }
   .timeline::before {
     content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
@@ -343,7 +328,6 @@
   .tl-degree { font-family: var(--heading-font); font-size: 1.3rem; font-weight: 400; color: #fff; margin-bottom: 4px; }
   .tl-inst { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
 
-  /* CERTIFICATIONS */
   .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
   .cert-card {
     padding: 22px; border: 1px solid var(--border);
@@ -361,8 +345,9 @@
   .cert-title { font-family: var(--heading-font); font-size: 1.1rem; font-weight: 600; color: var(--gold); margin-bottom: 6px; }
   .cert-body { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
   .cert-status { display: inline-block; margin-top: 10px; font-family: var(--mono-font); font-size: 9px; letter-spacing: 0.15em; color: var(--accent2); text-transform: uppercase; }
+  .cert-group-label { margin-bottom: 12px; font-family: var(--mono-font); font-size: 10px; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; }
+  .cert-group-label.spaced { margin-top: 32px; }
 
-  /* CONSULTANCY */
   .consultancy-ref {
     font-family: var(--mono-font); font-size: 10px;
     letter-spacing: 0.1em; color: var(--muted);
@@ -374,7 +359,6 @@
   }
   .consultancy-ref span { color: var(--accent2); }
 
-  /* CDC tier table */
   .cs-tier-table {
     width: 100%; border-collapse: collapse;
     border: 1px solid var(--border); border-radius: 6px;
@@ -414,7 +398,6 @@
     border-radius: 2px; padding: 1px 5px; margin-left: 6px; vertical-align: middle;
   }
 
-  /* Audit service rows */
   .cs-rows { display: flex; flex-direction: column; gap: 10px; }
   .cs-row {
     display: flex; align-items: center; justify-content: space-between;
@@ -449,7 +432,6 @@
   .cs-acc-inner { padding: 20px 22px 24px; }
   .acc-item.open .cs-acc-inner { border-top: 1px solid var(--border); }
 
-  /* Notes */
   .cs-notes { display: flex; flex-direction: column; gap: 10px; margin-top: 30px; }
   .cs-note {
     display: flex; align-items: flex-start; gap: 16px;
@@ -458,7 +440,6 @@
   }
   .cs-note-num { font-size: 9px; color: var(--accent); flex-shrink: 0; padding-top: 1px; }
 
-  /* FOOTER */
   footer {
     margin-top: 100px; padding: 30px 0;
     border-top: 1px solid var(--border);
@@ -468,7 +449,6 @@
   .footer-name { font-family: var(--heading-font); font-size: 1rem; font-style: italic; color: var(--muted); }
   .clock { font-family: var(--mono-font); font-size: 12px; color: var(--accent); letter-spacing: 0.1em; }
 
-  /* ANIMATIONS */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(22px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -493,9 +473,7 @@
 
 <div class="page-wrap">
 
-  <!-- HERO -->
   <section class="hero" id="home">
-    <div class="hero-eyebrow"> </div>
     <h1>Dr. Manu <em>V. T.</em></h1>
     <div class="hero-role">Assistant Professor</div>
     <div class="hero-dept">Cyber Security &amp; Digital Forensics &middot; NFSU Bhopal</div>
@@ -512,7 +490,6 @@
     </div>
   </section>
 
-  <!-- NAV -->
   <nav class="sticky-nav">
     <div class="nav-inner">
       <a href="#about">About</a>
@@ -525,7 +502,6 @@
     </div>
   </nav>
 
-  <!-- ABOUT -->
   <section class="section fade-in" id="about">
     <h2 class="section-title">About Me</h2>
     <div class="about-text">
@@ -540,7 +516,6 @@
 
   <div class="divider"></div>
 
-  <!-- EDUCATION -->
   <section class="section fade-in" id="education">
     <h2 class="section-title">Educational Qualifications</h2>
     <div class="timeline">
@@ -564,13 +539,17 @@
         <div class="tl-degree">AISSCE &mdash; Computer Science</div>
         <div class="tl-inst">St. Antony's Public School, Anakkal, Kanjirappally<br>Kottayam District, Kerala &mdash; CBSE, New Delhi</div>
       </div>
+      <div class="tl-item">
+        <div class="tl-year">2001</div>
+        <div class="tl-degree">AISSE &mdash; Secondary School</div>
+        <div class="tl-inst">St. Antony's Public School, Kanjirappally<br>Kottayam District, Kerala &mdash; CBSE, New Delhi</div>
+      </div>
     </div>
     <p style="font-size:0.78rem;color:var(--muted);margin-top:20px;font-family:var(--mono-font);">NB: All academic programs completed in Regular Full-Time mode.</p>
   </section>
 
   <div class="divider"></div>
 
-  <!-- TIMETABLE -->
   <section class="section fade-in" id="timetable">
     <h2 class="section-title">Academic Timetable</h2>
     <div class="tt-accordion" data-accordion>
@@ -680,7 +659,6 @@
 
   <div class="divider"></div>
 
-  <!-- CONSULTANCY SERVICES -->
   <section class="section fade-in" id="consultancy">
     <div class="section-label">NFSU &middot; Ministry of Home Affairs, Govt. of India</div>
     <h2 class="section-title">Consultancy Services</h2>
@@ -692,7 +670,6 @@
 
     <div class="cs-accordion" data-accordion>
 
-      <!-- 01: Cyber Defence Centre Services -->
       <div class="acc-item">
         <button class="acc-trigger cs-acc-trigger" aria-expanded="false">
           <span class="cs-acc-title">01 &mdash; Cyber Defence Centre Services</span>
@@ -725,7 +702,6 @@
         </div>
       </div>
 
-      <!-- 02: Audit & Security Services -->
       <div class="acc-item">
         <button class="acc-trigger cs-acc-trigger" aria-expanded="false">
           <span class="cs-acc-title">02 &mdash; Audit &amp; Security Services</span>
@@ -778,7 +754,6 @@
 
   <div class="divider"></div>
 
-  <!-- PUBLICATIONS -->
   <section class="section fade-in" id="publications">
     <h2 class="section-title">Publication List</h2>
     <div class="pub-filter" role="tablist">
@@ -875,7 +850,6 @@
 
   <div class="divider"></div>
 
-  <!-- CONTACT -->
   <section class="section fade-in" id="contact">
     <h2 class="section-title">Contact &amp; Research Profiles</h2>
     <div class="contact-grid">
@@ -890,10 +864,9 @@
 
   <div class="divider"></div>
 
-  <!-- CERTIFICATIONS -->
   <section class="section fade-in" id="certifications">
     <h2 class="section-title">Certifications</h2>
-    <div style="margin-bottom:12px;font-family:var(--mono-font);font-size:10px;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;">Professional</div>
+    <div class="cert-group-label">Professional</div>
     <div class="cert-grid">
       <div class="cert-card">
         <div class="cert-title">CISA</div>
@@ -911,7 +884,7 @@
         <span class="cert-status">Completed</span>
       </div>
     </div>
-    <div style="margin-top:32px;margin-bottom:12px;font-family:var(--mono-font);font-size:10px;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;">Academic</div>
+    <div class="cert-group-label spaced">Academic</div>
     <div class="cert-grid">
       <div class="cert-card">
         <div class="cert-title">UGC-NET</div>
@@ -937,7 +910,6 @@
 (function () {
   'use strict';
 
-  /* ---------- ANIMATED BACKGROUND (perf-tuned canvas) ---------- */
   const canvas = document.getElementById('bg-canvas');
   const ctx = canvas.getContext('2d', { alpha: true });
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -945,7 +917,7 @@
   const PALETTE = [[56, 180, 220], [0, 229, 192], [232, 200, 122]];
   const LINK_DIST = 150, LINK_DIST_SQ = LINK_DIST * LINK_DIST;
   const MOUSE_DIST = 200, MOUSE_DIST_SQ = MOUSE_DIST * MOUSE_DIST;
-  const MAX_NODES = 140; // hard cap regardless of screen size
+  const MAX_NODES = 140;
 
   let W, H, dpr, nodes = [];
   let mouse = { x: -9999, y: -9999 };
@@ -1071,7 +1043,6 @@
   resize();
   if (!prefersReducedMotion) start();
 
-  /* ---------- SCROLL FADE-IN ---------- */
   const fadeObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -1082,7 +1053,6 @@
   }, { threshold: 0.08 });
   document.querySelectorAll('.fade-in').forEach((el) => fadeObserver.observe(el));
 
-  /* ---------- NAV SCROLLSPY ---------- */
   const navLinks = document.querySelectorAll('.nav-inner a');
   const navMap = new Map();
   navLinks.forEach((link) => {
@@ -1102,7 +1072,6 @@
   }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
   navMap.forEach((_, section) => spyObserver.observe(section));
 
-  /* ---------- PUBLICATION FILTER (event delegation) ---------- */
   const pubFilter = document.querySelector('.pub-filter');
   const pubGroups = document.querySelectorAll('.pub-group');
   if (pubFilter) {
@@ -1116,7 +1085,6 @@
     });
   }
 
-  /* ---------- ACCORDIONS (shared, delegated, keyboard-accessible) ---------- */
   document.querySelectorAll('[data-accordion]').forEach((group) => {
     group.addEventListener('click', (e) => {
       const trigger = e.target.closest('.acc-trigger');
@@ -1134,7 +1102,6 @@
     });
   });
 
-  /* ---------- CLOCK ---------- */
   const clockEl = document.getElementById('clock');
   function updateClock() {
     const now = new Date();
