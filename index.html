@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dr. Manu V. T. | Personal Homepage</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Josefin+Sans:wght@300;400;600&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link href="Dr.%20Manu%20V.%20T.%20_%20Personal%20Homepage_files/css2_BaWD.css" rel="stylesheet">
 <style>
   :root {
     --bg: #050a12;
@@ -149,6 +149,24 @@
   .nav-inner a.active { color: var(--accent2); }
   .nav-inner a.active::after { left: 0; right: 0; background: linear-gradient(90deg, var(--accent2), var(--accent)); }
   .nav-inner a.active::before { opacity: 1; transform: translate(-50%, 4px) scale(1); }
+
+  .nav-inner a.admission-btn {
+    margin-left: auto;
+    padding: 6px 16px;
+    border: 1px solid var(--accent2);
+    border-radius: 3px;
+    color: var(--accent2);
+    background: rgba(0,229,192,0.08);
+    transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .nav-inner a.admission-btn::after,
+  .nav-inner a.admission-btn::before { content: none; }
+  .nav-inner a.admission-btn:hover {
+    background: var(--accent2);
+    color: #04140f;
+    box-shadow: 0 0 18px rgba(0,229,192,0.45);
+    transform: translateY(-2px);
+  }
 
   .section { padding: 72px 0 0; content-visibility: auto; contain-intrinsic-size: 1px 800px; }
   .section-label {
@@ -469,20 +487,20 @@
 </head>
 <body>
 
-<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<canvas id="bg-canvas" aria-hidden="true" width="1920" height="913" style="width: 1280px; height: 609px;"></canvas>
 
 <div class="page-wrap">
 
   <section class="hero" id="home">
     <h1>Dr. Manu <em>V. T.</em></h1>
     <div class="hero-role">Assistant Professor</div>
-    <div class="hero-dept">Cyber Security &amp; Digital Forensics &middot; NFSU Bhopal</div>
-    <div class="hero-coord">Programme Coordinator &mdash; <em>M.Sc. Digital Forensics &amp; Information Security</em></div>
+    <div class="hero-dept">Cyber Security &amp; Digital Forensics · NFSU Bhopal</div>
+    <div class="hero-coord">Programme Coordinator — <em>M.Sc. Digital Forensics &amp; Information Security</em></div>
     <div class="hero-certs">
-      <span class="cert-badge">B.Tech CSE &mdash; NIT Calicut</span>
-      <span class="cert-badge">Ph.D &mdash; University of Hyderabad</span>
+      <span class="cert-badge">B.Tech CSE — NIT Calicut</span>
+      <span class="cert-badge">Ph.D — University of Hyderabad</span>
       <span class="cert-badge">CISA (Certified Information Systems Auditor)</span>
-      <span class="cert-badge">ISO 27001:2022 Lead Auditor &mdash; Information Security Management Systems (ISMS)</span>
+      <span class="cert-badge">ISO 27001:2022 Lead Auditor — Information Security Management Systems (ISMS)</span>
     </div>
     <div class="scroll-hint">
       <span class="scroll-line"></span>
@@ -499,18 +517,37 @@
       <a href="#publications">Publications</a>
       <a href="#contact">Contact</a>
       <a href="#certifications">Certifications</a>
+      <a class="admission-btn" href="admission_info.html" target="_blank" rel="noopener">Admission Info ↗</a>
     </div>
   </nav>
 
   <section class="section fade-in" id="about">
     <h2 class="section-title">About Me</h2>
     <div class="about-text">
-      <p>Teaching has always been close to my heart &mdash; a passion shaped by my mother, who served as a state award&ndash;winning teacher in the government school system. Inspired by her dedication and impact, I chose to pursue a life in academia where I could blend learning, discovery, and the joy of guiding future engineers.</p>
-      <p>My academic journey began with a B.Tech. in Computer Science and Engineering from NIT Calicut, followed by an M.Tech. from the University of Kerala. I then completed my Ph.D. in Computer Science at the University of Hyderabad, with doctoral research carried out at the Center of Excellence in Cyber Security, IDRBT &mdash; an institute established by the Reserve Bank of India.</p>
-      <p>I had the privilege of being mentored by <strong>Prof. B. M. Mehtre</strong>, a pioneer behind India's first Automated Fingerprint Identification System (AFIS). Over the years, my research has led to publications in <em>Forensic Science International</em> (SCI, Q1) and <em>Signal, Image and Video Processing</em> (SCIE, Q2), as well as multiple Scopus-indexed conference papers and book chapters.</p>
-      <p>At IDRBT, I led large-scale cyber drills involving more than 25 participants at a time, helping banks improve incident response capabilities in line with RBI directives. My digital forensics experience includes the FRED forensic workstation and tools such as EnCase, Oxygen Forensics, and Paraben SIM analysis suites.</p>
-      <p>Today, my research spans image forensics and cyber defense analytics—driven by a belief that technology should enable trust, and that education empowers individuals to secure the world they build. 
-        Guided by this philosophy, I combine research with hands-on forensic practice, using tools such as <strong>Amped FIVE</strong> and <strong>Amped Authenticate</strong> to examine CCTV footage and verify the authenticity of questioned images.</p>
+      <p>Teaching has always been close to my heart — a passion shaped 
+by my mother, who served as a state award–winning teacher in the 
+government school system. Inspired by her dedication and impact, I chose
+ to pursue a life in academia where I could blend learning, discovery, 
+and the joy of guiding future engineers.</p>
+      <p>My academic journey began with a B.Tech. in Computer Science 
+and Engineering from NIT Calicut, followed by an M.Tech. from the 
+University of Kerala. I then completed my Ph.D. in Computer Science at 
+the University of Hyderabad, with doctoral research carried out at the 
+Center of Excellence in Cyber Security, IDRBT — an institute established
+ by the Reserve Bank of India.</p>
+      <p>I had the privilege of being mentored by <strong>Prof. B. M. Mehtre</strong>,
+ a pioneer behind India's first Automated Fingerprint Identification 
+System (AFIS). Over the years, my research has led to publications in <em>Forensic Science International</em> (SCI, Q1) and <em>Signal, Image and Video Processing</em> (SCIE, Q2), as well as multiple Scopus-indexed conference papers and book chapters.</p>
+      <p>At IDRBT, I led large-scale cyber drills involving more than 25
+ participants at a time, helping banks improve incident response 
+capabilities in line with RBI directives. My digital forensics 
+experience includes the FRED forensic workstation and tools such as 
+EnCase, Oxygen Forensics, and Paraben SIM analysis suites.</p>
+      <p>Today, my research spans image forensics and cyber defense 
+analytics—driven by a belief that technology should enable trust, and 
+that education empowers individuals to secure the world they build. 
+        Guided by this philosophy, I combine research with hands-on 
+forensic practice, using tools such as <strong>Amped FIVE</strong> and <strong>Amped Authenticate</strong> to examine CCTV footage and verify the authenticity of questioned images.</p>
     </div>
   </section>
 
@@ -520,29 +557,29 @@
     <h2 class="section-title">Educational Qualifications</h2>
     <div class="timeline">
       <div class="tl-item">
-        <div class="tl-year">2013 &ndash; 2018</div>
-        <div class="tl-degree">Ph.D &mdash; Computer Science</div>
+        <div class="tl-year">2013 – 2018</div>
+        <div class="tl-degree">Ph.D — Computer Science</div>
         <div class="tl-inst">School of Computer and Information Sciences (SCIS), University of Hyderabad (Central University)<br>&amp; Center of Excellence in Cyber Security, IDRBT, Hyderabad<br><em style="color:var(--accent);font-size:0.82rem;">(Established by Reserve Bank of India)</em></div>
       </div>
       <div class="tl-item">
-        <div class="tl-year">2009 &ndash; 2011</div>
-        <div class="tl-degree">M.Tech &mdash; Computer Science</div>
+        <div class="tl-year">2009 – 2011</div>
+        <div class="tl-degree">M.Tech — Computer Science</div>
         <div class="tl-inst">Specialization: Digital Image Computing<br>Department of Computer Science, University of Kerala, Kariyavattom Campus</div>
       </div>
       <div class="tl-item">
-        <div class="tl-year">2003 &ndash; 2007</div>
-        <div class="tl-degree">B.Tech &mdash; CSE</div>
+        <div class="tl-year">2003 – 2007</div>
+        <div class="tl-degree">B.Tech — CSE</div>
         <div class="tl-inst">Computer Science &amp; Engineering<br>National Institute of Technology (NIT) Calicut</div>
       </div>
       <div class="tl-item">
-        <div class="tl-year">2001 &ndash; 2003</div>
-        <div class="tl-degree">AISSCE &mdash; Computer Science</div>
-        <div class="tl-inst">St. Antony's Public School, Anakkal, Kanjirappally<br>Kottayam District, Kerala &mdash; CBSE, New Delhi<br><em style="color:var(--accent);font-size:0.82rem;">Established 1986 &middot; CBSE Affiliation No. 930037 &middot; School Code 75036</em></div>
+        <div class="tl-year">2001 – 2003</div>
+        <div class="tl-degree">AISSCE — Computer Science</div>
+        <div class="tl-inst">St. Antony's Public School, Anakkal, Kanjirappally<br>Kottayam District, Kerala — CBSE, New Delhi<br><em style="color:var(--accent);font-size:0.82rem;">Established 1986 · CBSE Affiliation No. 930037 · School Code 75036</em></div>
       </div>
       <div class="tl-item">
         <div class="tl-year">2001</div>
-        <div class="tl-degree">AISSE &mdash; Physics, Chemistry, Maths </div>
-        <div class="tl-inst">St. Antony's Public School, Kanjirappally<br>Kottayam District, Kerala &mdash; CBSE, New Delhi<br><em style="color:var(--accent);font-size:0.82rem;">Established 1986 &middot; CBSE Affiliation No. 930037 &middot; School Code 75036</em></div>
+        <div class="tl-degree">AISSE — Physics, Chemistry, Maths </div>
+        <div class="tl-inst">St. Antony's Public School, Kanjirappally<br>Kottayam District, Kerala — CBSE, New Delhi<br><em style="color:var(--accent);font-size:0.82rem;">Established 1986 · CBSE Affiliation No. 930037 · School Code 75036</em></div>
       </div>
     </div>
     <p style="font-size:0.78rem;color:var(--muted);margin-top:20px;font-family:var(--mono-font);">NB: All academic programs completed in Regular Full-Time mode.</p>
@@ -552,7 +589,7 @@
 
   <section class="section fade-in" id="timetable">
     <h2 class="section-title">Academic Timetable</h2>
-    <div class="tt-accordion" data-accordion>
+    <div class="tt-accordion" data-accordion="">
 
       <div class="acc-item tt-day">
         <button class="acc-trigger tt-trigger" aria-expanded="false">
@@ -560,17 +597,17 @@
           <div class="tt-day-preview">
             <span class="tt-preview-chip">MAF Lab</span><span class="tt-preview-chip">MMF</span><span class="tt-preview-chip">MAF</span>
           </div>
-          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
         <div class="acc-body"><div class="tt-slots">
-          <div class="tt-slot"><div class="tt-slot-time">10:30&ndash;11:30</div><div class="tt-slot-content"><span class="tt-subject">MAF Lab</span><span class="tt-sub">2nd Sem, DFIS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30&ndash;12:30</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot"><div class="tt-slot-time">12:30&ndash;1:30</div><div class="tt-slot-content"><span class="tt-subject">MMF</span><span class="tt-sub">4th Sem, BSc-MSc FS</span></div></div>
-          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30&ndash;2:00</div><div class="tt-slot-content">&mdash; Lunch Break &mdash;</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">2:00&ndash;3:00</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">3:00&ndash;4:00</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot"><div class="tt-slot-time">4:00&ndash;5:00</div><div class="tt-slot-content"><span class="tt-subject">MAF</span><span class="tt-sub">2nd Sem, MSc DFIS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00&ndash;6:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">10:30–11:30</div><div class="tt-slot-content"><span class="tt-subject">MAF Lab</span><span class="tt-sub">2nd Sem, DFIS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30–12:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">12:30–1:30</div><div class="tt-slot-content"><span class="tt-subject">MMF</span><span class="tt-sub">4th Sem, BSc-MSc FS</span></div></div>
+          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30–2:00</div><div class="tt-slot-content">— Lunch Break —</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">2:00–3:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">3:00–4:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">4:00–5:00</div><div class="tt-slot-content"><span class="tt-subject">MAF</span><span class="tt-sub">2nd Sem, MSc DFIS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00–6:00</div><div class="tt-slot-content">Free</div></div>
         </div></div>
       </div>
 
@@ -580,17 +617,17 @@
           <div class="tt-day-preview">
             <span class="tt-preview-chip">MA</span><span class="tt-preview-chip">BCDF</span><span class="tt-preview-chip">MAF</span>
           </div>
-          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
         <div class="acc-body"><div class="tt-slots">
-          <div class="tt-slot"><div class="tt-slot-time">10:30&ndash;11:30</div><div class="tt-slot-content"><span class="tt-subject">MA</span><span class="tt-sub">2nd Sem, MSc CS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30&ndash;12:30</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:30&ndash;1:30</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30&ndash;2:00</div><div class="tt-slot-content">&mdash; Lunch Break &mdash;</div></div>
-          <div class="tt-slot"><div class="tt-slot-time">2:00&ndash;3:00</div><div class="tt-slot-content"><span class="tt-subject">BCDF</span><span class="tt-sub">2nd Sem, MSc FS</span></div></div>
-          <div class="tt-slot"><div class="tt-slot-time">3:00&ndash;4:00</div><div class="tt-slot-content"><span class="tt-subject">MAF</span><span class="tt-sub">2nd Sem, MSc DFIS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">4:00&ndash;5:00</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00&ndash;6:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">10:30–11:30</div><div class="tt-slot-content"><span class="tt-subject">MA</span><span class="tt-sub">2nd Sem, MSc CS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30–12:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:30–1:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30–2:00</div><div class="tt-slot-content">— Lunch Break —</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">2:00–3:00</div><div class="tt-slot-content"><span class="tt-subject">BCDF</span><span class="tt-sub">2nd Sem, MSc FS</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">3:00–4:00</div><div class="tt-slot-content"><span class="tt-subject">MAF</span><span class="tt-sub">2nd Sem, MSc DFIS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">4:00–5:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00–6:00</div><div class="tt-slot-content">Free</div></div>
         </div></div>
       </div>
 
@@ -600,17 +637,17 @@
           <div class="tt-day-preview">
             <span class="tt-preview-chip">MA Lab</span><span class="tt-preview-chip">MMF</span><span class="tt-preview-chip">BCDF</span>
           </div>
-          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
         <div class="acc-body"><div class="tt-slots">
-          <div class="tt-slot"><div class="tt-slot-time">10:30&ndash;11:30</div><div class="tt-slot-content"><span class="tt-subject">MA Lab</span><span class="tt-sub">2nd Sem, MSc CS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30&ndash;12:30</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot"><div class="tt-slot-time">12:30&ndash;1:30</div><div class="tt-slot-content"><span class="tt-subject">MMF</span><span class="tt-sub">4th Sem, BSc-MSc FS</span></div></div>
-          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30&ndash;2:00</div><div class="tt-slot-content">&mdash; Lunch Break &mdash;</div></div>
-          <div class="tt-slot"><div class="tt-slot-time">2:00&ndash;3:00</div><div class="tt-slot-content"><span class="tt-subject">BCDF</span><span class="tt-sub">2nd Sem, MSc FS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">3:00&ndash;4:00</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">4:00&ndash;5:00</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00&ndash;6:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">10:30–11:30</div><div class="tt-slot-content"><span class="tt-subject">MA Lab</span><span class="tt-sub">2nd Sem, MSc CS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30–12:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">12:30–1:30</div><div class="tt-slot-content"><span class="tt-subject">MMF</span><span class="tt-sub">4th Sem, BSc-MSc FS</span></div></div>
+          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30–2:00</div><div class="tt-slot-content">— Lunch Break —</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">2:00–3:00</div><div class="tt-slot-content"><span class="tt-subject">BCDF</span><span class="tt-sub">2nd Sem, MSc FS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">3:00–4:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">4:00–5:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00–6:00</div><div class="tt-slot-content">Free</div></div>
         </div></div>
       </div>
 
@@ -620,17 +657,17 @@
           <div class="tt-day-preview">
             <span class="tt-preview-chip">MAF</span><span class="tt-preview-chip">MA</span><span class="tt-preview-chip">BCDF</span>
           </div>
-          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
         <div class="acc-body"><div class="tt-slots">
-          <div class="tt-slot"><div class="tt-slot-time">10:30&ndash;11:30</div><div class="tt-slot-content"><span class="tt-subject">MAF</span><span class="tt-sub">2nd Sem, MSc DFIS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30&ndash;12:30</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:30&ndash;1:30</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30&ndash;2:00</div><div class="tt-slot-content">&mdash; Lunch Break &mdash;</div></div>
-          <div class="tt-slot"><div class="tt-slot-time">2:00&ndash;3:00</div><div class="tt-slot-content"><span class="tt-subject">MA</span><span class="tt-sub">2nd Sem, MSc CS</span></div></div>
-          <div class="tt-slot"><div class="tt-slot-time">3:00&ndash;4:00</div><div class="tt-slot-content"><span class="tt-subject">BCDF</span><span class="tt-sub">2nd Sem, MSc FS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">4:00&ndash;5:00</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00&ndash;6:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">10:30–11:30</div><div class="tt-slot-content"><span class="tt-subject">MAF</span><span class="tt-sub">2nd Sem, MSc DFIS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30–12:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:30–1:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30–2:00</div><div class="tt-slot-content">— Lunch Break —</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">2:00–3:00</div><div class="tt-slot-content"><span class="tt-subject">MA</span><span class="tt-sub">2nd Sem, MSc CS</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">3:00–4:00</div><div class="tt-slot-content"><span class="tt-subject">BCDF</span><span class="tt-sub">2nd Sem, MSc FS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">4:00–5:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00–6:00</div><div class="tt-slot-content">Free</div></div>
         </div></div>
       </div>
 
@@ -640,17 +677,17 @@
           <div class="tt-day-preview">
             <span class="tt-preview-chip">MA</span><span class="tt-preview-chip">BCDF</span>
           </div>
-          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
         <div class="acc-body"><div class="tt-slots">
-          <div class="tt-slot"><div class="tt-slot-time">10:30&ndash;11:30</div><div class="tt-slot-content"><span class="tt-subject">MA</span><span class="tt-sub">2nd Sem, MSc CS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30&ndash;12:30</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:30&ndash;1:30</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30&ndash;2:00</div><div class="tt-slot-content">&mdash; Lunch Break &mdash;</div></div>
-          <div class="tt-slot"><div class="tt-slot-time">2:00&ndash;3:00</div><div class="tt-slot-content"><span class="tt-subject">BCDF</span><span class="tt-sub">2nd Sem, MSc FS</span></div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">3:00&ndash;4:00</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">4:00&ndash;5:00</div><div class="tt-slot-content">Free</div></div>
-          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00&ndash;6:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">10:30–11:30</div><div class="tt-slot-content"><span class="tt-subject">MA</span><span class="tt-sub">2nd Sem, MSc CS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30–12:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:30–1:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">1:30–2:00</div><div class="tt-slot-content">— Lunch Break —</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">2:00–3:00</div><div class="tt-slot-content"><span class="tt-subject">BCDF</span><span class="tt-sub">2nd Sem, MSc FS</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">3:00–4:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">4:00–5:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">5:00–6:00</div><div class="tt-slot-content">Free</div></div>
         </div></div>
       </div>
 
@@ -660,20 +697,20 @@
   <div class="divider"></div>
 
   <section class="section fade-in" id="consultancy">
-    <div class="section-label">NFSU &middot; Ministry of Home Affairs, Govt. of India</div>
+    <div class="section-label">NFSU · Ministry of Home Affairs, Govt. of India</div>
     <h2 class="section-title">Consultancy Services</h2>
 
     <div class="consultancy-ref">
-      Ref: <span>ADM/NFSU/FCNotification/1554/2023</span> &nbsp;&middot;&nbsp; Dated: <span>17-04-2023</span><br>
-      National Forensic Sciences University (NFSU) &nbsp;&middot;&nbsp; Ministry of Home Affairs, Government of India
+      Ref: <span>ADM/NFSU/FCNotification/1554/2023</span> &nbsp;·&nbsp; Dated: <span>17-04-2023</span><br>
+      National Forensic Sciences University (NFSU) &nbsp;·&nbsp; Ministry of Home Affairs, Government of India
     </div>
 
-    <div class="cs-accordion" data-accordion>
+    <div class="cs-accordion" data-accordion="">
 
       <div class="acc-item">
         <button class="acc-trigger cs-acc-trigger" aria-expanded="false">
-          <span class="cs-acc-title">01 &mdash; Cyber Defence Centre Services</span>
-          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          <span class="cs-acc-title">01 — Cyber Defence Centre Services</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
         <div class="acc-body">
           <div class="cs-acc-inner">
@@ -692,9 +729,9 @@
                     <span class="cs-svc-name">Digital Forensic As-A-Service</span>
                     <span class="cs-svc-sub">per Exhibit</span>
                   </td>
-                  <td><span class="cs-price">&#8377; 13,310 /-</span></td>
-                  <td><span class="cs-price">&#8377; 13,310 /- <span class="cs-same">same</span></span></td>
-                  <td><span class="cs-price">&#8377; 13,310 /- <span class="cs-same">same</span></span></td>
+                  <td><span class="cs-price">₹ 13,310 /-</span></td>
+                  <td><span class="cs-price">₹ 13,310 /- <span class="cs-same">same</span></span></td>
+                  <td><span class="cs-price">₹ 13,310 /- <span class="cs-same">same</span></span></td>
                 </tr>
               </tbody>
             </table>
@@ -704,15 +741,15 @@
 
       <div class="acc-item">
         <button class="acc-trigger cs-acc-trigger" aria-expanded="false">
-          <span class="cs-acc-title">02 &mdash; Audit &amp; Security Services</span>
-          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          <span class="cs-acc-title">02 — Audit &amp; Security Services</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
         <div class="acc-body">
           <div class="cs-acc-inner">
             <div class="cs-rows">
               <div class="cs-row">
                 <div class="cs-row-name">System Audit</div>
-                <div class="cs-row-price">&#8377; 1,000 /-<span class="cs-unit">per Endpoint</span></div>
+                <div class="cs-row-price">₹ 1,000 /-<span class="cs-unit">per Endpoint</span></div>
               </div>
               <div class="cs-row">
                 <div class="cs-row-name">Network Audit &amp; Assessment</div>
@@ -732,11 +769,11 @@
               </div>
               <div class="cs-row">
                 <div class="cs-row-name">Onsite Audit &amp; Compliance</div>
-                <div class="cs-row-price">&#8377; 18,000 /-<span class="cs-unit">per day / consultant</span></div>
+                <div class="cs-row-price">₹ 18,000 /-<span class="cs-unit">per day / consultant</span></div>
               </div>
               <div class="cs-row">
                 <div class="cs-row-name">Incident Response &amp; Management</div>
-                <div class="cs-row-price">&#8377; 18,000 /-<span class="cs-unit">per day / consultant</span></div>
+                <div class="cs-row-price">₹ 18,000 /-<span class="cs-unit">per day / consultant</span></div>
               </div>
             </div>
           </div>
@@ -770,50 +807,56 @@
         <div class="pub-num">1.</div>
         <div class="pub-body">
           <div class="pub-tags"><span class="tag q1">Q1 Journal</span><span class="tag scopus">SCI</span><span class="tag scopus">Scopus</span><span class="tag cite">Citations: 15</span></div>
-          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2019). Tamper detection of social media images using quality artifacts and texture features. <em>Forensic Science International</em>, Elsevier, 295, 100&ndash;112.</div>
-          <a class="pub-doi" href="https://doi.org/10.1016/j.forsciint.2018.11.025" target="_blank" rel="noopener">&#8599; DOI: 10.1016/j.forsciint.2018.11.025 &middot; IF: 2.395</a>
+          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2019). Tamper detection of social media images using quality artifacts and texture features. <em>Forensic Science International</em>, Elsevier, 295, 100–112.</div>
+          <a class="pub-doi" href="https://doi.org/10.1016/j.forsciint.2018.11.025" target="_blank" rel="noopener">↗ DOI: 10.1016/j.forsciint.2018.11.025 · IF: 2.395</a>
         </div>
       </div>
       <div class="pub-item">
         <div class="pub-num">2.</div>
         <div class="pub-body">
           <div class="pub-tags"><span class="tag q2">Q2 Journal</span><span class="tag scopus">SCIE</span><span class="tag scopus">Scopus</span><span class="tag cite">Citations: 29</span></div>
-          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2018). Copy-move tampering detection using affine transformation property preservation on clustered keypoints. <em>Signal, Image and Video Processing</em>, Springer, 12(3), 549&ndash;556.</div>
-          <a class="pub-doi" href="https://doi.org/10.1007/s11760-017-1191-7" target="_blank" rel="noopener">&#8599; DOI: 10.1007/s11760-017-1191-7 &middot; IF: 2.157</a>
+          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2018).
+ Copy-move tampering detection using affine transformation property 
+preservation on clustered keypoints. <em>Signal, Image and Video Processing</em>, Springer, 12(3), 549–556.</div>
+          <a class="pub-doi" href="https://doi.org/10.1007/s11760-017-1191-7" target="_blank" rel="noopener">↗ DOI: 10.1007/s11760-017-1191-7 · IF: 2.157</a>
         </div>
       </div>
     </div>
 
     <div class="pub-group" data-type="conference">
-      <div class="pub-group-title">International Conferences &mdash; Outside India (Scopus Indexed)</div>
+      <div class="pub-group-title">International Conferences — Outside India (Scopus Indexed)</div>
       <div class="pub-item">
         <div class="pub-num">3.</div>
         <div class="pub-body">
           <div class="pub-tags"><span class="tag scopus">Scopus Indexed</span><span class="tag cite">Citations: 6</span></div>
-          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2017). Blind technique using blocking artifacts and entropy of histograms for image tampering detection. In <em>Second International Workshop on Pattern Recognition</em> (SPIE Proceedings, Vol. 10443). NTU, Singapore, May 1&ndash;3, 2017.</div>
-          <a class="pub-doi" href="https://doi.org/10.1117/12.2280306" target="_blank" rel="noopener">&#8599; DOI: 10.1117/12.2280306</a>
+          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2017).
+ Blind technique using blocking artifacts and entropy of histograms for 
+image tampering detection. In <em>Second International Workshop on Pattern Recognition</em> (SPIE Proceedings, Vol. 10443). NTU, Singapore, May 1–3, 2017.</div>
+          <a class="pub-doi" href="https://doi.org/10.1117/12.2280306" target="_blank" rel="noopener">↗ DOI: 10.1117/12.2280306</a>
         </div>
       </div>
-      <div class="pub-group-title">International Conferences &mdash; In India (Scopus Indexed)</div>
+      <div class="pub-group-title">International Conferences — In India (Scopus Indexed)</div>
       <div class="pub-item">
         <div class="pub-num">4.</div>
         <div class="pub-body">
           <div class="pub-tags"><span class="tag scopus">Scopus Indexed</span><span class="tag cite">Citations: 56</span></div>
-          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2016). Detection of copy-move forgery in images using segmentation and SURF. In <em>Advances in Signal Processing and Intelligent Recognition Systems</em> (pp. 645&ndash;654). Springer, Cham.</div>
+          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2016). Detection of copy-move forgery in images using segmentation and SURF. In <em>Advances in Signal Processing and Intelligent Recognition Systems</em> (pp. 645–654). Springer, Cham.</div>
         </div>
       </div>
       <div class="pub-item">
         <div class="pub-num">5.</div>
         <div class="pub-body">
           <div class="pub-tags"><span class="tag scopus">Scopus Indexed</span><span class="tag cite">Citations: 14</span></div>
-          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2015). Visual artifacts based image splicing detection in uncompressed images. In <em>Computer Graphics, Vision and Information Security (CGVIS)</em>, IEEE International Conference (pp. 145&ndash;150). IEEE.</div>
+          <div class="pub-text">Manu, V. T., &amp; Mehtre, B. M. (2015). Visual artifacts based image splicing detection in uncompressed images. In <em>Computer Graphics, Vision and Information Security (CGVIS)</em>, IEEE International Conference (pp. 145–150). IEEE.</div>
         </div>
       </div>
       <div class="pub-item">
         <div class="pub-num">6.</div>
         <div class="pub-body">
           <div class="pub-tags"><span class="tag scopus">Scopus Indexed</span><span class="tag cite">Citations: 26</span></div>
-          <div class="pub-text">Manu, V. T., &amp; Simon, P. (2012). A Novel Statistical Fusion Rule for Image Fusion in Non Subsampled Contourlet Transform Domain. In <em>International Conference on Computer Science and Information Technology</em> (pp. 367&ndash;376). Springer, Berlin.</div>
+          <div class="pub-text">Manu, V. T., &amp; Simon, P. (2012). A 
+Novel Statistical Fusion Rule for Image Fusion in Non Subsampled 
+Contourlet Transform Domain. In <em>International Conference on Computer Science and Information Technology</em> (pp. 367–376). Springer, Berlin.</div>
         </div>
       </div>
     </div>
@@ -842,7 +885,9 @@
         <div class="pub-num">9.</div>
         <div class="pub-body">
           <div class="pub-tags"><span class="tag misc">arXiv</span><span class="tag cite">Citations: 2</span></div>
-          <div class="pub-text">Manu, V. T., &amp; Simon, P. (2012). A novel statistical fusion rule for image fusion and its comparison in Non-Subsampled Contourlet Transform and Wavelet domains. <em>arXiv preprint</em> arXiv:1205.1648.</div>
+          <div class="pub-text">Manu, V. T., &amp; Simon, P. (2012). A 
+novel statistical fusion rule for image fusion and its comparison in 
+Non-Subsampled Contourlet Transform and Wavelet domains. <em>arXiv preprint</em> arXiv:1205.1648.</div>
         </div>
       </div>
     </div>
@@ -853,11 +898,11 @@
   <section class="section fade-in" id="contact">
     <h2 class="section-title">Contact &amp; Research Profiles</h2>
     <div class="contact-grid">
-      <div class="contact-card"><div class="contact-label">Scopus</div><div class="contact-val"><a href="https://www.scopus.com/authid/detail.uri?authorId=55339839700" target="_blank" rel="noopener">55339839700 &#8599;</a></div></div>
-      <div class="contact-card"><div class="contact-label">ORCiD</div><div class="contact-val"><a href="https://orcid.org/0000-0001-5696-4851" target="_blank" rel="noopener">0000-0001-5696-4851 &#8599;</a></div></div>
-      <div class="contact-card"><div class="contact-label">Google Scholar</div><div class="contact-val"><a href="https://scholar.google.com/citations?user=4grbJmcAAAAJ" target="_blank" rel="noopener">View Profile &#8599;</a></div></div>
+      <div class="contact-card"><div class="contact-label">Scopus</div><div class="contact-val"><a href="https://www.scopus.com/authid/detail.uri?authorId=55339839700" target="_blank" rel="noopener">55339839700 ↗</a></div></div>
+      <div class="contact-card"><div class="contact-label">ORCiD</div><div class="contact-val"><a href="https://orcid.org/0000-0001-5696-4851" target="_blank" rel="noopener">0000-0001-5696-4851 ↗</a></div></div>
+      <div class="contact-card"><div class="contact-label">Google Scholar</div><div class="contact-val"><a href="https://scholar.google.com/citations?user=4grbJmcAAAAJ" target="_blank" rel="noopener">View Profile ↗</a></div></div>
       <div class="contact-card"><div class="contact-label">Personal Email</div><div class="contact-val">manuvt [at] gmail.com</div></div>
-      <div class="contact-card"><div class="contact-label">Official Homepage</div><div class="contact-val"><a href="https://www.nfsu.ac.in/Faculty/profile?userid=688" target="_blank" rel="noopener">NFSU Faculty Profile &#8599;</a></div></div>
+      <div class="contact-card"><div class="contact-label">Official Homepage</div><div class="contact-val"><a href="https://www.nfsu.ac.in/Faculty/profile?userid=688" target="_blank" rel="noopener">NFSU Faculty Profile ↗</a></div></div>
       <div class="contact-card"><div class="contact-label">Institution</div><div class="contact-val">NFSU, Bhopal Campus<br>Dept. of Cyber Security &amp; Digital Forensics</div></div>
     </div>
   </section>
@@ -870,13 +915,13 @@
     <div class="cert-grid">
       <div class="cert-card">
         <div class="cert-title">CISA</div>
-        <div class="cert-body">Certified Information Systems Auditor&reg;<br>Conducting Body: ISACA<br><a href="https://www.credly.com/badges/07c191c0-923e-4935-9af2-1d305fd7c28b/public_url" target="_blank" rel="noopener" style="color:var(--accent);font-size:0.78rem;">View Digital Credential &#8599;</a></div>
-        <span class="cert-status">Awarded &mdash; January 2024</span>
+        <div class="cert-body">Certified Information Systems Auditor®<br>Conducting Body: ISACA<br><a href="https://www.credly.com/badges/07c191c0-923e-4935-9af2-1d305fd7c28b/public_url" target="_blank" rel="noopener" style="color:var(--accent);font-size:0.78rem;">View Digital Credential ↗</a></div>
+        <span class="cert-status">Awarded — January 2024</span>
       </div>
       <div class="cert-card">
         <div class="cert-title">ISO/IEC 27001:2022</div>
-        <div class="cert-body">Lead Auditor ISMS (Information Security Management Systems)<br>Conducting Body: T&Uuml;V S&Uuml;D</div>
-        <span class="cert-status">Awarded &mdash; October 2025</span>
+        <div class="cert-body">Lead Auditor ISMS (Information Security Management Systems)<br>Conducting Body: TÜV SÜD</div>
+        <span class="cert-status">Awarded — October 2025</span>
       </div>
       <div class="cert-card">
         <div class="cert-title">AWS Academy</div>
@@ -889,19 +934,19 @@
       <div class="cert-card">
         <div class="cert-title">UGC-NET</div>
         <div class="cert-body">Computer Science and Applications<br>Conducting Body: UGC</div>
-        <span class="cert-status">Pass &mdash; December 2012</span>
+        <span class="cert-status">Pass — December 2012</span>
       </div>
       <div class="cert-card">
         <div class="cert-title">GATE</div>
         <div class="cert-body">Graduate Aptitude Test in Engineering<br>Computer Science &amp; Information Technology<br></div>
-        <span class="cert-status">Awarded &mdash; 2008 &bull; 2009 &bull; 2014 &bull; 2018</span>
+        <span class="cert-status">Awarded — 2008 • 2009 • 2014 • 2018</span>
       </div>
     </div>
   </section>
 
   <footer>
     <span class="footer-name">Dr. Manu V. T.</span>
-    <span class="clock" id="clock">--:--:--</span>
+    <span class="clock" id="clock">22:34:15</span>
   </footer>
 
 </div>
@@ -1111,5 +1156,6 @@
   setInterval(updateClock, 1000);
 })();
 </script>
-</body>
-</html>
+
+
+</body></html>
