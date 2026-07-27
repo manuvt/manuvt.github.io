@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dr. Manu V. T. | Personal Homepage</title>
 <link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
 <link href="Dr.%20Manu%20V.%20T.%20_%20Personal%20Homepage_files/css2_BaWD.css" rel="stylesheet">
 <style>
   :root {
@@ -149,24 +150,6 @@
   .nav-inner a.active { color: var(--accent2); }
   .nav-inner a.active::after { left: 0; right: 0; background: linear-gradient(90deg, var(--accent2), var(--accent)); }
   .nav-inner a.active::before { opacity: 1; transform: translate(-50%, 4px) scale(1); }
-
-  .nav-inner a.admission-btn {
-    margin-left: auto;
-    padding: 6px 16px;
-    border: 1px solid var(--accent2);
-    border-radius: 3px;
-    color: var(--accent2);
-    background: rgba(0,229,192,0.08);
-    transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-  }
-  .nav-inner a.admission-btn::after,
-  .nav-inner a.admission-btn::before { content: none; }
-  .nav-inner a.admission-btn:hover {
-    background: var(--accent2);
-    color: #04140f;
-    box-shadow: 0 0 18px rgba(0,229,192,0.45);
-    transform: translateY(-2px);
-  }
 
   .section { padding: 72px 0 0; content-visibility: auto; contain-intrinsic-size: 1px 800px; }
   .section-label {
@@ -542,6 +525,13 @@
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: rgba(56,180,220,0.3); border-radius: 3px; }
 
+  .section-intro {
+    font-family: var(--mono-font); font-size: 10px;
+    letter-spacing: 0.08em; color: var(--muted);
+    margin: -20px 0 28px; line-height: 1.9;
+  }
+  .inline-accent { color: var(--accent); font-size: 0.82rem; }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
   }
@@ -580,7 +570,6 @@
       <a href="#publications">Publications</a>
       <a href="#contact">Contact</a>
       <a href="#certifications">Certifications</a>
-      <a class="admission-btn" href="admission_info.html" target="_blank" rel="noopener">Admission Info ↗</a>
     </div>
   </nav>
 
@@ -622,7 +611,7 @@ forensic practice, using tools such as <strong>Amped FIVE</strong> and <strong>A
       <div class="tl-item">
         <div class="tl-year">2013 – 2018</div>
         <div class="tl-degree">Ph.D — Computer Science</div>
-        <div class="tl-inst">School of Computer and Information Sciences (SCIS), University of Hyderabad (Central University)<br>&amp; Center of Excellence in Cyber Security, IDRBT, Hyderabad<br><em style="color:var(--accent);font-size:0.82rem;">(Established by Reserve Bank of India)</em></div>
+        <div class="tl-inst">School of Computer and Information Sciences (SCIS), University of Hyderabad (Central University)<br>&amp; Center of Excellence in Cyber Security, IDRBT, Hyderabad<br><em class="inline-accent">(Established by Reserve Bank of India)</em></div>
       </div>
       <div class="tl-item">
         <div class="tl-year">2009 – 2011</div>
@@ -637,12 +626,12 @@ forensic practice, using tools such as <strong>Amped FIVE</strong> and <strong>A
       <div class="tl-item">
         <div class="tl-year">2001 – 2003</div>
         <div class="tl-degree">AISSCE — Computer Science</div>
-        <div class="tl-inst">St. Antony's Public School, Anakkal, Kanjirappally<br>Kottayam District, Kerala — CBSE, New Delhi<br><em style="color:var(--accent);font-size:0.82rem;">Established 1986 · CBSE Affiliation No. 930037 · School Code 75036</em></div>
+        <div class="tl-inst">St. Antony's Public School, Anakkal, Kanjirappally<br>Kottayam District, Kerala — CBSE, New Delhi<br><em class="inline-accent">Established 1986 · CBSE Affiliation No. 930037 · School Code 75036</em></div>
       </div>
       <div class="tl-item">
         <div class="tl-year">2001</div>
         <div class="tl-degree">AISSE — Physics, Chemistry, Maths </div>
-        <div class="tl-inst">St. Antony's Public School, Kanjirappally<br>Kottayam District, Kerala — CBSE, New Delhi<br><em style="color:var(--accent);font-size:0.82rem;">Established 1986 · CBSE Affiliation No. 930037 · School Code 75036</em></div>
+        <div class="tl-inst">St. Antony's Public School, Kanjirappally<br>Kottayam District, Kerala — CBSE, New Delhi<br><em class="inline-accent">Established 1986 · CBSE Affiliation No. 930037 · School Code 75036</em></div>
       </div>
     </div>
     <p style="font-size:0.78rem;color:var(--muted);margin-top:20px;font-family:var(--mono-font);">NB: All academic programs completed in Regular Full-Time mode.</p>
@@ -652,7 +641,7 @@ forensic practice, using tools such as <strong>Amped FIVE</strong> and <strong>A
 
   <section class="section fade-in" id="timetable">
     <h2 class="section-title">Academic Timetable</h2>
-    <p style="font-family:var(--mono-font);font-size:10px;letter-spacing:0.08em;color:var(--muted);margin:-20px 0 28px;line-height:1.9;">Combined across B.Sc.-M.Sc. Forensic Science (Sem III &amp; V) &middot; M.Sc. Cyber Security (Sem III) &middot; M.Sc. Digital Forensics &amp; Information Security (Sem III) &middot; M.Sc. Forensic Science, Specialization III &#8211; Forensic Physics &amp; Ballistics (Sem III). Tentative, Odd Sem 2026-27.</p>
+    <p class="section-intro">Combined across B.Sc.-M.Sc. Forensic Science (Sem III &amp; V) &middot; M.Sc. Cyber Security (Sem III) &middot; M.Sc. Digital Forensics &amp; Information Security (Sem III) &middot; M.Sc. Forensic Science, Specialization III &#8211; Forensic Physics &amp; Ballistics (Sem III). Tentative, Odd Sem 2026-27.</p>
     <div class="tt-accordion" data-accordion="">
 
       <div class="acc-item tt-day">
@@ -798,12 +787,11 @@ forensic practice, using tools such as <strong>Amped FIVE</strong> and <strong>A
     </div>
   </section>
 
-
   <div class="divider"></div>
 
   <section class="section fade-in" id="syllabi">
     <h2 class="section-title">Course Syllabi</h2>
-    <p style="font-family:var(--mono-font);font-size:10px;letter-spacing:0.08em;color:var(--muted);margin:-20px 0 28px;line-height:1.9;">Full syllabi for the courses on the timetable above, plus related courses. Evaluation scheme, objectives, units, learning outcomes, and references for each.</p>
+    <p class="section-intro">Full syllabi for the courses on the timetable above, plus related courses. Evaluation scheme, objectives, units, learning outcomes, and references for each.</p>
     <div class="syl-accordion" data-accordion="">
 
       <div class="acc-item">
@@ -1102,7 +1090,6 @@ forensic practice, using tools such as <strong>Amped FIVE</strong> and <strong>A
 
     </div>
   </section>
-
 
   <div class="divider"></div>
 
@@ -1566,6 +1553,5 @@ Non-Subsampled Contourlet Transform and Wavelet domains. <em>arXiv preprint</em>
   setInterval(updateClock, 1000);
 })();
 </script>
-
 
 </body></html>
