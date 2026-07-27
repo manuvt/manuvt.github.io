@@ -275,6 +275,10 @@
     font-family: var(--mono-font); font-size: 9px;
     color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase;
   }
+  .tt-slot-clash { background: rgba(220,70,70,0.08); }
+  .tt-slot-clash .tt-slot-time { color: #ff6b6b; border-right-color: rgba(255,107,107,0.25); }
+  .tt-slot-clash .tt-subject { color: #ff6b6b; }
+  .tt-slot-clash .tt-sub { color: rgba(255,140,140,0.75); }
 
   .pub-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
   .filter-btn {
@@ -366,6 +370,17 @@
   .cert-group-label { margin-bottom: 12px; font-family: var(--mono-font); font-size: 10px; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; }
   .cert-group-label.spaced { margin-top: 32px; }
 
+  .consultancy-ref {
+    font-family: var(--mono-font); font-size: 10px;
+    letter-spacing: 0.1em; color: var(--muted);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 20px; margin-bottom: 36px;
+    background: rgba(0,229,192,0.04); line-height: 2;
+  }
+  .consultancy-ref span { color: var(--accent2); }
+
   .cs-tier-table {
     width: 100%; border-collapse: collapse;
     border: 1px solid var(--border); border-radius: 6px;
@@ -447,6 +462,64 @@
   }
   .cs-note-num { font-size: 9px; color: var(--accent); flex-shrink: 0; padding-top: 1px; }
 
+  /* Course Syllabi accordion */
+  .syl-accordion { display: flex; flex-direction: column; gap: 8px; }
+  .syl-trigger:hover .syl-title { color: var(--accent); }
+  .syl-code {
+    font-family: var(--mono-font); font-size: 9px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); display: block; margin-bottom: 3px;
+  }
+  .syl-title {
+    font-family: var(--heading-font); font-size: 1.15rem;
+    font-weight: 400; color: #fff; transition: color 0.2s;
+  }
+  .syl-head-text { flex: 1; min-width: 0; text-align: left; }
+  .syl-body-inner { padding: 4px 22px 26px; border-top: 1px solid var(--border); }
+  .acc-item.open .syl-body-inner { padding-top: 20px; }
+  .syl-block-label {
+    font-family: var(--mono-font); font-size: 9px;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--accent2); margin: 26px 0 10px;
+  }
+  .syl-block-label:first-child { margin-top: 4px; }
+  .syl-objective {
+    font-size: 0.86rem; color: var(--text); opacity: 0.9;
+    line-height: 1.85; border-left: 2px solid var(--accent);
+    padding-left: 16px;
+  }
+  .syl-unit { margin-bottom: 16px; }
+  .syl-unit-head {
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .syl-unit-tag {
+    font-family: var(--mono-font); font-size: 9px;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);
+  }
+  .syl-unit-title { font-family: var(--heading-font); font-size: 1rem; color: #fff; }
+  .syl-unit p { font-size: 0.82rem; color: var(--muted); line-height: 1.75; margin-bottom: 6px; }
+  ol.syl-list { list-style: none; counter-reset: syl; padding: 0; margin: 0; }
+  ol.syl-list li {
+    counter-increment: syl; position: relative; padding-left: 26px;
+    font-size: 0.85rem; color: var(--text); opacity: 0.92;
+    margin-bottom: 10px; line-height: 1.7;
+  }
+  ol.syl-list li::before {
+    content: counter(syl); position: absolute; left: 0; top: 0;
+    font-family: var(--mono-font); font-size: 10px; color: var(--accent2);
+  }
+  ul.syl-refs { list-style: none; padding: 0; margin: 0; }
+  ul.syl-refs li {
+    font-size: 0.8rem; color: var(--muted); line-height: 1.7;
+    padding: 8px 0; border-bottom: 1px solid rgba(56,180,220,0.07);
+  }
+  ul.syl-refs li:last-child { border-bottom: none; }
+  .syl-joint-note {
+    font-family: var(--mono-font); font-size: 9.5px; color: var(--muted);
+    font-style: italic; margin: 4px 0 20px; letter-spacing: 0.03em;
+  }
+
   footer {
     margin-top: 100px; padding: 30px 0;
     border-top: 1px solid var(--border);
@@ -501,10 +574,13 @@
     <div class="nav-inner">
       <a href="#about">About</a>
       <a href="#education">Education</a>
+      <a href="#timetable">Timetable</a>
+      <a href="#syllabi">Course Syllabi</a>
+      <a href="#consultancy">Consultancy</a>
       <a href="#publications">Publications</a>
       <a href="#contact">Contact</a>
       <a href="#certifications">Certifications</a>
-      <a class="admission-btn" href="admission_info.html" target="_blank" rel="noopener">NFSU Admission Info ↗</a>
+      <a class="admission-btn" href="admission_info.html" target="_blank" rel="noopener">Admission Info ↗</a>
     </div>
   </nav>
 
@@ -572,7 +648,556 @@ forensic practice, using tools such as <strong>Amped FIVE</strong> and <strong>A
     <p style="font-size:0.78rem;color:var(--muted);margin-top:20px;font-family:var(--mono-font);">NB: All academic programs completed in Regular Full-Time mode.</p>
   </section>
 
+  <div class="divider"></div>
 
+  <section class="section fade-in" id="timetable">
+    <h2 class="section-title">Academic Timetable</h2>
+    <p style="font-family:var(--mono-font);font-size:10px;letter-spacing:0.08em;color:var(--muted);margin:-20px 0 28px;line-height:1.9;">Combined across B.Sc.-M.Sc. Forensic Science (Sem III &amp; V) &middot; M.Sc. Cyber Security (Sem III) &middot; M.Sc. Digital Forensics &amp; Information Security (Sem III) &middot; M.Sc. Forensic Science, Specialization III &#8211; Forensic Physics &amp; Ballistics (Sem III). Tentative, Odd Sem 2026-27.</p>
+    <div class="tt-accordion" data-accordion="">
+
+      <div class="acc-item tt-day">
+        <button class="acc-trigger tt-trigger" aria-expanded="false">
+          <span class="tt-day-name">Monday</span>
+          <div class="tt-day-preview">
+            <span class="tt-preview-chip">AVA</span><span class="tt-preview-chip">IoT</span>
+          </div>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="acc-body"><div class="tt-slots">
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">10:30&#8211;11:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:00&#8211;11:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">11:30&#8211;12:00</div><div class="tt-slot-content"><span class="tt-subject">Audio Recognition &amp; Video Analysis</span><span class="tt-sub">FSMS24 SPIII-P3 &middot; M.Sc. FS, Forensic Physics Spec., Sem III &middot; w/ Dr. Praveen Kumar Yadav</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">12:00&#8211;12:30</div><div class="tt-slot-content"><span class="tt-subject">Audio Recognition &amp; Video Analysis</span><span class="tt-sub">(continued)</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">12:30&#8211;13:00</div><div class="tt-slot-content"><span class="tt-subject">IoT Security &amp; Forensics</span><span class="tt-sub">CTMSDFIS/CTMSCS SIII P2 &middot; M.Sc. CS + M.Sc. DFIS, Sem III</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">13:00&#8211;13:30</div><div class="tt-slot-content"><span class="tt-subject">IoT Security &amp; Forensics</span><span class="tt-sub">(continued)</span></div></div>
+          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">13:30&#8211;14:00</div><div class="tt-slot-content">&#8212; Lunch Break &#8212;</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">14:00&#8211;14:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">14:30&#8211;15:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">15:00&#8211;15:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">15:30&#8211;16:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">16:00&#8211;16:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">16:30&#8211;17:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">17:00&#8211;17:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">17:30&#8211;18:00</div><div class="tt-slot-content">Free</div></div>
+        </div></div>
+      </div>
+
+      <div class="acc-item tt-day">
+        <button class="acc-trigger tt-trigger" aria-expanded="false">
+          <span class="tt-day-name">Tuesday</span>
+          <div class="tt-day-preview">
+            <span class="tt-preview-chip">AVA</span><span class="tt-preview-chip">CySec</span><span class="tt-preview-chip">IoT Lab</span><span class="tt-preview-chip">DFCL</span>
+          </div>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="acc-body"><div class="tt-slots">
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">10:30&#8211;11:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:00&#8211;11:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">11:30&#8211;12:00</div><div class="tt-slot-content"><span class="tt-subject">Audio Recognition &amp; Video Analysis</span><span class="tt-sub">FSMS24 SPIII-P3 &middot; M.Sc. FS, Forensic Physics Spec., Sem III</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">12:00&#8211;12:30</div><div class="tt-slot-content"><span class="tt-subject">Audio Recognition &amp; Video Analysis</span><span class="tt-sub">(continued)</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:30&#8211;13:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">13:00&#8211;13:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">13:30&#8211;14:00</div><div class="tt-slot-content">&#8212; Lunch Break &#8212;</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">14:00&#8211;14:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">14:30&#8211;15:00</div><div class="tt-slot-content"><span class="tt-subject">Cyber Security</span><span class="tt-sub">BSC-SE-306 &middot; B.Sc.-M.Sc. Forensic Science, Sem III</span></div></div>
+          <div class="tt-slot tt-slot-clash"><div class="tt-slot-time">15:00&#8211;15:30</div><div class="tt-slot-content"><span class="tt-subject">&#9888; Clash</span><span class="tt-sub">Cyber Security ends 15:30 / IoT Security &amp; Forensics Lab starts here</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">15:30&#8211;16:00</div><div class="tt-slot-content"><span class="tt-subject">IoT Security &amp; Forensics Lab</span><span class="tt-sub">CTMSDFIS/CTMSCS SIII L2 &middot; ends 16:00</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">16:00&#8211;16:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">16:30&#8211;17:00</div><div class="tt-slot-content"><span class="tt-subject">Digital Forensics &amp; Cyber Law</span><span class="tt-sub">BSC-MJ-501 &middot; B.Sc.-M.Sc. Forensic Science, Sem V</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">17:00&#8211;17:30</div><div class="tt-slot-content"><span class="tt-subject">Digital Forensics &amp; Cyber Law</span><span class="tt-sub">(continued)</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">17:30&#8211;18:00</div><div class="tt-slot-content">Free</div></div>
+        </div></div>
+      </div>
+
+      <div class="acc-item tt-day">
+        <button class="acc-trigger tt-trigger" aria-expanded="false">
+          <span class="tt-day-name">Wednesday</span>
+          <div class="tt-day-preview">
+            <span class="tt-preview-chip">IoT</span><span class="tt-preview-chip">IRM</span><span class="tt-preview-chip">DFCL</span>
+          </div>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="acc-body"><div class="tt-slots">
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">10:30&#8211;11:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:00&#8211;11:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30&#8211;12:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:00&#8211;12:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">12:30&#8211;13:00</div><div class="tt-slot-content"><span class="tt-subject">IoT Security &amp; Forensics</span><span class="tt-sub">CTMSDFIS/CTMSCS SIII P2 &middot; M.Sc. CS + M.Sc. DFIS, Sem III</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">13:00&#8211;13:30</div><div class="tt-slot-content"><span class="tt-subject">IoT Security &amp; Forensics</span><span class="tt-sub">(continued)</span></div></div>
+          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">13:30&#8211;14:00</div><div class="tt-slot-content">&#8212; Lunch Break &#8212;</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">14:00&#8211;14:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">14:30&#8211;15:00</div><div class="tt-slot-content"><span class="tt-subject">Incident Response Management</span><span class="tt-sub">BSC-EL3-505 &middot; Core Elective-II &middot; B.Sc.-M.Sc. Forensic Science, Sem V</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">15:00&#8211;15:30</div><div class="tt-slot-content"><span class="tt-subject">Incident Response Management</span><span class="tt-sub">(continued)</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">15:30&#8211;16:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">16:00&#8211;16:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">16:30&#8211;17:00</div><div class="tt-slot-content"><span class="tt-subject">Digital Forensics &amp; Cyber Law</span><span class="tt-sub">BSC-MJ-501 &middot; B.Sc.-M.Sc. Forensic Science, Sem V</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">17:00&#8211;17:30</div><div class="tt-slot-content"><span class="tt-subject">Digital Forensics &amp; Cyber Law</span><span class="tt-sub">(continued)</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">17:30&#8211;18:00</div><div class="tt-slot-content">Free</div></div>
+        </div></div>
+      </div>
+
+      <div class="acc-item tt-day">
+        <button class="acc-trigger tt-trigger" aria-expanded="false">
+          <span class="tt-day-name">Thursday</span>
+          <div class="tt-day-preview">
+            <span class="tt-preview-chip">AVA</span><span class="tt-preview-chip">IRM</span><span class="tt-preview-chip">DFCL</span>
+          </div>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="acc-body"><div class="tt-slots">
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">10:30&#8211;11:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:00&#8211;11:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">11:30&#8211;12:00</div><div class="tt-slot-content"><span class="tt-subject">Audio Recognition &amp; Video Analysis</span><span class="tt-sub">FSMS24 SPIII-P3 &middot; M.Sc. FS, Forensic Physics Spec., Sem III</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">12:00&#8211;12:30</div><div class="tt-slot-content"><span class="tt-subject">Audio Recognition &amp; Video Analysis</span><span class="tt-sub">(continued)</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:30&#8211;13:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">13:00&#8211;13:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">13:30&#8211;14:00</div><div class="tt-slot-content">&#8212; Lunch Break &#8212;</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">14:00&#8211;14:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">14:30&#8211;15:00</div><div class="tt-slot-content"><span class="tt-subject">Incident Response Management</span><span class="tt-sub">BSC-EL3-505 &middot; Core Elective-II &middot; B.Sc.-M.Sc. Forensic Science, Sem V</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">15:00&#8211;15:30</div><div class="tt-slot-content"><span class="tt-subject">Incident Response Management</span><span class="tt-sub">(continued)</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">15:30&#8211;16:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">16:00&#8211;16:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">16:30&#8211;17:00</div><div class="tt-slot-content"><span class="tt-subject">Digital Forensics &amp; Cyber Law</span><span class="tt-sub">BSC-MJ-501 &middot; B.Sc.-M.Sc. Forensic Science, Sem V</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">17:00&#8211;17:30</div><div class="tt-slot-content"><span class="tt-subject">Digital Forensics &amp; Cyber Law</span><span class="tt-sub">(continued)</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">17:30&#8211;18:00</div><div class="tt-slot-content">Free</div></div>
+        </div></div>
+      </div>
+
+      <div class="acc-item tt-day">
+        <button class="acc-trigger tt-trigger" aria-expanded="false">
+          <span class="tt-day-name">Friday</span>
+          <div class="tt-day-preview">
+            <span class="tt-preview-chip">IoT</span><span class="tt-preview-chip">DFCL</span><span class="tt-preview-chip">AVA</span><span class="tt-preview-chip">CySec</span>
+          </div>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="acc-body"><div class="tt-slots">
+          <div class="tt-slot"><div class="tt-slot-time">10:30&#8211;11:00</div><div class="tt-slot-content"><span class="tt-subject">IoT Security &amp; Forensics</span><span class="tt-sub">CTMSDFIS/CTMSCS SIII P2 &middot; M.Sc. CS + M.Sc. DFIS, Sem III</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">11:00&#8211;11:30</div><div class="tt-slot-content"><span class="tt-subject">IoT Security &amp; Forensics</span><span class="tt-sub">(continued)</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:30&#8211;12:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:00&#8211;12:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">12:30&#8211;13:00</div><div class="tt-slot-content"><span class="tt-subject">Digital Forensics &amp; Cyber Law</span><span class="tt-sub">BSC-MJ-501 &middot; B.Sc.-M.Sc. Forensic Science, Sem V</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">13:00&#8211;13:30</div><div class="tt-slot-content"><span class="tt-subject">Digital Forensics &amp; Cyber Law</span><span class="tt-sub">(continued)</span></div></div>
+          <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">13:30&#8211;14:00</div><div class="tt-slot-content">&#8212; Lunch Break &#8212;</div></div>
+          <div class="tt-slot"><div class="tt-slot-time">14:00&#8211;14:30</div><div class="tt-slot-content"><span class="tt-subject">Audio Recognition &amp; Video Analysis</span><span class="tt-sub">FSMS24 SPIII-P3 &middot; M.Sc. FS, Forensic Physics Spec., Sem III</span></div></div>
+          <div class="tt-slot tt-slot-clash"><div class="tt-slot-time">14:30&#8211;15:00</div><div class="tt-slot-content"><span class="tt-subject">&#9888; Clash</span><span class="tt-sub">Audio Recognition &amp; Video Analysis ends 15:00 / Cyber Security starts here</span></div></div>
+          <div class="tt-slot"><div class="tt-slot-time">15:00&#8211;15:30</div><div class="tt-slot-content"><span class="tt-subject">Cyber Security</span><span class="tt-sub">BSC-SE-306 &middot; ends 15:30</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">15:30&#8211;16:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">16:00&#8211;16:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">16:30&#8211;17:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">17:00&#8211;17:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">17:30&#8211;18:00</div><div class="tt-slot-content">Free</div></div>
+        </div></div>
+      </div>
+
+    </div>
+    <div class="cs-notes" style="margin-top:24px;">
+      <div class="cs-note"><span class="cs-note-num">01</span><span>Lunch break timing differs slightly by programme: 13:30&#8211;14:00 is common to all; B.Sc.-M.Sc. Forensic Science students continue until 14:30, while M.Sc. Cyber Security / DFIS / Forensic Physics resume classes at 14:00.</span></div>
+      <div class="cs-note"><span class="cs-note-num">02</span><span>Two schedule clashes are currently flagged (Tue 15:00&#8211;15:30 and Fri 14:30&#8211;15:00) and are pending resolution with the respective Programme Coordinators.</span></div>
+      <div class="cs-note"><span class="cs-note-num">03</span><span>All timings are tentative, sourced from the respective official time tables, Odd Sem 2026-27.</span></div>
+    </div>
+  </section>
+
+
+  <div class="divider"></div>
+
+  <section class="section fade-in" id="syllabi">
+    <h2 class="section-title">Course Syllabi</h2>
+    <p style="font-family:var(--mono-font);font-size:10px;letter-spacing:0.08em;color:var(--muted);margin:-20px 0 28px;line-height:1.9;">Full syllabi for the courses on the timetable above, plus related courses. Evaluation scheme, objectives, units, learning outcomes, and references for each.</p>
+    <div class="syl-accordion" data-accordion="">
+
+      <div class="acc-item">
+        <button class="acc-trigger syl-trigger" aria-expanded="false">
+          <div class="syl-head-text"><span class="syl-code">BSC-SE-306</span><span class="syl-title">Cyber Security</span></div>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="acc-body"><div class="syl-body-inner">
+
+          <table class="cs-tier-table">
+            <thead><tr><th>Th</th><th>Tu</th><th>Pr</th><th>C</th><th>TCH</th><th>TA-1&amp;2</th><th>MSE</th><th>Univ. Exam</th><th>Total</th></tr></thead>
+            <tbody><tr>
+              <td>2</td><td>0</td><td>0</td><td>2</td><td>2</td>
+              <td>50 <span class="cs-svc-sub">00:45</span></td>
+              <td>50 <span class="cs-svc-sub">01:30</span></td>
+              <td>100 <span class="cs-svc-sub">03:00</span></td>
+              <td class="cs-price">200</td>
+            </tr></tbody>
+          </table>
+
+          <div class="syl-block-label">Course Objectives</div>
+          <p class="syl-objective">This course is designed to expose students to real-world security challenges and basic internet security &mdash; protecting remote access and local computing devices, and applying tools and utilities to counter network threats and attacks.</p>
+
+          <div class="syl-block-label">Modules</div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Module 1 &middot; 15 Hrs</span><span class="syl-unit-title">Introduction to Cyber Security &amp; Network Defence Tools</span></div>
+            <p>Introduction, Computer Security, Threats, Harm, Vulnerabilities, Controls, Authentication, Access Control and Cryptography. Web attacks: Browser Attacks, Web Attacks Targeting Users, Obtaining User or Website Data, Email Attacks. Network Vulnerabilities: vulnerability scanning, open port/service identification, banner/version check, traffic probe, vulnerability probe, examples using OpenVAS and Metasploit. Network vulnerability scanning with Netcat and Socat, plus network sniffers and injection tools.</p>
+            <p>Network Defence Tools &mdash; Firewalls and Packet Filters: firewall basics, packet filter vs. firewall, how a firewall protects a network, packet characteristics to filter, stateless vs. stateful firewalls, NAT and port forwarding. VPN fundamentals. Firewall implementation on Linux and Windows. Snort as an Intrusion Detection System.</p>
+          </div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Module 2 &middot; 15 Hrs</span><span class="syl-unit-title">Cyber Crime, Law and Investigation</span></div>
+            <p>Cyber Crimes, types of cybercrime, hacking, attack vectors, cyberspace and criminal behavior, traditional problems associated with computer crime. Introduction to incident response, digital forensics, computer language, network language, and the realms of the cyber world.</p>
+            <p>Internet Crime and the IT Act: history of the internet, recognizing and defining computer crime, contemporary crimes, computers as targets, contamination/destruction of data. Indian IT Act, 2000. Firewalls and packet filters, password cracking, keyloggers and spyware, viruses and worms, trojans and backdoors, steganography, DoS/DDoS attacks, SQL injection, buffer overflow, attacks on wireless networks.</p>
+          </div>
+
+          <div class="syl-block-label">Learning Outcomes</div>
+          <ol class="syl-list">
+            <li>Basics of Cyber Security access and monitoring systems.</li>
+            <li>Concepts of intrusion detection and security challenges.</li>
+            <li>Implementation of protection tools for local and intrusion detection.</li>
+            <li>Appreciation of vulnerabilities &mdash; identifying and defending against threats.</li>
+          </ol>
+
+          <div class="syl-block-label">References</div>
+          <ul class="syl-refs">
+            <li>Computer and Cyber Security: Principles, Algorithm, Applications, and Perspectives &mdash; B.B. Gupta, D.P. Agrawal, Haoxiang Wang, CRC Press, 2018.</li>
+            <li>Cyber Security Essentials &mdash; James Graham, Richard Howard and Ryan Otson, CRC Press.</li>
+          </ul>
+
+        </div></div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger syl-trigger" aria-expanded="false">
+          <div class="syl-head-text"><span class="syl-code">BSC-MJ-501</span><span class="syl-title">Digital Forensics and Cyber Law</span></div>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="acc-body"><div class="syl-body-inner">
+
+          <table class="cs-tier-table">
+            <thead><tr><th>Th</th><th>Tu</th><th>Pr</th><th>C</th><th>TCH</th><th>TA-1&amp;2</th><th>MSE</th><th>Univ. Exam</th><th>Total</th></tr></thead>
+            <tbody><tr>
+              <td>3</td><td>1</td><td>0</td><td>4</td><td>4</td>
+              <td>50 <span class="cs-svc-sub">00:45</span></td>
+              <td>50 <span class="cs-svc-sub">01:30</span></td>
+              <td>100 <span class="cs-svc-sub">03:00</span></td>
+              <td class="cs-price">200</td>
+            </tr></tbody>
+          </table>
+
+          <div class="syl-block-label">Course Objectives</div>
+          <p class="syl-objective">The primary objective is to teach students how to identify and classify various types of cybercrimes occurring in the digital realm; comprehend the fundamental principles and methodologies of Digital Forensics, including data acquisition, analysis, and preservation of digital evidence in accordance with legal standards; and gain insight into the key sections of the IT Act and related laws governing the admissibility of digital evidence in legal proceedings.</p>
+
+          <div class="syl-block-label">Modules</div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Module 1 &middot; 15 Hrs</span><span class="syl-unit-title">Forms of Cyber-Crime and Introduction to Digital Forensics</span></div>
+            <p>Cyber-crime &ndash; overview, internal and external, online and offline attacks. Cyber-crime against individuals and organizations &ndash; email spoofing, phishing, spamming, unauthorized access, DoS/DDoS, computer sabotage, malware, email bombing, salami attack, software piracy, industrial espionage, crimes on social media, banking frauds, IP frauds.</p>
+            <p>Digital Forensics &ndash; introduction, objective, methodology, rules and services, branches: Live, Disk, Network, Mobile Device Forensics etc.</p>
+          </div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Module 2 &middot; 15 Hrs</span><span class="syl-unit-title">Incident Response and Digital Evidence</span></div>
+            <p>Incident Response and First Responder at crime scene &ndash; role, toolkit, stages, do's and don'ts. Types and sources of digital evidence, collection principles, Best Evidence Rule, forensic readiness, ethics, search/seizure/preservation of volatile and non-volatile evidence, imaging, hashing, deleted data recovery.</p>
+          </div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Module 3 &middot; 15 Hrs</span><span class="syl-unit-title">Introduction to IT Act and Cyber Laws</span></div>
+            <p>IT Act 2000 &ndash; objectives, applicability, definitions, amendments; digital signature, electronic records/evidence/governance; IT (Amendment) Act 2008; cyber-crimes under Sections 43(a)-(j), 43A, 65, 66, 66A-66F, 67, 67A, 67B, 70, 70A, 70B, 80 with penalties; penal provisions for phishing, spam, malware, hacking, stalking; relevant sections of Indian Evidence Act.</p>
+          </div>
+
+          <div class="syl-block-label">Learning Outcomes</div>
+          <ol class="syl-list">
+            <li>Understand the different types of crimes in the cyberspace.</li>
+            <li>Get familiar with the principles of Digital Forensics.</li>
+            <li>Learn the basics of Incident Response and principles pertaining to digital evidence.</li>
+            <li>Get an overview of the sections of IT Act and laws related to admissibility of digital evidences.</li>
+          </ol>
+
+          <div class="syl-block-label">References</div>
+          <ul class="syl-refs">
+            <li>Nina Godbole &amp; Sunit Belapore, "Cyber Security: Understanding Cyber-crimes, Computer Forensics and Legal Perspectives," Wiley, 2011.</li>
+            <li>Bill Nelson, Amelia Phillips, Christopher Steuart, "Guide to Computer Forensics and Investigations," 5th ed., Cengage, 2010.</li>
+            <li>William Stallings, "Cryptography and Network Security," 5th ed., Prentice Hall, 2007.</li>
+            <li>Majid Yar, "Cybercrime and Society," Sage, 2006.</li>
+            <li>Michael E. Whiteman &amp; Herbert J. Mattord, "Principles of Information Security," Vikas Publishing House, 2003.</li>
+            <li>EC-Council, "Computer Hacking Forensic Investigator v.9."</li>
+            <li>Harish Chander, "Cyber Laws and IT Protection," PHI Learning, 2012.</li>
+            <li>Karnika Seth, "Computers, Internet and New Technology Laws," Lexis Nexis Butterworth Wadhwa, 2012.</li>
+          </ul>
+
+        </div></div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger syl-trigger" aria-expanded="false">
+          <div class="syl-head-text"><span class="syl-code">BSC-EL3-505</span><span class="syl-title">Incident Response Management</span></div>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="acc-body"><div class="syl-body-inner">
+
+          <table class="cs-tier-table">
+            <thead><tr><th>Th</th><th>Tu</th><th>Pr</th><th>C</th><th>TCH</th><th>TA-1&amp;2</th><th>MSE</th><th>Univ. Exam</th><th>Total</th></tr></thead>
+            <tbody><tr>
+              <td>2</td><td>0</td><td>0</td><td>2</td><td>2</td>
+              <td>50 <span class="cs-svc-sub">00:45</span></td>
+              <td>50 <span class="cs-svc-sub">01:30</span></td>
+              <td>100 <span class="cs-svc-sub">03:00</span></td>
+              <td class="cs-price">200</td>
+            </tr></tbody>
+          </table>
+
+          <div class="syl-block-label">Course Objectives</div>
+          <p class="syl-objective">To equip students with the basic and important concepts of incident response, incident response management, and the important steps of incident responses and handling.</p>
+
+          <div class="syl-block-label">Modules</div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Module 1 &middot; 15 Hrs</span><span class="syl-unit-title">Introduction to Incident Response</span></div>
+            <p>Computer Security Incident, key concepts of information security, incident management, purpose, need and goals of incident response, incident response plan, signs/indicators of an incident, incident categories, prioritization, handling, estimating cost, reporting, incident response team roles and responsibilities.</p>
+          </div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Module 2 &middot; 15 Hrs</span><span class="syl-unit-title">Management of Incident Response</span></div>
+            <p>18 steps of incident response/handling: identification, recording, initial response, communicating, containment, response strategy, classification, investigation, data collection, forensic analysis, evidence protection, notifying external agencies, eradication, systems recovery, documentation, damage/cost assessment, lessons learned, review &amp; update policies.</p>
+          </div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Module 3 &middot; 15 Hrs</span><span class="syl-unit-title">Goals of Incident Response</span></div>
+            <p>Goals of incident response, response plan, identification, prioritization, handling, cost estimation, reporting, reporting organizations, vulnerability resources.</p>
+          </div>
+
+          <div class="syl-block-label">Learning Outcomes</div>
+          <ol class="syl-list">
+            <li>Key concepts of information security.</li>
+            <li>Incident response.</li>
+            <li>Steps involved in incident handling.</li>
+          </ol>
+
+          <div class="syl-block-label">References</div>
+          <ul class="syl-refs">
+            <li>CERT IN Guidelines.</li>
+            <li>ENISA Manuals.</li>
+            <li>Leighton Johnson, "Computer Incident Response and Forensics Team Management," Syngress.</li>
+            <li>Jithin Alex, "Incident Handling and Response: A Holistic Approach for an Efficient Security Incident Management."</li>
+            <li>N.K. McCarthy, Jason T. Luttgens, "The Computer Incident Response Planning Handbook," McGraw-Hill.</li>
+          </ul>
+
+        </div></div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger syl-trigger" aria-expanded="false">
+          <div class="syl-head-text"><span class="syl-code">FSMS24 SIII SP-III P3</span><span class="syl-title">Audio Recognition and Video Analysis</span></div>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="acc-body"><div class="syl-body-inner">
+
+          <table class="cs-tier-table">
+            <thead><tr><th>L</th><th>T</th><th>P</th><th>C</th><th>TCH</th><th>TA-1&amp;2</th><th>MSE</th><th>Univ. Exam</th><th>Total</th></tr></thead>
+            <tbody><tr>
+              <td>4</td><td>0</td><td>0</td><td>4</td><td>4</td>
+              <td>50 <span class="cs-svc-sub">01:30</span></td>
+              <td>50 <span class="cs-svc-sub">01:30</span></td>
+              <td>100 <span class="cs-svc-sub">03:00</span></td>
+              <td class="cs-price">200</td>
+            </tr></tbody>
+          </table>
+          <div class="syl-joint-note">Jointly taught with Dr. Praveen Kumar Yadav &mdash; M.Sc. Forensic Science, Specialization III (Forensic Physics and Ballistics), Semester III.</div>
+
+          <div class="syl-block-label">Course Objectives</div>
+          <p class="syl-objective">A comprehensive understanding of forensic voice and video analysis &mdash; covering the history and theory of voice production, speaker recognition and profiling techniques, handling and examination of audio evidence, and forensic video examination including processing, authentication, legal admissibility, biometric analysis and CCTV forensics through related case studies.</p>
+
+          <div class="syl-block-label">Units</div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Unit I &middot; 15 Hrs</span><span class="syl-unit-title">Introduction to Voice Identification / Speaker Recognition</span></div>
+            <p>History of voice analysis, voice production theory, interspeaker/intraspeaker variations, text-dependent/independent recognition, discriminating tests, handling and physical examination of audio recording evidences, marking of speakers, preparation of working copies.</p>
+          </div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Unit II &middot; 15 Hrs</span><span class="syl-unit-title">Speaker Profiling</span></div>
+            <p>Segregation of speech samples, auditory/spectrographic/automatic recognition techniques, enhancement and normalization, authenticity and integrity, speech signal processing, Fourier analysis, analogue-to-digital conversion, instruments, report writing, admissibility of audio evidence in court.</p>
+          </div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Unit III &middot; 15 Hrs</span><span class="syl-unit-title">Forensic Video Examination</span></div>
+            <p>Definition, scope, significance in crime investigation, collection/handling/preservation of video files, frame extraction, shot-by-shot analysis, video authentication, metadata analysis, hash value generation, biometric analysis, facial biometrics.</p>
+          </div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Unit IV &middot; 15 Hrs</span><span class="syl-unit-title">CCTV Forensics</span></div>
+            <p>Acquisition/handling/preservation of CCTV footage, hash generation, DVR/NVR extraction, chain of custody, authentication and enhancement, forensic tools, legal admissibility.</p>
+          </div>
+
+          <div class="syl-block-label">Learning Outcomes</div>
+          <ol class="syl-list">
+            <li>Detailed insight into audio, video and image forensics.</li>
+            <li>Understand how multimedia evidences are collected and analysed for forensic investigation.</li>
+            <li>Learn about the legal admissibility of multimedia evidences.</li>
+          </ol>
+
+          <div class="syl-block-label">References</div>
+          <ul class="syl-refs">
+            <li>Hill, T. (2020). CCTV Handbook. Independently published.</li>
+            <li>Damjanovski, V. (2005). CCTV: Networking and Digital Technology, 2nd ed. Butterworth-Heinemann.</li>
+            <li>Kroener, I. (2014). CCTV: A Technology under the Radar? Routledge.</li>
+            <li>Types of CCTV Cameras &ndash; The Complete Guide, Business Watch (2020).</li>
+            <li>Paul, D., &amp; Puvvala, C. (2020). Video Analytics Using Deep Learning. Apress.</li>
+            <li>The 2022 Report on Video Analytics, Intelligence, Surveillance, Reconnaissance and Object Recognition Technologies. ICON Group International.</li>
+            <li>Carle, B., &amp; Jensen, R. C. (2018). Understanding Video Management Systems.</li>
+            <li>Wolper, V. E. (2020). Photograph Restoration and Enhancement, 3rd ed. Mercury Learning &amp; Information.</li>
+            <li>Phil Rose &amp; James Robertson, Forensic Speaker Identification.</li>
+            <li>Harry Hollien, Forensic Voice Identification.</li>
+            <li>Ray D Kent &amp; Charles Read, The Acoustic Analysis of Speech.</li>
+          </ul>
+
+        </div></div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger syl-trigger" aria-expanded="false">
+          <div class="syl-head-text"><span class="syl-code">CTMSDFIS SIII P2 &middot; CTMSCS SIII P2</span><span class="syl-title">IoT Security &amp; Forensics</span></div>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="acc-body"><div class="syl-body-inner">
+
+          <table class="cs-tier-table">
+            <thead><tr><th>Th</th><th>Tu</th><th>Pr</th><th>C</th><th>TCH</th><th>TA-1/2</th><th>MSE</th><th>Univ. Exam</th><th>Total</th></tr></thead>
+            <tbody><tr>
+              <td>03</td><td>00</td><td>00</td><td>03</td><td>03</td>
+              <td>25 <span class="cs-svc-sub">00:45</span></td>
+              <td>50 <span class="cs-svc-sub">01:30</span></td>
+              <td>100 <span class="cs-svc-sub">03:00</span></td>
+              <td class="cs-price">200</td>
+            </tr></tbody>
+          </table>
+          <div class="syl-joint-note">Jointly taught as CTMSDFIS SIII P2 (M.Sc. Digital Forensics &amp; Information Security) and CTMSCS SIII P2 (M.Sc. Cyber Security), Semester III &mdash; identical syllabus under both codes.</div>
+
+          <div class="syl-block-label">Objectives</div>
+          <ol class="syl-list">
+            <li>To understand the basic concept and architecture of IoT.</li>
+            <li>To understand the IoT communication and messaging protocols.</li>
+            <li>To understand the IoT enabling technologies.</li>
+            <li>To understand the IoT security aspects.</li>
+            <li>To understand the basics of IoT security.</li>
+          </ol>
+
+          <div class="syl-block-label">Units</div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Unit I</span><span class="syl-unit-title">Introduction to IoT</span></div>
+            <p>Definition &amp; characteristics, evolution, physical/logical design, IoT components, levels and deployment techniques, applications &amp; domains, enabling technologies, challenges in IoT.</p>
+          </div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Unit II</span><span class="syl-unit-title">M2M &amp; System Management</span></div>
+            <p>M2M vs IoT, Software Defined Networking (SDN), Network Function Virtualization (NFV), SNMP and its limitations, network operator requirements, H/W and S/W communications (UART, SPI, I2C, JTAG).</p>
+          </div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Unit III</span><span class="syl-unit-title">IoT Communication and Messaging Protocols</span></div>
+            <p>Protocol stack for IoT, HTTP, MQTT, XMPP, COAP basics and architectures.</p>
+          </div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Unit IV</span><span class="syl-unit-title">IoT Security</span></div>
+            <p>Interoperability, need for security, privacy &amp; threats, attack vectors &amp; surfaces, pen testing approaches, OWASP Top 10 for IoT, threat modeling, cloud security architecture, case study.</p>
+          </div>
+          <div class="syl-unit">
+            <div class="syl-unit-head"><span class="syl-unit-tag">Unit V</span><span class="syl-unit-title">IoT Forensics, Standards &amp; Guidelines</span></div>
+            <p>Introduction to IoT forensics, forensic investigation of IoT devices &amp; components, forensic tools &amp; techniques, standards and guidelines, case study.</p>
+          </div>
+
+          <div class="syl-block-label">References</div>
+          <ul class="syl-refs">
+            <li>Arshdeep Bahga &amp; Vijay Madisetti, "Internet of Things: A Hands-On Approach," Universities Press, 2015.</li>
+            <li>B. B. Gupta &amp; Aakanksha Tewari, "A Beginner's Guide to Internet of Things Security," CRC Press, 2020.</li>
+            <li>Aaron Guzman &amp; Aditya Gupta, "IoT Penetration Testing Cookbook," Packt Publishing, 2017.</li>
+            <li>Fotios Chantzis et al., "Practical IoT Hacking," No Starch Press, 2021.</li>
+            <li>Brian Russell &amp; Drew Van Duren, "Practical Internet of Things Security," 2016.</li>
+            <li>Jan Holler et al., "From Machine-to-Machine to the Internet of Things," Academic Press, 2014.</li>
+            <li>Shancang Li &amp; Li Da Xu, "Securing the Internet of Things," Elsevier, 2017.</li>
+            <li>David Hanes et al., "IoT Fundamentals," Cisco Press, 2017.</li>
+            <li>Reza Montasari et al., "Digital Forensic Investigation of Internet of Thing Devices," Springer, 2021.</li>
+          </ul>
+
+        </div></div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <div class="divider"></div>
+
+  <section class="section fade-in" id="consultancy">
+    <div class="section-label">NFSU · Ministry of Home Affairs, Govt. of India</div>
+    <h2 class="section-title">Consultancy Services</h2>
+
+    <div class="consultancy-ref">
+      Ref: <span>ADM/NFSU/FCNotification/1554/2023</span> &nbsp;·&nbsp; Dated: <span>17-04-2023</span><br>
+      National Forensic Sciences University (NFSU) &nbsp;·&nbsp; Ministry of Home Affairs, Government of India
+    </div>
+
+    <div class="cs-accordion" data-accordion="">
+
+      <div class="acc-item">
+        <button class="acc-trigger cs-acc-trigger" aria-expanded="false">
+          <span class="cs-acc-title">01 — Cyber Defence Centre Services</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="acc-body">
+          <div class="cs-acc-inner">
+            <table class="cs-tier-table">
+              <thead>
+                <tr>
+                  <th scope="col">Service</th>
+                  <th scope="col">Govt Agencies (MHA)</th>
+                  <th scope="col">Other Govt</th>
+                  <th scope="col">Private / Industries</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <span class="cs-svc-name">Digital Forensic As-A-Service</span>
+                    <span class="cs-svc-sub">per Exhibit</span>
+                  </td>
+                  <td><span class="cs-price">₹ 13,310 /-</span></td>
+                  <td><span class="cs-price">₹ 13,310 /- <span class="cs-same">same</span></span></td>
+                  <td><span class="cs-price">₹ 13,310 /- <span class="cs-same">same</span></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger cs-acc-trigger" aria-expanded="false">
+          <span class="cs-acc-title">02 — Audit &amp; Security Services</span>
+          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+        <div class="acc-body">
+          <div class="cs-acc-inner">
+            <div class="cs-rows">
+              <div class="cs-row">
+                <div class="cs-row-name">System Audit</div>
+                <div class="cs-row-price">₹ 1,000 /-<span class="cs-unit">per Endpoint</span></div>
+              </div>
+              <div class="cs-row">
+                <div class="cs-row-name">Network Audit &amp; Assessment</div>
+                <div class="cs-row-price"><span class="cs-scope">Scope-based</span></div>
+              </div>
+              <div class="cs-row">
+                <div class="cs-row-name">Web Application Audit</div>
+                <div class="cs-row-price"><span class="cs-scope">Scope-based</span></div>
+              </div>
+              <div class="cs-row">
+                <div class="cs-row-name">Mobile Application Audit</div>
+                <div class="cs-row-price"><span class="cs-scope">Scope-based</span></div>
+              </div>
+              <div class="cs-row">
+                <div class="cs-row-name">Managed Security Service Provider</div>
+                <div class="cs-row-price"><span class="cs-scope">Scope-based</span></div>
+              </div>
+              <div class="cs-row">
+                <div class="cs-row-name">Onsite Audit &amp; Compliance</div>
+                <div class="cs-row-price">₹ 18,000 /-<span class="cs-unit">per day / consultant</span></div>
+              </div>
+              <div class="cs-row">
+                <div class="cs-row-name">Incident Response &amp; Management</div>
+                <div class="cs-row-price">₹ 18,000 /-<span class="cs-unit">per day / consultant</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cs-notes">
+      <div class="cs-note"><span class="cs-note-num">01</span><span>All charges are exclusive of applicable taxes.</span></div>
+      <div class="cs-note"><span class="cs-note-num">02</span><span>Travel &amp; logistics charges will be billed separately.</span></div>
+      <div class="cs-note"><span class="cs-note-num">03</span><span>Economic viability of on-premises audit and assessment will be evaluated prior to execution.</span></div>
+    </div>
+  </section>
 
   <div class="divider"></div>
 
@@ -686,9 +1311,9 @@ Non-Subsampled Contourlet Transform and Wavelet domains. <em>arXiv preprint</em>
       <div class="contact-card"><div class="contact-label">Scopus</div><div class="contact-val"><a href="https://www.scopus.com/authid/detail.uri?authorId=55339839700" target="_blank" rel="noopener">55339839700 ↗</a></div></div>
       <div class="contact-card"><div class="contact-label">ORCiD</div><div class="contact-val"><a href="https://orcid.org/0000-0001-5696-4851" target="_blank" rel="noopener">0000-0001-5696-4851 ↗</a></div></div>
       <div class="contact-card"><div class="contact-label">Google Scholar</div><div class="contact-val"><a href="https://scholar.google.com/citations?user=4grbJmcAAAAJ" target="_blank" rel="noopener">View Profile ↗</a></div></div>
-      <div class="contact-card"><div class="contact-label">Vidwan-ID</div><div class="contact-val"><a href="https://vidwan.inflibnet.ac.in/profile/167497" target="_blank" rel="noopener">167497 ↗</a></div></div>
-      <div class="contact-card"><div class="contact-label">Official Mail ID</div><div class="contact-val"><a href="mailto:manu.vt@nfsu.ac.in">manu.vt@nfsu.ac.in</a></div></div>
+      <div class="contact-card"><div class="contact-label">Personal Email</div><div class="contact-val">manuvt [at] gmail.com</div></div>
       <div class="contact-card"><div class="contact-label">Official Homepage</div><div class="contact-val"><a href="https://www.nfsu.ac.in/Faculty/profile?userid=688" target="_blank" rel="noopener">NFSU Faculty Profile ↗</a></div></div>
+      <div class="contact-card"><div class="contact-label">Institution</div><div class="contact-val">NFSU, Bhopal Campus<br>Dept. of Cyber Security &amp; Digital Forensics</div></div>
     </div>
   </section>
 
@@ -712,11 +1337,6 @@ Non-Subsampled Contourlet Transform and Wavelet domains. <em>arXiv preprint</em>
         <div class="cert-title">AWS Academy</div>
         <div class="cert-body">AWS Academy Graduate<br>AWS Academy Cloud Foundations<br>Conducting Body: AWS Academy</div>
         <span class="cert-status">Completed</span>
-      </div>
-      <div class="cert-card">
-        <div class="cert-title">Digital Forensics Essentials (DFE)</div>
-        <div class="cert-body">CodeRed<br>Conducting Body: EC-Council<br>Credential ID: 213990</div>
-        <span class="cert-status">Issued — April 2023</span>
       </div>
     </div>
     <div class="cert-group-label spaced">Academic</div>
