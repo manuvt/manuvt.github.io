@@ -8,7 +8,7 @@
 <title>Dr. Manu V. T. | Personal Homepage</title>
 <link rel="preconnect" href="https://fonts.googleapis.com/">
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-<link href="Dr.%20Manu%20V.%20T.%20_%20Personal%20Homepage_files/css2_BaWD.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #050a12;
@@ -16,11 +16,11 @@
     --border: rgba(56,180,220,0.18);
     --accent: #38b4dc;
     --accent2: #00e5c0;
-    --gold: #e8c87a;
+    --gold: #ff7ae0;
     --text: #dce8f0;
     --muted: #7a9bb5;
-    --heading-font: 'Cormorant Garamond', serif;
-    --body-font: 'Josefin Sans', sans-serif;
+    --heading-font: 'Playfair Display', 'Cormorant Garamond', serif;
+    --body-font: 'Inter', 'Josefin Sans', sans-serif;
     --mono-font: 'JetBrains Mono', monospace;
   }
 
@@ -45,7 +45,7 @@
   .page-wrap {
     position: relative; z-index: 1;
     max-width: 960px; margin: 0 auto;
-    padding: 58px 24px 80px;
+    padding: 58px 24px 96px;
   }
 
   .hero {
@@ -135,6 +135,37 @@
     background: linear-gradient(90deg, transparent, var(--accent) 20%, var(--accent2) 50%, var(--accent) 80%, transparent);
     opacity: 0.55;
   }
+
+  .sticky-nav-bottom {
+    position: fixed; bottom: 0; left: 0; right: 0; width: 100%; z-index: 1000;
+    background: linear-gradient(0deg, rgba(9,18,33,0.94), rgba(5,10,18,0.88));
+    backdrop-filter: blur(16px) saturate(140%);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -12px 32px -12px rgba(0,0,0,0.55), 0 -1px 0 rgba(56,180,220,0.1);
+    padding: 12px 24px;
+    transition: border-color 0.3s ease;
+  }
+  .sticky-nav-bottom:hover {
+    border-top-color: rgba(255,46,196,0.6);
+    animation: nav-pink-glow-bottom 1.6s ease-in-out infinite;
+  }
+  @keyframes nav-pink-glow-bottom {
+    0%, 100% {
+      box-shadow: 0 -12px 32px -12px rgba(0,0,0,0.55), 0 -1px 0 rgba(56,180,220,0.1),
+        0 0 14px rgba(255,46,196,0.3), 0 -4px 24px rgba(255,46,196,0.15);
+    }
+    50% {
+      box-shadow: 0 -12px 32px -12px rgba(0,0,0,0.55), 0 -1px 0 rgba(56,180,220,0.1),
+        0 0 26px rgba(255,46,196,0.65), 0 -6px 46px rgba(255,46,196,0.35);
+    }
+  }
+  .sticky-nav-bottom::after {
+    content: ''; position: absolute; left: 0; right: 0; top: -1px;
+    height: 1px; pointer-events: none;
+    background: linear-gradient(90deg, transparent, var(--pink) 20%, var(--accent2) 50%, var(--pink) 80%, transparent);
+    opacity: 0.55;
+  }
+  .sticky-nav-bottom .nav-inner { gap: 22px; justify-content: center; }
   .nav-inner { display: flex; gap: 28px; flex-wrap: wrap; max-width: 960px; margin: 0 auto; }
   .nav-inner a {
     position: relative;
@@ -196,9 +227,21 @@
   }
 
   .acc-item {
-    border: 1px solid var(--border); border-radius: 6px;
-    overflow: hidden; background: var(--surface);
-    backdrop-filter: blur(8px); transition: border-color 0.25s;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 14px;
+    overflow: hidden;
+    background: linear-gradient(155deg, rgba(255,255,255,0.09), rgba(255,255,255,0.02) 40%, rgba(56,180,220,0.06) 100%);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 0 40px rgba(255,255,255,0.02);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    position: relative;
+  }
+  .acc-item::after {
+    content: ''; position: absolute; top: -60%; left: -20%;
+    width: 60%; height: 220%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.14), rgba(255,255,255,0) 60%);
+    transform: rotate(20deg); pointer-events: none; z-index: 0;
   }
   .acc-item.open { border-color: var(--accent); }
   .acc-trigger {
@@ -208,6 +251,7 @@
     padding: 16px 22px; cursor: pointer;
     user-select: none; gap: 16px;
     background: none; border: none; color: inherit; font: inherit;
+    position: relative; z-index: 1;
   }
   .acc-chevron {
     width: 18px; height: 18px; flex-shrink: 0;
@@ -217,6 +261,7 @@
   .acc-body {
     max-height: 0; overflow: hidden;
     transition: max-height 0.42s cubic-bezier(0.4,0,0.2,1);
+    position: relative; z-index: 1;
   }
   .acc-item.open .acc-body { max-height: 1200px; }
   .syl-accordion .acc-item.open .acc-body { max-height: 8000px; }
@@ -296,7 +341,7 @@
     font-family: var(--heading-font); font-size: 1.05rem;
     font-style: italic; color: var(--gold);
     margin: 36px 0 16px; padding-bottom: 8px;
-    border-bottom: 1px solid rgba(232,200,122,0.15);
+    border-bottom: 1px solid rgba(255,122,224,0.15);
   }
   .pub-item {
     display: flex; gap: 18px; padding: 20px 20px 20px 0;
@@ -307,7 +352,7 @@
   .pub-body { flex: 1; }
   .pub-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
   .tag { font-family: var(--mono-font); font-size: 9px; letter-spacing: 0.15em; padding: 2px 8px; border-radius: 2px; text-transform: uppercase; }
-  .tag.q1 { background: rgba(232,200,122,0.15); color: var(--gold); border: 1px solid rgba(232,200,122,0.3); }
+  .tag.q1 { background: rgba(255,122,224,0.15); color: var(--gold); border: 1px solid rgba(255,122,224,0.3); }
   .tag.q2 { background: rgba(0,229,192,0.1); color: var(--accent2); border: 1px solid rgba(0,229,192,0.25); }
   .tag.scopus { background: rgba(56,180,220,0.1); color: var(--accent); border: 1px solid var(--border); }
   .tag.book { background: rgba(160,120,200,0.12); color: #c8a8e8; border: 1px solid rgba(160,120,200,0.25); }
@@ -325,13 +370,28 @@
 
   .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
   .contact-card {
-    padding: 22px 24px; border: 1px solid var(--border);
-    border-radius: 4px; background: var(--surface);
-    backdrop-filter: blur(8px); transition: border-color 0.25s, transform 0.25s;
+    padding: 22px 24px; border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 14px;
+    background: linear-gradient(155deg, rgba(255,255,255,0.09), rgba(255,255,255,0.02) 40%, rgba(56,180,220,0.06) 100%);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 0 40px rgba(255,255,255,0.02);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative; overflow: hidden;
   }
-  .contact-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-  .contact-label { font-family: var(--mono-font); font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
-  .contact-val { font-size: 0.88rem; color: var(--text); }
+  .contact-card::after {
+    content: ''; position: absolute; top: -60%; left: -20%;
+    width: 60%; height: 220%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.16), rgba(255,255,255,0) 60%);
+    transform: rotate(20deg); pointer-events: none;
+  }
+  .contact-card:hover {
+    border-color: rgba(56,180,220,0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 44px rgba(0,0,0,0.45), 0 0 24px rgba(56,180,220,0.18), inset 0 1px 0 rgba(255,255,255,0.22);
+  }
+  .contact-label { font-family: var(--mono-font); font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; position: relative; z-index: 1; }
+  .contact-val { font-size: 0.88rem; color: var(--text); position: relative; z-index: 1; }
   .contact-val a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
   .contact-val a:hover { border-color: var(--accent); }
 
@@ -350,23 +410,37 @@
   .tl-degree { font-family: var(--heading-font); font-size: 1.3rem; font-weight: 400; color: #fff; margin-bottom: 4px; }
   .tl-inst { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
 
-  .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
   .cert-card {
-    padding: 22px; border: 1px solid var(--border);
-    border-radius: 4px; background: var(--surface);
-    backdrop-filter: blur(8px); transition: all 0.25s;
+    padding: 24px; border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 14px;
+    background: linear-gradient(155deg, rgba(255,255,255,0.09), rgba(255,255,255,0.02) 40%, rgba(56,180,220,0.06) 100%);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.15), inset 0 0 40px rgba(255,255,255,0.02);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     position: relative; overflow: hidden;
+  }
+  .cert-card::after {
+    content: ''; position: absolute; top: -60%; left: -20%;
+    width: 60%; height: 220%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.16), rgba(255,255,255,0) 60%);
+    transform: rotate(20deg); pointer-events: none;
   }
   .cert-card::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0;
     height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2));
     opacity: 0; transition: opacity 0.25s;
   }
-  .cert-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .cert-card:hover {
+    border-color: rgba(56,180,220,0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 44px rgba(0,0,0,0.45), 0 0 24px rgba(56,180,220,0.18), inset 0 1px 0 rgba(255,255,255,0.22);
+  }
   .cert-card:hover::before { opacity: 1; }
-  .cert-title { font-family: var(--heading-font); font-size: 1.1rem; font-weight: 600; color: var(--gold); margin-bottom: 6px; }
-  .cert-body { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
-  .cert-status { display: inline-block; margin-top: 10px; font-family: var(--mono-font); font-size: 9px; letter-spacing: 0.15em; color: var(--accent2); text-transform: uppercase; }
+  .cert-title { font-family: var(--heading-font); font-size: 1.1rem; font-weight: 600; color: var(--gold); margin-bottom: 6px; position: relative; z-index: 1; }
+  .cert-body { font-size: 0.82rem; color: var(--muted); line-height: 1.6; position: relative; z-index: 1; }
+  .cert-status { display: inline-block; margin-top: 10px; font-family: var(--mono-font); font-size: 9px; letter-spacing: 0.15em; color: var(--accent2); text-transform: uppercase; position: relative; z-index: 1; }
   .cert-group-label { margin-bottom: 12px; font-family: var(--mono-font); font-size: 10px; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; }
   .cert-group-label.spaced { margin-top: 32px; }
 
@@ -624,9 +698,16 @@
     text-shadow: 0 0 16px var(--pink-glow);
   }
 
-  .acc-item { transition: border-color 0.25s, box-shadow 0.25s; }
-  .acc-item:hover { border-color: var(--pink); box-shadow: 0 0 14px var(--pink-glow-soft); }
-  .acc-item.open { border-color: var(--pink); box-shadow: 0 0 20px var(--pink-glow-soft), 0 0 40px rgba(34,224,255,0.12); }
+  .acc-item { transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s; }
+  .acc-item:hover {
+    border-color: var(--pink);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.15), 0 0 18px var(--pink-glow-soft);
+    transform: translateY(-2px);
+  }
+  .acc-item.open {
+    border-color: var(--pink);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.15), 0 0 24px var(--pink-glow-soft), 0 0 44px rgba(34,224,255,0.12);
+  }
   .acc-item.open .acc-chevron { color: var(--pink2); filter: drop-shadow(0 0 6px var(--pink-glow)); }
   .syl-trigger:hover .syl-title { color: var(--pink2); text-shadow: 0 0 10px var(--pink-glow-soft); }
   .syl-code { text-shadow: 0 0 6px rgba(56,180,220,0.3); }
@@ -666,10 +747,15 @@
 
   <nav class="sticky-nav">
     <div class="nav-inner">
-      <a href="#about">About</a>
-      <a href="#education">Education</a>
       <a href="#timetable">Timetable</a>
       <a href="#syllabi">Course Syllabi</a>
+    </div>
+  </nav>
+
+  <nav class="sticky-nav-bottom">
+    <div class="nav-inner">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
       <a href="#consultancy">Consultancy</a>
       <a href="#publications">Publications</a>
       <a href="#contact">Contact</a>
@@ -694,71 +780,6 @@
     </div>
   </section>
 
-  <section class="section fade-in" id="about">
-    <h2 class="section-title">About Me</h2>
-    <div class="about-text">
-      <p>Teaching has always been close to my heart — a passion shaped 
-by my mother, who served as a state award–winning teacher in the 
-government school system. Inspired by her dedication and impact, I chose
- to pursue a life in academia where I could blend learning, discovery, 
-and the joy of guiding future engineers.</p>
-      <p>My academic journey began with a B.Tech. in Computer Science 
-and Engineering from NIT Calicut, followed by an M.Tech. from the 
-University of Kerala. I then completed my Ph.D. in Computer Science at 
-the University of Hyderabad, with doctoral research carried out at the 
-Center of Excellence in Cyber Security, IDRBT — an institute established
- by the Reserve Bank of India.</p>
-      <p>I had the privilege of being mentored by <strong>Prof. B. M. Mehtre</strong>,
- a pioneer behind India's first Automated Fingerprint Identification 
-System (AFIS). Over the years, my research has led to publications in <em>Forensic Science International</em> (SCI, Q1) and <em>Signal, Image and Video Processing</em> (SCIE, Q2), as well as multiple Scopus-indexed conference papers and book chapters.</p>
-      <p>At IDRBT, I led large-scale cyber drills involving more than 25
- participants at a time, helping banks improve incident response 
-capabilities in line with RBI directives. My digital forensics 
-experience includes the FRED forensic workstation and tools such as 
-EnCase, Oxygen Forensics, and Paraben SIM analysis suites.</p>
-      <p>Today, my research spans image forensics and cyber defense 
-analytics—driven by a belief that technology should enable trust, and 
-that education empowers individuals to secure the world they build. 
-        Guided by this philosophy, I combine research with hands-on 
-forensic practice, using tools such as <strong>Amped FIVE</strong> and <strong>Amped Authenticate</strong> to examine CCTV footage and verify the authenticity of questioned images.</p>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <section class="section fade-in" id="education">
-    <h2 class="section-title">Educational Qualifications</h2>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-year">2013 – 2018</div>
-        <div class="tl-degree">Ph.D — Computer Science</div>
-        <div class="tl-inst">School of Computer and Information Sciences (SCIS), University of Hyderabad (Central University)<br>&amp; Center of Excellence in Cyber Security, IDRBT, Hyderabad<br><em class="inline-accent">(Established by Reserve Bank of India)</em></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">2009 – 2011</div>
-        <div class="tl-degree">M.Tech — Computer Science</div>
-        <div class="tl-inst">Specialization: Digital Image Computing<br>Department of Computer Science, University of Kerala, Kariyavattom Campus</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">2003 – 2007</div>
-        <div class="tl-degree">B.Tech — CSE</div>
-        <div class="tl-inst">Computer Science &amp; Engineering<br>National Institute of Technology (NIT) Calicut</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">2001 – 2003</div>
-        <div class="tl-degree">AISSCE — Computer Science</div>
-        <div class="tl-inst">St. Antony's Public School, Anakkal, Kanjirappally<br>Kottayam District, Kerala — CBSE, New Delhi<br><em class="inline-accent">Established 1986 · CBSE Affiliation No. 930037 · School Code 75036</em></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">2001</div>
-        <div class="tl-degree">AISSE — Physics, Chemistry, Maths </div>
-        <div class="tl-inst">St. Antony's Public School, Kanjirappally<br>Kottayam District, Kerala — CBSE, New Delhi<br><em class="inline-accent">Established 1986 · CBSE Affiliation No. 930037 · School Code 75036</em></div>
-      </div>
-    </div>
-    <p style="font-size:0.78rem;color:var(--muted);margin-top:20px;font-family:var(--mono-font);">NB: All academic programs completed in Regular Full-Time mode.</p>
-  </section>
-
-  <div class="divider"></div>
 
   <section class="section fade-in" id="timetable">
     <h2 class="section-title">Academic Timetable</h2>
@@ -907,8 +928,6 @@ forensic practice, using tools such as <strong>Amped FIVE</strong> and <strong>A
       <div class="cs-note"><span class="cs-note-num">03</span><span>All timings are tentative, sourced from the respective official time tables, Odd Sem 2026-27.</span></div>
     </div>
   </section>
-
-  <div class="divider"></div>
 
   <section class="section fade-in" id="syllabi">
     <h2 class="section-title">Course Syllabi</h2>
@@ -1288,7 +1307,67 @@ forensic practice, using tools such as <strong>Amped FIVE</strong> and <strong>A
     </div>
   </section>
 
-  <div class="divider"></div>
+  <section class="section fade-in" id="about">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-text">
+      <p>Teaching has always been close to my heart — a passion shaped 
+by my mother, who served as a state award–winning teacher in the 
+government school system. Inspired by her dedication and impact, I chose
+ to pursue a life in academia where I could blend learning, discovery, 
+and the joy of guiding future engineers.</p>
+      <p>My academic journey began with a B.Tech. in Computer Science 
+and Engineering from NIT Calicut, followed by an M.Tech. from the 
+University of Kerala. I then completed my Ph.D. in Computer Science at 
+the University of Hyderabad, with doctoral research carried out at the 
+Center of Excellence in Cyber Security, IDRBT — an institute established
+ by the Reserve Bank of India.</p>
+      <p>I had the privilege of being mentored by <strong>Prof. B. M. Mehtre</strong>,
+ a pioneer behind India's first Automated Fingerprint Identification 
+System (AFIS). Over the years, my research has led to publications in <em>Forensic Science International</em> (SCI, Q1) and <em>Signal, Image and Video Processing</em> (SCIE, Q2), as well as multiple Scopus-indexed conference papers and book chapters.</p>
+      <p>At IDRBT, I led large-scale cyber drills involving more than 25
+ participants at a time, helping banks improve incident response 
+capabilities in line with RBI directives. My digital forensics 
+experience includes the FRED forensic workstation and tools such as 
+EnCase, Oxygen Forensics, and Paraben SIM analysis suites.</p>
+      <p>Today, my research spans image forensics and cyber defense 
+analytics—driven by a belief that technology should enable trust, and 
+that education empowers individuals to secure the world they build. 
+        Guided by this philosophy, I combine research with hands-on 
+forensic practice, using tools such as <strong>Amped FIVE</strong> and <strong>Amped Authenticate</strong> to examine CCTV footage and verify the authenticity of questioned images.</p>
+    </div>
+  </section>
+
+  <section class="section fade-in" id="education">
+    <h2 class="section-title">Educational Qualifications</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">2013 – 2018</div>
+        <div class="tl-degree">Ph.D — Computer Science</div>
+        <div class="tl-inst">School of Computer and Information Sciences (SCIS), University of Hyderabad (Central University)<br>&amp; Center of Excellence in Cyber Security, IDRBT, Hyderabad<br><em class="inline-accent">(Established by Reserve Bank of India)</em></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2009 – 2011</div>
+        <div class="tl-degree">M.Tech — Computer Science</div>
+        <div class="tl-inst">Specialization: Digital Image Computing<br>Department of Computer Science, University of Kerala, Kariyavattom Campus</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2003 – 2007</div>
+        <div class="tl-degree">B.Tech — CSE</div>
+        <div class="tl-inst">Computer Science &amp; Engineering<br>National Institute of Technology (NIT) Calicut</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2001 – 2003</div>
+        <div class="tl-degree">AISSCE — Computer Science</div>
+        <div class="tl-inst">St. Antony's Public School, Anakkal, Kanjirappally<br>Kottayam District, Kerala — CBSE, New Delhi<br><em class="inline-accent">Established 1986 · CBSE Affiliation No. 930037 · School Code 75036</em></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2001</div>
+        <div class="tl-degree">AISSE — Physics, Chemistry, Maths </div>
+        <div class="tl-inst">St. Antony's Public School, Kanjirappally<br>Kottayam District, Kerala — CBSE, New Delhi<br><em class="inline-accent">Established 1986 · CBSE Affiliation No. 930037 · School Code 75036</em></div>
+      </div>
+    </div>
+    <p style="font-size:0.78rem;color:var(--muted);margin-top:20px;font-family:var(--mono-font);">NB: All academic programs completed in Regular Full-Time mode.</p>
+  </section>
 
   <section class="section fade-in" id="consultancy">
     <div class="section-label">NFSU · Ministry of Home Affairs, Govt. of India</div>
@@ -1382,8 +1461,6 @@ forensic practice, using tools such as <strong>Amped FIVE</strong> and <strong>A
       <div class="cs-note"><span class="cs-note-num">03</span><span>Economic viability of on-premises audit and assessment will be evaluated prior to execution.</span></div>
     </div>
   </section>
-
-  <div class="divider"></div>
 
   <section class="section fade-in" id="publications">
     <h2 class="section-title">Publication List</h2>
@@ -1487,8 +1564,6 @@ Non-Subsampled Contourlet Transform and Wavelet domains. <em>arXiv preprint</em>
     </div>
   </section>
 
-  <div class="divider"></div>
-
   <section class="section fade-in" id="contact">
     <h2 class="section-title">Contact &amp; Research Profiles</h2>
     <div class="contact-grid">
@@ -1500,8 +1575,6 @@ Non-Subsampled Contourlet Transform and Wavelet domains. <em>arXiv preprint</em>
       <div class="contact-card"><div class="contact-label">Institution</div><div class="contact-val">NFSU, Bhopal Campus<br>Dept. of Cyber Security &amp; Digital Forensics</div></div>
     </div>
   </section>
-
-  <div class="divider"></div>
 
   <section class="section fade-in" id="certifications">
     <h2 class="section-title">Certifications</h2>
@@ -1553,7 +1626,7 @@ Non-Subsampled Contourlet Transform and Wavelet domains. <em>arXiv preprint</em>
   const ctx = canvas.getContext('2d', { alpha: true });
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const PALETTE = [[56, 180, 220], [0, 229, 192], [232, 200, 122], [34, 224, 255]];
+  const PALETTE = [[56, 180, 220], [0, 229, 192], [255, 122, 224], [34, 224, 255]];
   const LINK_DIST = 150, LINK_DIST_SQ = LINK_DIST * LINK_DIST;
   const MOUSE_DIST = 200, MOUSE_DIST_SQ = MOUSE_DIST * MOUSE_DIST;
   const MAX_NODES = 140;
