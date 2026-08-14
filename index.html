@@ -53,6 +53,26 @@
     justify-content: center; align-items: flex-start;
     padding: 80px 0 60px;
   }
+  .hero-name-row {
+    display: flex; align-items: flex-end; flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 24px; margin-bottom: 16px; width: 100%;
+  }
+  .hero-name-row h1 { margin-bottom: 0; }
+  .hero-qr {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0; animation: fadeUp 0.8s ease forwards 1.1s;
+  }
+  .hero-qr img {
+    width: 90px; height: 90px; border-radius: 8px;
+    background: #fff; padding: 6px;
+    box-shadow: 0 0 24px rgba(56,180,220,0.25);
+  }
+  .hero-qr-label {
+    font-family: var(--mono-font); font-size: 9px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); text-align: center;
+  }
   .hero h1 {
     font-family: var(--heading-font);
     font-size: clamp(3rem, 8vw, 6rem);
@@ -770,7 +790,13 @@
   </nav>
 
   <section class="hero" id="home">
-    <h1>Dr. Manu <em>V. T.</em></h1>
+    <div class="hero-name-row">
+      <h1>Dr. Manu <em>V. T.</em></h1>
+      <div class="hero-qr">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZoAAAGaAQAAAAAefbjOAAADJklEQVR4nO2cQW7iQBBF/5+2lKUtcQCO0txgjhTlSHMD+ygcAMleIhn9WVSXMWQxSsgYMNWLKAQ/qUu0qn79LkLhy6v79XUGCCiggAIKKKCA1gmxrAokKwBDBe4GkmxOBAZ/YHeX7QW0PJQlST2ArNH+pI+tJO0rAEiSJF1Cy20voOWhoSQAfbAC2QDIexIAwB3gyeNO2wtoMai6ek0AEHBiSQj1eP3Iw8cU0E9Cko5E1yRxhyRgePvsWDxZTAF9B6oltQDQWXE4EV0DoNu6rJALjKeJKaDvQKUkdKYYEpj7zci8fxPznw2Y99UI4MT7bC+gxSE7EZ8KQ30kuu2RAo7U9QMPHlNAt0CwrjL3gFqU4mA/2lpSW4+Q+mS/WZfaPnhMAd0CzRoJoj5UBJKIuhcBAnlfZIUwvIlLby+gxaGpagi87CuEYTPaEeh+jxVRH1xMPHhMAf0ENJDIGs3PNvfS2ox6BN/3ldWUu20voMUg0xFFM+AsK5LMzzZTu5asQVXoiLVDVjWKZrCacarQNQkyRTFsVHzMgd5yPHhMAd0OqTV/sgJ3KF0HOtJsKmlPkk2Km64XgKBpIcs7zdKCuo8JJKn1C9CoGquGinDAZDuUK3Gp5A1MGSROxEtAniN6wC83/ByUVY6KyctwqFYPXRYHwD/4EaXhONuV/fTwg8cU0C3QlCP8gzfNUPu8VLbJqWTpIXLE+iHXEbiQEGeh2fphOLsVcSJWDc2U5dmIcnNKM2U5PxsPHlNAt0NlwHYg1foshNqBRO7LnCVmQxJPEVNAN0HddnKskaSPBpinjP7E2ZjVk8QU0C0udu4hYmjA3AOwm+/6UFnZ6Br4GwtvL6DFoZln6RrTV/axmaIo6jGU5QtAuDgHkwFhUhLmQvhVqK84ES8A5cm47JoTS+uBJH34kAS6+JbfS0CzOUtPD4A7VMnbUiA8y1eF+N6jTFdmHVlKh3tV3N15ewH9d+g6R1wkBfcxAbepIkesHvITMV1uyMfo3KQcXV7GvcZLQJ++0zW9Y7N0XXOAMKSRGDZjTNWtH6L+/cz1iv9MFlBAAQUUUEABAcBfAWVx4UlS/MkAAAAASUVORK5CYII=" alt="QR code linking to NFSU Faculty Profile" />
+        <div class="hero-qr-label">Scan for Faculty Profile</div>
+      </div>
+    </div>
     <div class="hero-role">Assistant Professor</div>
     <div class="hero-dept">Cyber Security &amp; Digital Forensics · NFSU Bhopal</div>
     <div class="hero-coord">Programme Coordinator — <em>M.Sc. Digital Forensics &amp; Information Security</em></div>
@@ -823,7 +849,7 @@
         <button class="acc-trigger tt-trigger" aria-expanded="false">
           <span class="tt-day-name">Tuesday</span>
           <div class="tt-day-preview">
-            <span class="tt-preview-chip">CompFor</span><span class="tt-preview-chip">AVA</span><span class="tt-preview-chip">IRM</span><span class="tt-preview-chip">IoT Lab</span><span class="tt-preview-chip">CSAC</span><span class="tt-preview-chip">DFCL</span>
+            <span class="tt-preview-chip">CompFor</span><span class="tt-preview-chip">AVA</span><span class="tt-preview-chip">IoT Lab</span><span class="tt-preview-chip">CSAC</span><span class="tt-preview-chip">DFCL</span>
           </div>
           <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
@@ -835,8 +861,8 @@
           <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:30&#8211;13:00</div><div class="tt-slot-content">Free</div></div>
           <div class="tt-slot tt-slot-free"><div class="tt-slot-time">13:00&#8211;13:30</div><div class="tt-slot-content">Free</div></div>
           <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">13:30&#8211;14:00</div><div class="tt-slot-content">&#8212; Lunch Break &#8212;</div></div>
-          <div class="tt-slot"><div class="tt-slot-time">14:00&#8211;14:30</div><div class="tt-slot-content"><span class="tt-subject">Incident Response Management</span><span class="tt-sub">CTMSDFIS SI P3</span></div></div>
-          <div class="tt-slot"><div class="tt-slot-time">14:30&#8211;15:00</div><div class="tt-slot-content"><span class="tt-subject">Incident Response Management</span><span class="tt-sub">(continued)</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">14:00&#8211;14:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">14:30&#8211;15:00</div><div class="tt-slot-content">Free</div></div>
           <div class="tt-slot tt-slot-clash"><div class="tt-slot-time">15:00&#8211;15:30</div><div class="tt-slot-content"><span class="tt-subject">&#9888; Clash</span><span class="tt-sub">IoT Security &amp; Forensics Lab / Cyber Security Audit and Compliance both scheduled here</span></div></div>
           <div class="tt-slot tt-slot-clash"><div class="tt-slot-time">15:30&#8211;16:00</div><div class="tt-slot-content"><span class="tt-subject">&#9888; Clash</span><span class="tt-sub">IoT Security &amp; Forensics Lab (continued) / Cyber Security Audit and Compliance (continued)</span></div></div>
           <div class="tt-slot tt-slot-free"><div class="tt-slot-time">16:00&#8211;16:30</div><div class="tt-slot-content">Free</div></div>
@@ -850,7 +876,7 @@
         <button class="acc-trigger tt-trigger" aria-expanded="false">
           <span class="tt-day-name">Wednesday</span>
           <div class="tt-day-preview">
-            <span class="tt-preview-chip">CompFor</span><span class="tt-preview-chip">IoT</span><span class="tt-preview-chip">IRM</span><span class="tt-preview-chip">CSAC</span><span class="tt-preview-chip">DFCL</span>
+            <span class="tt-preview-chip">CompFor</span><span class="tt-preview-chip">IoT</span><span class="tt-preview-chip">CSAC</span><span class="tt-preview-chip">DFCL</span>
           </div>
           <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
@@ -862,8 +888,8 @@
           <div class="tt-slot"><div class="tt-slot-time">12:30&#8211;13:00</div><div class="tt-slot-content"><span class="tt-subject">IoT Security &amp; Forensics</span><span class="tt-sub">CTMSDFIS/CTMSCS SIII P2 &middot; M.Sc. CS + M.Sc. DFIS, Sem III</span></div></div>
           <div class="tt-slot"><div class="tt-slot-time">13:00&#8211;13:30</div><div class="tt-slot-content"><span class="tt-subject">IoT Security &amp; Forensics</span><span class="tt-sub">(continued)</span></div></div>
           <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">13:30&#8211;14:00</div><div class="tt-slot-content">&#8212; Lunch Break &#8212;</div></div>
-          <div class="tt-slot"><div class="tt-slot-time">14:00&#8211;14:30</div><div class="tt-slot-content"><span class="tt-subject">Incident Response Management</span><span class="tt-sub">CTMSDFIS SI P3</span></div></div>
-          <div class="tt-slot"><div class="tt-slot-time">14:30&#8211;15:00</div><div class="tt-slot-content"><span class="tt-subject">Incident Response Management</span><span class="tt-sub">(continued)</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">14:00&#8211;14:30</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">14:30&#8211;15:00</div><div class="tt-slot-content">Free</div></div>
           <div class="tt-slot"><div class="tt-slot-time">15:00&#8211;15:30</div><div class="tt-slot-content"><span class="tt-subject">Cyber Security Audit and Compliance</span><span class="tt-sub">CTMSDFIS/CTMSCS SI P2</span></div></div>
           <div class="tt-slot"><div class="tt-slot-time">15:30&#8211;16:00</div><div class="tt-slot-content"><span class="tt-subject">Cyber Security Audit and Compliance</span><span class="tt-sub">(continued)</span></div></div>
           <div class="tt-slot tt-slot-free"><div class="tt-slot-time">16:00&#8211;16:30</div><div class="tt-slot-content">Free</div></div>
@@ -877,7 +903,7 @@
         <button class="acc-trigger tt-trigger" aria-expanded="false">
           <span class="tt-day-name">Thursday</span>
           <div class="tt-day-preview">
-            <span class="tt-preview-chip">AVA</span><span class="tt-preview-chip">IRM</span><span class="tt-preview-chip">DFCL</span>
+            <span class="tt-preview-chip">AVA</span><span class="tt-preview-chip">DFCL</span>
           </div>
           <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
@@ -886,8 +912,8 @@
           <div class="tt-slot tt-slot-free"><div class="tt-slot-time">11:00&#8211;11:30</div><div class="tt-slot-content">Free</div></div>
           <div class="tt-slot"><div class="tt-slot-time">11:30&#8211;12:00</div><div class="tt-slot-content"><span class="tt-subject">Audio Recognition &amp; Video Analysis</span><span class="tt-sub">FSMS24 SPIII-P3 &middot; M.Sc. FS, Forensic Physics Spec., Sem III</span></div></div>
           <div class="tt-slot"><div class="tt-slot-time">12:00&#8211;12:30</div><div class="tt-slot-content"><span class="tt-subject">Audio Recognition &amp; Video Analysis</span><span class="tt-sub">(continued)</span></div></div>
-          <div class="tt-slot"><div class="tt-slot-time">12:30&#8211;13:00</div><div class="tt-slot-content"><span class="tt-subject">Incident Response Management</span><span class="tt-sub">CTMSDFIS SI P3</span></div></div>
-          <div class="tt-slot"><div class="tt-slot-time">13:00&#8211;13:30</div><div class="tt-slot-content"><span class="tt-subject">Incident Response Management</span><span class="tt-sub">(continued)</span></div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">12:30&#8211;13:00</div><div class="tt-slot-content">Free</div></div>
+          <div class="tt-slot tt-slot-free"><div class="tt-slot-time">13:00&#8211;13:30</div><div class="tt-slot-content">Free</div></div>
           <div class="tt-slot tt-slot-lunch"><div class="tt-slot-time">13:30&#8211;14:00</div><div class="tt-slot-content">&#8212; Lunch Break &#8212;</div></div>
           <div class="tt-slot tt-slot-free"><div class="tt-slot-time">14:00&#8211;14:30</div><div class="tt-slot-content">Free</div></div>
           <div class="tt-slot tt-slot-free"><div class="tt-slot-time">14:30&#8211;15:00</div><div class="tt-slot-content">Free</div></div>
@@ -1055,66 +1081,6 @@
             <li>PCI DSS, SAQ Instructions and Guidelines (available online)</li>
             <li>Business Continuity, 2nd Edition &mdash; Bob Hayes, Kathleen Kotwica, Elsevier, 2013</li>
             <li>Governance, Risk, and Compliance &mdash; Microsoft, 2019</li>
-          </ul>
-
-        </div></div>
-      </div>
-
-      <div class="acc-item">
-        <button class="acc-trigger syl-trigger" aria-expanded="false">
-          <div class="syl-head-text"><span class="syl-code">CTMSDFIS SI P3</span><span class="syl-title">Incident Response Management</span></div>
-          <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </button>
-        <div class="acc-body"><div class="syl-body-inner">
-
-          <table class="cs-tier-table">
-            <thead><tr><th>Th</th><th>Tu</th><th>Pr</th><th>C</th><th>TCH</th><th>TA-1&amp;2</th><th>MSE</th><th>Univ. Exam</th><th>Total</th></tr></thead>
-            <tbody><tr>
-              <td>3</td><td>0</td><td>0</td><td>3</td><td>3</td>
-              <td>25 <span class="cs-svc-sub">00:45</span></td>
-              <td>50 <span class="cs-svc-sub">01:30</span></td>
-              <td>100 <span class="cs-svc-sub">03:00</span></td>
-              <td class="cs-price">200</td>
-            </tr></tbody>
-          </table>
-
-          <div class="syl-block-label">Course Objectives</div>
-          <p class="syl-objective">To understand the concept of incident response management; to learn various incident response management techniques; to understand the fundamentals of digital forensics; and to learn various digital forensics techniques.</p>
-
-          <div class="syl-block-label">Units</div>
-          <div class="syl-unit">
-            <div class="syl-unit-head"><span class="syl-unit-tag">Unit I</span><span class="syl-unit-title">Introduction to Incident Response</span></div>
-            <p>Cyber incident statistics, computer security incident, information warfare, key concepts of information security, types of computer security incidents, examples of computer security incidents, how to identify an incident, need for incident response, goals and purpose of incident response, signs of an incident, incident categories.</p>
-          </div>
-          <div class="syl-unit">
-            <div class="syl-unit-head"><span class="syl-unit-tag">Unit II</span><span class="syl-unit-title">Incident Management</span></div>
-            <p>Incident prioritization, use of disaster recovery technologies, impact of virtualization on incident response and handling, estimating cost of an incident, incident reporting, incident reporting organizations, vulnerability resources, incident management, incident response team roles, incident response team responsibilities, dependencies.</p>
-          </div>
-          <div class="syl-unit">
-            <div class="syl-unit-head"><span class="syl-unit-tag">Unit III</span><span class="syl-unit-title">Incident Handling</span></div>
-            <p>Incident handling process, real-time log capture and analysis, botnet identification and counteraction, enterprise solutions for incident response and recovery, timeline analysis, malware handling: safety, documentation, distribution; report writing: reporting standards, report style and formatting, report content, quality assurance.</p>
-          </div>
-          <div class="syl-unit">
-            <div class="syl-unit-head"><span class="syl-unit-tag">Unit IV</span><span class="syl-unit-title">Data Collection</span></div>
-            <p>When to perform a live response, selecting a live response tool, what to collect, collection best practices, live data collection on Microsoft Windows systems, live data collection on Unix-based systems, understanding network monitoring, types of network monitoring, setting up a network monitoring system, network data analysis, collecting logs generated from network events.</p>
-          </div>
-          <div class="syl-unit">
-            <div class="syl-unit-head"><span class="syl-unit-tag">Unit V</span><span class="syl-unit-title">Data Analysis</span></div>
-            <p>Analysis methodology: define objectives, where the data is stored, outline an approach, select methods, evaluate results. Investigating Windows systems: NTFS and file system analysis, Prefetch, event logs, scheduled tasks, the Windows registry. Investigating applications: what is application data, where is application data stored, general investigation methods, web browsers, email clients, instant message clients, and analysis of application data.</p>
-          </div>
-
-          <div class="syl-block-label">References</div>
-          <ul class="syl-refs">
-            <li>Computer Incident Response and Forensics Team Management: Conducting a Successful Incident Response &mdash; Leighton Johnson</li>
-            <li>Incident Handling and Response: A Holistic Approach for an Efficient Security Incident Management &mdash; Jithin Aby Alex</li>
-            <li>Blue Team Handbook: Incident Response Edition &mdash; Don Murdoch</li>
-            <li>The Computer Incident Response Planning Handbook: Executable Plans for Protecting Information at Risk &mdash; N. K. McCarthy</li>
-            <li>Critical Incident Management: A Complete Response Guide, 2nd Edition &mdash; John McNall, Thomas T. Gillespie, Vincent F. Faggiano</li>
-            <li>Applied Incident Response &mdash; Steve Anson</li>
-            <li>Security Operations Centre &mdash; SIEM Use Cases and Cyber Threat Intelligence &mdash; Arun E Thomas</li>
-            <li>Incident Response &amp; Computer Forensics &mdash; Jason T. Luttgens, Kevin Mandia, Matthew Pepe</li>
-            <li>Incident Management for Operations &mdash; Chris Hawley, Rob Schnepp, Ron Vidal</li>
-            <li>Digital Forensics and Incident Response: Incident Response Techniques and Procedures to Respond to Modern Cyber Threats, 2nd Edition &mdash; Gerard Johansen</li>
           </ul>
 
         </div></div>
