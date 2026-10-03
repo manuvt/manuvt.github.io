@@ -967,58 +967,65 @@
 
       <div class="acc-item">
         <button class="acc-trigger syl-trigger" aria-expanded="false">
-          <div class="syl-head-text"><span class="syl-code">CTMSDFIS SI P1</span><span class="syl-title">Computer Forensics</span></div>
+          <div class="syl-head-text"><span class="syl-code">MSDF26-PC-101</span><span class="syl-title">Digital Forensics</span></div>
           <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
         <div class="acc-body"><div class="syl-body-inner">
 
-          <table class="cs-tier-table">
-            <thead><tr><th>Th</th><th>Tu</th><th>Pr</th><th>C</th><th>TCH</th><th>TA-1&amp;2</th><th>MSE</th><th>Univ. Exam</th><th>Total</th></tr></thead>
-            <tbody><tr>
-              <td>3</td><td>0</td><td>0</td><td>3</td><td>3</td>
-              <td>25 <span class="cs-svc-sub">00:45</span></td>
-              <td>50 <span class="cs-svc-sub">01:30</span></td>
-              <td>100 <span class="cs-svc-sub">03:00</span></td>
-              <td class="cs-price">200</td>
-            </tr></tbody>
-          </table>
-
           <div class="syl-block-label">Course Objectives</div>
-          <p class="syl-objective">To learn how computers work and handle data; to understand electronic evidence and various computer artefacts; to learn electronic evidence acquisition techniques; and to learn how to analyze Windows, Linux and Mac OS machines.</p>
+          <ol class="syl-list">
+            <li>To understand number systems, computer architecture, and OS fundamentals for digital forensics.</li>
+            <li>To learn digital forensics principles, legal frameworks, and evidence acquisition methodology.</li>
+            <li>To apply file system analysis techniques across FAT, NTFS, EXT, and HFS+/APFS.</li>
+            <li>To analyze Windows, Linux, and MacOS platform-specific forensic artifacts systematically.</li>
+            <li>To evaluate forensic findings and produce court-admissible investigation reports.</li>
+          </ol>
 
           <div class="syl-block-label">Units</div>
           <div class="syl-unit">
-            <div class="syl-unit-head"><span class="syl-unit-tag">Unit I</span><span class="syl-unit-title">Fundamentals of Computer Systems</span></div>
-            <p>Number Systems: Binary, Octal, Decimal and Hexadecimal, Conversion and Operations on Binary Number Systems, Representing Information in Hexadecimal and Binary, Little Endian and Big-Endian Formats. Computer Architecture: Input Devices, Central Processing Unit, Storage Devices and Output Devices. Secondary Storage Devices: Understanding Disk, Volume and Partition, HDD and SSD Structures, Introduction to MBR, GPT and VBR. Basics of Operating Systems: Role of Operating System, Boot Process, Introduction to Process and Memory Management.</p>
+            <div class="syl-unit-head"><span class="syl-unit-tag">Unit I &middot; 08 Hrs</span><span class="syl-unit-title">Fundamentals of Digital Systems &amp; Digital Data Representation</span></div>
+            <p>Number Systems: Binary, Octal, Decimal, Hexadecimal, Conversion and Operations on Binary Number Systems, Little Endian and Big-Endian Formats, ASCII and Unicode (UTF-8, UTF-16) Character Encoding. Computer Architecture: Input Devices, Central Processing Unit (ALU, Control Unit, Registers, Cache), Primary Memory (RAM and ROM), Storage Devices, Output Devices. Secondary Storage Devices: Disk, Volume, Partition, HDD and SSD Structures, MBR, GPT, VBR, Slack Space, Unallocated Clusters, Host Protected Area (HPA). Operating Systems: Role of Operating System, Boot Process.</p>
           </div>
+
           <div class="syl-unit">
-            <div class="syl-unit-head"><span class="syl-unit-tag">Unit II</span><span class="syl-unit-title">Introduction to Computer Forensics Investigations and Electronic Evidence</span></div>
-            <p>Digital Forensics: Definition, Process, Locard's Principle of Exchange, Branches of Digital Forensics, Handling Digital Crime Scene, Important Documents and Electronic Evidences. Introduction to Evidence Acquisition: Identification, Acquisition, Labelling and Packaging, Transportation, Chain-of-Custody, Importance of Documentation and Preservation. Acquisition Process: Write-Blockers, Imaging Techniques, Evidence Integrity, Standard Operating Procedures for Acquisitions and Preservation of Evidences. Introduction to Data Recovery and Carving: Importance of Data Recovery in Forensic Investigation, Carving Methods, Difference between Data Recovery and Carving.</p>
+            <div class="syl-unit-head"><span class="syl-unit-tag">Unit II &middot; 10 Hrs</span><span class="syl-unit-title">Introduction to Digital Forensics, Evidence Handling and Evidence Integrity</span></div>
+            <p>Digital Forensics Fundamentals: Definition and Scope, Locard's Principle of Exchange, Forensic Investigation Lifecycle, Branches of Digital Forensics (Disk, Memory, Network, Mobile, Cloud, IoT). Electronic Evidence: Types of Digital Evidence, Volatile vs Non-Volatile Data, Order of Volatility, Sources of Evidence. Legal and Ethical Framework: International Cybercrime Cooperation (Budapest Convention on Cybercrime), Principles of Cross-Border Electronic Evidence Law (jurisdiction, data sovereignty, mutual legal assistance), International Standards (ISO/IEC 27037, ISO/IEC 27042, NIST SP 800-86, SWGDE), Admissibility in Court (general principles), Professional Ethics. Evidence Acquisition: Identification, Labeling, Packaging, Transportation, Chain-of-Custody, Documentation, Preservation, Write-Blockers, Imaging (Physical vs Logical). Digital Forensic Triage: Concept and Importance of Triage, On-Scene Triage vs Lab Triage, Triage Tools and Indicators, Prioritizing Evidence for Acquisition. Evidence Integrity and Hashing: MD5, SHA-1, SHA-256 Hashing Algorithms, Hash Verification of Forensic Images, Role of Hashing in Forensic Evidence Integrity and Court Admissibility. Data Recovery and Carving: File Carving, File Signatures (Magic Bytes), Data Recovery vs Carving, Common File Signatures. Anti-Forensic Techniques and Investigation Challenges.</p>
           </div>
+
           <div class="syl-unit">
-            <div class="syl-unit-head"><span class="syl-unit-tag">Unit III</span><span class="syl-unit-title">Windows OS Forensics</span></div>
-            <p>Windows OS Architecture, File System Analysis: Understanding and Analyzing FAT and NTFS File Systems, Recreating FAT and NTFS Partitions, Analyzing Unallocated Partitions. Registry Analysis: Understanding Windows Registry, Analyzing Windows Registry, Finding Important Artefacts Related to User Activities, User/Application Configurations and Preferences; Attached Devices, Shared Locations, Recently Accessed Documents, Programs and Locations; Installed Applications and Others from Windows Registry. Event and Log Analysis: Introduction to Windows Events, Understanding Windows Events (Evt and Evtx Files), Analyzing Logs of Third-party Applications.</p>
+            <div class="syl-unit-head"><span class="syl-unit-tag">Unit III &middot; 09 Hrs</span><span class="syl-unit-title">Introduction to Windows Forensics</span></div>
+            <p>Windows OS: Windows 7 to Windows 11, System Architecture, User Profiles, File Locations. File Systems: FAT, ExFAT, NTFS. Windows Registry: Hives, Keys, User Activity, Devices, Installed Programs. Event and Log Analysis: Windows Event Logs (EVT, EVTX Files), Forensic Value. Artefact Sources: Recent Files, Browser History, Recycle Bin, Prefetch Files.</p>
           </div>
+
           <div class="syl-unit">
-            <div class="syl-unit-head"><span class="syl-unit-tag">Unit IV</span><span class="syl-unit-title">Linux OS Forensics</span></div>
-            <p>Linux OS Architecture, File System Analysis: Understanding and Analyzing EXT File System, Recreating EXT Partitions, Analyzing Unallocated Partitions. Log Analysis: Understanding Various Logs, Analyzing Important Logs to Find Important Artefacts Related to User Activities, User/Application Configurations and Preferences; Attached Devices, Shared Locations, Recently Accessed Documents, Programs and Locations; Installed Applications.</p>
+            <div class="syl-unit-head"><span class="syl-unit-tag">Unit IV &middot; 09 Hrs</span><span class="syl-unit-title">Introduction to Linux Forensics</span></div>
+            <p>Linux OS: Ubuntu, Kali, CentOS, Directory Structure (/etc, /var, /home, /tmp), Users and Permissions. File Systems: EXT3, EXT4, Forensic Relevance. Linux Log Files: syslog, auth.log, dmesg. Artefact Sources: Bash History, Hidden Files, Cron Jobs, Mounted Devices.</p>
           </div>
+
           <div class="syl-unit">
-            <div class="syl-unit-head"><span class="syl-unit-tag">Unit V</span><span class="syl-unit-title">MAC OS Forensics</span></div>
-            <p>MAC OS Architecture, File System Analysis: Understanding and Analyzing HFS and HFS+ File System, Recreating HFS Partitions, Analyzing Unallocated Partitions. Log Analysis: Understanding Various Logs, Analyzing Important Logs to Find Important Artefacts Related to User Activities, User/Application Configurations and Preferences, Attached Devices, Shared Locations, Recently Accessed Documents, Programs and Locations, Installed Applications.</p>
+            <div class="syl-unit-head"><span class="syl-unit-tag">Unit V &middot; 09 Hrs</span><span class="syl-unit-title">Introduction to macOS Forensics</span></div>
+            <p>MacOS: System Architecture, Versions, User Library Folders. File Systems: HFS+, APFS, Snapshots, Containers, Forensic Relevance. macOS Logs: Unified Logging System, Console Logs. Artefact Sources: Spotlight, Time Machine Backups, Plist Files, Recent Items.</p>
           </div>
+
+          <div class="syl-block-label">Course Outcomes</div>
+          <ol class="syl-list">
+            <li><strong>CO-1</strong> To understand and interpret number systems, encoding formats, and computer architecture for forensic examination. <span class="inline-accent">[Understand]</span></li>
+            <li><strong>CO-2</strong> To apply digital forensics methodology to acquire and preserve legally admissible electronic evidence. <span class="inline-accent">[Apply]</span></li>
+            <li><strong>CO-3</strong> To perform forensic analysis of FAT, NTFS, EXT, and HFS+/APFS to recover deleted files. <span class="inline-accent">[Analyse]</span></li>
+            <li><strong>CO-4</strong> To examine platform-specific artifacts across Windows, Linux, and macOS to reconstruct activity timelines. <span class="inline-accent">[Analyse]</span></li>
+            <li><strong>CO-5</strong> To evaluate forensic findings and produce structured, court-admissible investigation reports. <span class="inline-accent">[Create]</span></li>
+          </ol>
 
           <div class="syl-block-label">References</div>
           <ul class="syl-refs">
-            <li>A Practical Guide to Computer Forensics Investigations (Pearson IT Cybersecurity Curriculum) &mdash; Darren R. Hayes</li>
-            <li>Learn Computer Forensics: A beginner's guide to searching, analyzing, and securing digital evidence &mdash; William Oettinger</li>
-            <li>Investigating Windows Systems &mdash; Harlan Carvey</li>
-            <li>Practical Linux Forensics: A Guide for Digital Investigators &mdash; Bruce Nikkel</li>
-            <li>Linux Forensics &mdash; Philip Polstra</li>
-            <li>Digital Forensics with Open-Source Tools &mdash; Cory Altheide, Harlan Carvey</li>
-            <li>Operating Systems: Internals and Design Principles, 9/e &mdash; William Stallings</li>
-            <li>Linux Bible, 10th Edition &mdash; Christopher Negus</li>
-            <li>Linux Pocket Guide: Essential Commands, 3rd Edition &mdash; Daniel J. Barrett</li>
+            <li>File System Forensic Analysis &mdash; Brian Carrier &mdash; Addison-Wesley Professional, 2005</li>
+            <li>Digital Evidence and Computer Crime: Forensic Science, Computers and the Internet (3rd Ed.) &mdash; Eoghan Casey &mdash; Academic Press / Elsevier, 2011</li>
+            <li>Windows Registry Forensics: Advanced Digital Forensic Analysis of the Windows Registry (2nd Ed.) &mdash; Harlan Carvey &mdash; Syngress, 2016</li>
+            <li>Linux Forensics &mdash; Philip Polstra &mdash; CreateSpace Independent Publishing Platform, 2015</li>
+            <li>Practical Forensic Imaging: Securing Digital Evidence with Linux Tools &mdash; Bruce Nikkel &mdash; No Starch Press, 2016</li>
+            <li>Digital Forensics with Open-Source Tools &mdash; Cory Altheide and Harlan Carvey &mdash; Syngress / Elsevier, 2011</li>
+            <li>Incident Response and Computer Forensics (3rd Ed.) &mdash; Jason T. Luttgens, Matthew Pepe and Kevin Mandia &mdash; McGraw-Hill Education, 2014</li>
+            <li>Practical Linux Forensics: A Guide for Digital Investigators &mdash; Bruce Nikkel &mdash; No Starch Press, 2021</li>
           </ul>
 
         </div></div>
